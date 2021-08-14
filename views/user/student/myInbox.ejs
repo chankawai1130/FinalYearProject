@@ -1,0 +1,221 @@
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<style type="text/css">
+    .main-nav-ul ul {
+        display: none;
+    }
+
+    .main-nav-ul li:hover ul {
+        display: block;
+    }
+
+    .sub-arrow:after {
+        content: '\203A';
+        float: right;
+        margin-right: 20px;
+    }
+
+
+    body {
+        background: #e0ded6;
+        font-family: "Helvetica Neue", Helvetica, Arial;
+        padding-top: 20px;
+    }
+
+    table,
+    th {
+        border: 2px solid;
+        border-collapse: collapse;
+        border-color: #D1DDDD
+    }
+
+    th,
+    td {
+        padding-top: 8px;
+    }
+
+    th {
+        background-color: #D1DDDD
+    }
+
+    ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        width: 250px;
+        background-color: #f1f1f1;
+    }
+
+    li a {
+        display: block;
+        color: #000;
+        padding: 8px 16px;
+        text-decoration: none;
+    }
+
+    li a.active {
+        background-color: #8AA0AB;
+        color: white;
+    }
+
+    li a:hover:not(.active) {
+        background-color: rgb(218, 218, 218);
+        color: #000;
+    }
+
+    #welcomeMsg:hover,
+    #welcomeMsg:focus {
+        text-decoration: underline;
+    }
+
+    .modalBtn {
+        background-color: #4CAF50;
+        color: white;
+        padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        cursor: pointer;
+        width: 100%;
+        opacity: 0.9;
+    }
+
+    .modalBtn:hover {
+        opacity: 1;
+    }
+
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 3;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(8, 8, 8, 0.5);
+        padding-top: 50px;
+    }
+
+    .welcomeMsgModal-content {
+        background-color: #fefefe;
+        margin: 5% auto 15% auto;
+        border: 1px solid #888;
+        width: 64%;
+        font-family: "Helvetica Neue", Helvetica, Arial;
+    }
+</style>
+
+<div class="container" style="width: 1140px; position: static; text-align:right;">
+    <% if (req.session.role !=undefined) {%>
+
+        <a href="/user/logout" class="item" style="color: black;">(Logout)</a>
+
+        <%}%>
+</div>
+
+<div class="container" style="width: 1140px;  justify-content: center; 
+    margin: 0 auto;  padding: 30px 15px 25px; background: #fff;
+    border-radius: 0px; position: static;">
+    <article class="page">
+        <div style="display: flex;">
+            <nav class="main-nav">
+                <ul class="main-nav-ul">
+                    <li class="menu-left_item lv1"><a class="active" href="/user/student/myInbox"><span
+                                class="sub-arrow">My
+                                Inbox</span></a></li>
+                    <li class="menu-left_item lv1"><a href="/user/student/myApplication">My Application<span
+                                class="sub-arrow"></span></a>
+                    </li>
+                    <li class="menu-left_item lv1"><a href="/user/student/applicationStatus"><span
+                                class="sub-arrow">Application Status</span></a>
+                    </li>
+                    <li class="menu-left_item lv1"><a href="/user/student/myProfile"><span class="sub-arrow">My
+                                Profile</span></a>
+                    </li>
+                </ul>
+            </nav>
+
+            <div class="main-content" style="margin-left: 40px">
+                <h3 style="color: #333333;
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 5px;">My Inbox</h3>
+
+                <table style="color: #333333; margin-top: 15px;">
+                    <tr>
+                        <th style="text-align: left; width: 600px; padding-left: 12px;">Subject</th>
+                        <th style="text-align: left; width:200px">Issue Date Time</th>
+                    </tr>
+                    <tr>
+                        <td style="text-align: left; padding-left: 12px;"><a id="welcomeMsg" href="#"
+                                onclick="document.getElementById('welcomeMsgModal').style.display='block'; return false;"
+                                style="color: black;">[Admission Office] Welcome!</a></td>
+
+                        <div id="welcomeMsgModal" class="modal">
+                            <div class="welcomeMsgModal-content">
+                                <div style="padding: 16px 16px 10px 16px;">
+                                    <!-- modal-header -->
+                                    <span class="close"
+                                        onclick="document.getElementById('welcomeMsgModal').style.display='none'">&times;</span>
+                                    <h3 style="color: black;
+                                        font-size: 18px;
+                                        font-weight: 600;
+                                        margin-bottom: 18px;
+                                        margin-top: 15px;
+                                        padding-left: 15px;">Online Application System for Admission to Undergraduate
+                                        Programmes
+                                    </h3>
+
+                                    <div class="modal-body" style="color: #444444;">
+                                        <!-- modal-body -->
+                                        <p style="color: #5E5E5E;">** This is a system-generated message. Please do not
+                                            reply to this email.**</p>
+
+                                        <p>Dear <%= req.session.user.GivenName %>,</p>
+                                        <p>Welcome to the HKBU Application System for Undergraduate Programmes!
+                                            Before launching your application, please prepare required documents.</p>
+
+                                        <p>You may amend/ update and save your data via the application system before
+                                            submission of your application.
+                                            However, change of study year and programme choice will NOT be accepted
+                                            after submission.</p>
+
+                                        <p>You may check the status of your application and to provide any update on
+                                            your
+                                            academic studies to the University on this application system.
+                                            Should you have any questions, please contact us by email at ardirect@hkbu.edu.hk or by phone ay (852) 3411 2200.
+                                        </p>
+
+
+                                        <p>All the best with your application and we look forward to learning more about
+                                            you in the coming months!</p>
+
+                                        <p>Best wishes, <br>
+                                            Admissions Office <br>
+                                            Academic Registry <br>
+                                            Hong Kong Baptist University</p>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <td style="text-align: left">
+                            <%= new Date(req.session.user.createdAt).toLocaleTimeString([], {year: 'numeric' ,
+                                month: 'numeric' , day: 'numeric' , hour: '2-digit' , minute: '2-digit' , hour12:
+                                false}) %>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+    </article>
+</div>

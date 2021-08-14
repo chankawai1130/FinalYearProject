@@ -1,0 +1,633 @@
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<style type="text/css">
+    .topnav {
+        overflow: hidden;
+        background-color: #f0f0f0;
+        width: 100%;
+        justify-content: center;
+        margin: 0 auto;
+        padding-left: 110px;
+        border-radius: 0px;
+        position: static;
+    }
+
+    .topnav a {
+        float: left;
+        color: #000;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+        font-size: 17px;
+    }
+
+    .topnav a:hover:not(.active) {
+        background-color: rgb(218, 218, 218);
+        color: #000;
+    }
+
+    .topnav a:hover,
+    .topnav a:focus {
+        text-decoration: underline;
+    }
+
+    .topnav a.active {
+        /* background-color:#697174; */
+        /* background-color:#717A7D; */
+        background-color: #8AA0AB;
+        color: white;
+    }
+
+    body {
+        background: #e0ded6;
+        font-family: "Helvetica Neue", Helvetica, Arial;
+    }
+
+    input::-webkit-input-placeholder {
+        color: #b5b5b5;
+    }
+
+    input:-moz-placeholder {
+        color: #b5b5b5;
+    }
+
+    .clearfix::after {
+        content: "";
+        clear: both;
+        display: table;
+    }
+
+    #backToDataTable:hover {
+        opacity: 1;
+    }
+
+    #backToDataTable {
+        background-color: #FEFAFF;
+        color: #666666;
+        border-radius: 2px;
+        width: 175px;
+        margin-bottom: 10px;
+        margin-right: 5px;
+        font-size: 14px;
+        padding: 4px 9px 4px;
+        opacity: 0.9;
+    }
+
+    .main-nav-ul ul {
+        display: none;
+    }
+
+    .main-nav-ul li:hover ul {
+        display: block;
+    }
+
+    .sub-arrow:after {
+        content: '\203A';
+        float: right;
+        margin-right: 20px;
+    }
+
+    ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        width: 250px;
+        background-color: #f8f8f8;
+    }
+
+    li a {
+        display: block;
+        color: #666666;
+        padding: 8px 16px;
+        text-decoration: none;
+    }
+
+    li a.active {
+        background-color: #908B85;
+        color: white;
+        opacity: 0.7;
+    }
+
+    li a:hover:not(.active) {
+        background-color: rgb(218, 218, 218);
+        color: #000;
+    }
+
+    table,
+    th,
+    td {
+        border: 2px solid;
+        border-collapse: collapse;
+        border-color: #f6f6f6;
+        font-size: 16px
+    }
+
+    .table-content {
+        padding: 4px 10px;
+        text-align: center;
+    }
+
+    #nextBtn {
+        background: -moz-linear-gradient(top,
+                #b9c5dd 0%,
+                #ACB9CA);
+        background: -webkit-gradient(linear, left top, left bottom,
+                from(#b9c5dd),
+                to(#ACB9CA));
+        color: #000;
+        border: 2px solid #ACB9CA;
+    }
+
+    #nextBtn:hover {
+        background: -moz-linear-gradient(top,
+                #ACB9CA 0%,
+                #b9c5dd);
+        background: -webkit-gradient(linear, left top, left bottom,
+                from(#ACB9CA),
+                to(#b9c5dd));
+    }
+
+    #prevBtn {
+        background: -moz-linear-gradient(top,
+                #D8D8D8 0%,
+                #C9C9C9);
+        background: -webkit-gradient(linear, left top, left bottom,
+                from(#D8D8D8),
+                to(#C9C9C9));
+        /* background: #D8D8D8; */
+        color: #000;
+        border: 2px solid #D8D8D8;
+    }
+
+    #prevBtn:hover {
+        background: -moz-linear-gradient(top,
+                #C9C9C9 0%,
+                #D8D8D8);
+        background: -webkit-gradient(linear, left top, left bottom,
+                from(#C9C9C9),
+                to(#D8D8D8));
+    }
+</style>
+
+<div class="wrapper" style="width: 100%;">
+    <div class="container-fluid no-gutters"
+        style="position: static; text-align: right; margin: 8px 0px; font-size: 14px;">
+
+        <% if (req.session.role !=undefined) {%>
+
+            Logged in as <b>
+                <%= req.session.user.Surname%>
+                    <%= req.session.user.GivenName%>
+            </b>&nbsp; |&nbsp;
+
+            <a style="color: black; padding: 5px 50px 25px 0px; color: #71838C" href="/user/logout">Logout</a>
+
+            <%}%>
+    </div>
+</div>
+
+<div class="wrapper" style="width: 100%; margin: 0 auto;">
+    <div class="container-fluid" style="justify-content: center; 
+    padding: 27px 15px 12px 115px; background: #fff;
+    border-radius: 0px; position: static;">
+        <h2 style="font-size: 40px;
+            font-weight: bold; color:#6A635A">HKBU Student Admission System</h2>
+    </div>
+</div>
+
+<div class="topnav">
+    <a class="active" href="/user/admin/applications/all/search">Applications</a>
+    <a href="/user/admin/statistics">Statistics</a>
+    <a href="/user/admin/profile">Profile</a>
+</div>
+
+<div class="wrapper" style="width: 100%; margin: 0 auto;">
+    <div class="container-fluid"
+        style="justify-content: center; height: 35px; font-size: 17px;
+background: #fff; border-radius: 0px; position: static; color: #888888; padding-top: 6px; padding-bottom: 5px; padding-left: 125px;">
+        <i class="fa fa-home" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;<i class="fa fa-angle-right"
+            aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;<span>Applications</span>&nbsp;&nbsp;
+    </div>
+</div>
+<br>
+
+<div class="wrapper" style="width: 1310px; margin: 0 auto;">
+    <div class="container-fluid" style="justify-content: center; 
+    padding: 30px 15px 25px; background: #fff;
+    border-radius: 0px; position: static;">
+
+        <div style="display: flex;">
+
+            <div class="main-content" style="margin-left: 40px;">
+
+                <div class="row" style="margin-left: 0px; clear: both">
+                    <!-- send email button -->
+                    <a id="redirect-link" style="color: #333333;" href="/user/admin/applications/all/search">
+                        <button class="form-control btn-lg" id="backToDataTable">
+                            << See all applications </button>
+                    </a>
+                </div>
+
+                <br>
+                <article class="page">
+                    <div style="display: flex;">
+
+                        <nav class="main-nav">
+                            <ul class="main-nav-ul">
+                                <li class="menu-left_item lv1"><a
+                                        href="/user/admin/applications/details/<%= application.id%>"><span
+                                            class="sub-arrow">Personal
+                                            Particulars</span></a></li>
+
+                                <li class="menu-left_item lv1"><a
+                                        href="/user/admin/applications/details/academicProfile/<%= application.id%>">Academic
+                                        Profile<span class="sub-arrow"></span></a>
+                                </li>
+                                <li class="menu-left_item lv1"><a class="active" href="/user/admin/applications/details/academicQualification/<%= application.id%>"><span
+                                            class="sub-arrow">Academic
+                                            Qualification</span></a>
+                                </li>
+                                <li class="menu-left_item lv1"><a
+                                        href="/user/admin/applications/details/programmePreference/<%= application.id%>"><span
+                                            class="sub-arrow">Programme
+                                            Preference</span></a>
+                                </li>
+                                <li class="menu-left_item lv1"><a href="/user/admin/applications/details/academicReference/<%= application.id%>"><span class="sub-arrow">Academic Reference</span></a>
+                                </li>
+                                <li class="menu-left_item lv1"><a href="/user/admin/applications/details/otherInformation/<%= application.id%>"><span class="sub-arrow">Other
+                                            Information</span></a>
+                                </li>
+                            </ul>
+                        </nav>
+
+                        <div id="academicQualification">
+
+                            <div class="main-content" style="margin-left: 40px">
+                                <h3 style="color:#666666;
+                                        font-size: 24px;
+                                        font-weight: bold;
+                                        margin-bottom: 5px;">Academic Qualification</h3>
+
+                                <table id="examResults" style="color: #333333; margin-top: 15px; width: 800px;">
+                                    <tr>
+                                        <td colspan="4" style="padding-left: 12px; background: #C8D8CC; margin-top: 15px; width: 800px; padding-top: 1px;
+                                    margin-left: 0px;">Public Examination Results</td>
+                                    </tr>
+                                    <tr style="background-color: #f6f6f6">
+                                        <td width="15%" style="text-align: center; padding: 5px 0;">Year</td>
+                                        <td width="35%" style="text-align: center;">Examination</td>
+                                        <td width="30%" style="text-align: center;">Subject</td>
+                                        <td width="20%" style="text-align: center;">Achieved Grade</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="table-content">
+                                            <select class="form-control" name="AcademicQualification[examYear]"
+                                                id="examYear" style="height: 30px; font-size: 15px;" required>
+                                            </select>
+                                        </td>
+                                        <td class="table-content">
+                                            <select class="form-control" name="AcademicQualification[examName]"
+                                                id="examName" style="height: 30px; font-size: 15px;" required>
+                                            </select>
+                                        </td>
+                                        <td class="table-content">
+                                            <select class="form-control" name="AcademicQualification[subject]"
+                                                id="subject" style="height: 30px; font-size: 15px; " required>
+                                            </select>
+                                        </td>
+                                        <td class="table-content">
+                                            <select class="form-control" name="AcademicQualification[grade]" id="grade"
+                                                style="height: 30px; font-size: 15px; " required>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                </table>
+
+                                <div>
+                                    <br>
+                                    <!-- Previous -->
+                                    <a href="/user/admin/applications/details/academicProfile/<%= application.id%>">
+                                        <button id="prevBtn" class="btn btn-primary"><b><< Previous</b></button></a>
+
+                                    <!-- Next -->
+                                    <a href="/user/admin/applications/details/programmePreference/<%= application.id%>">
+                                        <button id="nextBtn" class="btn btn-primary"><b>Next
+                                                Page >></b></button>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                </article>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    (function () {
+        var table = document.getElementById("examResults");
+        var rowCount = table.rows.length;
+        var row = table.insertRow(rowCount);
+
+        '<% if (application.academicQualificationData != null && application.academicQualificationData.AcademicQualification.examName != null) { %>'
+        var examArr = '<%= application.academicQualificationData.AcademicQualification.examName %>';
+        '<% } %>'
+
+
+        var splitExamArr = examArr.split(",");
+
+        //show up
+        for (i = 1; i < splitExamArr.length; i = i + 1) {
+
+            table.innerHTML = table.innerHTML + '<td class="table-content"><select class="form-control" id="examYear' + i + '" name="AcademicQualification[examYear]" style="height: 30px; font-size: 15px;"></select></td><td class="table-content"><select class="form-control" id="examName' + i + '" style="height: 30px; font-size: 15px;" name="AcademicQualification[examName]"></select></td><td class="table-content"><select class="form-control" id="subject' + i + '" name="AcademicQualification[subject]" style="height: 30px; font-size: 15px;"></select></td><td class="table-content"><select class="form-control" id="grade' + i + '" name="AcademicQualification[grade]" style="height: 30px; font-size: 15px;"></select></td>'
+
+            //set examYear option
+            var todayYear = new Date().getFullYear();
+            var start = todayYear;
+            var end = 1944;
+            var yearOptions = "<option selected disabled value=''>" + "-Select-" + "</option>";
+
+            for (var year = start; year >= end; year--) {
+                yearOptions += "<option id='" + year + "" + i + "'>" + year + "</option>";
+            }
+
+            document.getElementById("examYear" + i).innerHTML = yearOptions;
+
+            document.getElementById("examYear" + i).setAttribute('required', '');
+
+            //retrieve the input - examYear
+            '<% if (application.academicQualificationData != null && application.academicQualificationData.AcademicQualification.examYear != null) { %>'
+            var yearArr = '<%= application.academicQualificationData.AcademicQualification.examYear %>';
+            '<% } %>'
+
+
+            var splitYearArr = yearArr.split(",");
+
+            for (var year = start; year >= end; year--) {
+
+                if (splitYearArr[i] == year) {
+
+                    document.getElementById(year + "" + i).setAttribute('selected', 'selected');
+                }
+            }
+
+
+            //set examName option
+            var examOptions = "<option selected disabled value=''>" + "-Select-" + "</option>";
+            var exam = ["Hong Kong Diploma of Secondary Education", "Hong Kong Certificate of Exam", "Hong Kong A-Level Examination"]
+            for (j = 0; j < exam.length; j = j + 1) {
+                examOptions += "<option id='" + exam[j] + i + "'>" + exam[j] + "</option>";
+            }
+
+            document.getElementById("examName" + i).innerHTML = examOptions;
+
+            document.getElementById("examName" + i).setAttribute('required', '');
+
+
+            //populate select field - examName
+            for (k = 0; k < exam.length; k = k + 1) {
+
+                if (splitExamArr[i] == exam[k]) {
+
+                    document.getElementById(exam[k] + i).setAttribute('selected', 'selected');
+                }
+            }
+
+
+            //set subject options
+            var subjectOptions = "<option selected disabled value=''>" + "-Select-" + "</option>";
+            var subjects = ["Biology", "Business and Accounting and Financial Studies", "Chemistry", "Chinese History", "Chinese Language", "Chinese Literature",
+                "Combined Science", "Design and Applied Technology", "Economics", "English Language", "Ethics and Religious Studies", "Geography",
+                "Health Management and Social Care", "History", "Information and Communication Technology", "Integrated Science",
+                "Literature in English", "Mathematics", "Music", "Physical Education", "Physics", "Technology and Living", "Tourism and Hospitality Studies",
+                "Visual Arts"
+            ]
+
+            for (j = 0; j < subjects.length; j = j + 1) {
+                subjectOptions += "<option id='" + subjects[j] + i + "'>" + subjects[j] + "</option>";
+            }
+
+            document.getElementById("subject" + i).innerHTML = subjectOptions;
+
+            document.getElementById("subject" + i).setAttribute('required', '');
+
+            //retrieve the input - subject
+            '<% if (application.academicQualificationData != null && application.academicQualificationData.AcademicQualification.subject != null) { %>'
+            var subjectArr = '<%= application.academicQualificationData.AcademicQualification.subject %>';
+            '<% } %>'
+
+            var result = subjectArr.split(",");
+
+            for (k = 0; k < subjects.length; k = k + 1) {
+
+                if (result[i] == subjects[k]) {
+
+                    document.getElementById(subjects[k] + i).setAttribute('selected', 'selected');
+                }
+            }
+
+            //set grade option
+            var gradeOptions = "<option selected disabled value=''>" + "-Select-" + "</option>";
+
+            var grades = ["5**", "5*", "5", "4", "3", "2", "1", "U"];
+
+            for (j = 0; j < grades.length; j = j + 1) {
+                gradeOptions += "<option id='" + grades[j] + i + "'>" + grades[j] + "</option>";
+            }
+
+            document.getElementById("grade" + i).innerHTML = gradeOptions;
+
+            document.getElementById("grade" + i).setAttribute('required', '');
+
+            //retrieve the input - grade
+
+            '<% if (application.academicQualificationData != null && application.academicQualificationData.AcademicQualification.grade != null) { %>'
+            var gradeArr = '<%= application.academicQualificationData.AcademicQualification.grade %>';
+            '<% } %>'
+
+            var splitGradeArr = gradeArr.split(",");
+
+            for (k = 0; k < grades.length; k = k + 1) {
+
+                if (splitGradeArr[i] == grades[k]) {
+
+                    document.getElementById(grades[k] + i).setAttribute('selected', 'selected');
+                }
+            }
+        }
+    })();
+</script>
+
+<script>
+    (function () {
+        //set year options
+        var todayYear = new Date().getFullYear();
+        var start = todayYear;
+        var end = 1944;
+        var yearOptions = "<option selected disabled value=''>" + "-Select-" + "</option>";
+
+        for (var year = start; year >= end; year--) {
+            yearOptions += "<option id='" + year + "'>" + year + "</option>";
+        }
+
+        document.getElementById("examYear").innerHTML = yearOptions;
+
+
+        //is an array
+        '<% if (application.academicQualificationData != null && application.academicQualificationData.AcademicQualification.examYear[0] != null) { %>'
+        var selectedFirstYear = '<%= application.academicQualificationData.AcademicQualification.examYear[0] %>';
+        '<% } %>'
+
+        for (var year = start; year >= end; year--) {
+
+            if (selectedFirstYear == year) {
+
+                document.getElementById(year).setAttribute('selected', 'selected');
+            }
+        }
+
+        '<% if (application.academicQualificationData != null && application.academicQualificationData.AcademicQualification.examYear != null) { %>'
+        var selectedYear = '<%= application.academicQualificationData.AcademicQualification.examYear %>';
+        '<% } %>'
+
+        for (var year = start; year >= end; year--) {
+
+            if (selectedYear == year) {
+
+                document.getElementById(year).setAttribute('selected', 'selected');
+            }
+        }
+    })();
+</script>
+
+<script>
+    (function () {
+        //set exam name options
+        var examOptions = "<option selected disabled value=''>" + "-Select-" + "</option>";
+        var exam = [
+            "Hong Kong Diploma of Secondary Education",
+            "Hong Kong Certificate of Exam",
+            "Hong Kong A-Level Examination"]
+        for (i = 0; i < exam.length; i = i + 1) {
+            examOptions += "<option id='" + exam[i] + "'>" + exam[i] + "</option>";
+        }
+
+        document.getElementById("examName").innerHTML = examOptions;
+
+        //is an array
+        '<% if (application.academicQualificationData != null && application.academicQualificationData.AcademicQualification.examName[0] != null) { %>'
+        var selectedFirstExam = '<%= application.academicQualificationData.AcademicQualification.examName[0] %>';
+        '<% } %>'
+
+        for (i = 0; i < exam.length; i = i + 1) {
+
+            if (selectedFirstExam == exam[i]) {
+
+                document.getElementById(exam[i]).setAttribute('selected', 'selected');
+            }
+        }
+
+        '<% if (application.academicQualificationData != null && application.academicQualificationData.AcademicQualification.examName != null) { %>'
+        var selectedExam = '<%= application.academicQualificationData.AcademicQualification.examName %>';
+        '<% } %>'
+
+        for (i = 0; i < exam.length; i++) {
+
+            if (selectedExam == exam[i]) {
+
+                document.getElementById(exam[i]).setAttribute('selected', 'selected');
+            }
+        }
+    })();
+</script>
+
+<script>
+    (function () {
+        //set exam subject options
+        var subjectOptions = "<option selected disabled value=''>" + "-Select-" + "</option>";
+        var subjects = ["Biology", "Business and Accounting and Financial Studies", "Chemistry", "Chinese History", "Chinese Language", "Chinese Literature",
+            "Combined Science", "Design and Applied Technology", "Economics", "English Language", "Ethics and Religious Studies", "Geography",
+            "Health Management and Social Care", "History", "Information and Communication Technology", "Integrated Science",
+            "Literature in English", "Mathematics", "Music", "Physical Education", "Physics", "Technology and Living", "Tourism and Hospitality Studies",
+            "Visual Arts"
+        ]
+        for (i = 0; i < subjects.length; i = i + 1) {
+            subjectOptions += "<option id='" + subjects[i] + "'>" + subjects[i] + "</option>";
+        }
+
+        document.getElementById("subject").innerHTML = subjectOptions;
+
+        //is an array
+        '<% if (application.academicQualificationData != null && application.academicQualificationData.AcademicQualification.subject[0] != null) { %>'
+        var selectedFirstSubject = '<%= application.academicQualificationData.AcademicQualification.subject[0] %>';
+        '<% } %>'
+
+        for (i = 0; i < subjects.length; i = i + 1) {
+
+            if (selectedFirstSubject == subjects[i]) {
+
+                document.getElementById(subjects[i]).setAttribute('selected', 'selected');
+            }
+        }
+
+        '<% if (application.academicQualificationData != null && application.academicQualificationData.AcademicQualification.subject != null) { %>'
+        var selectedSubject = '<%= application.academicQualificationData.AcademicQualification.subject %>';
+        '<% } %>'
+
+        for (i = 0; i < subjects.length; i = i + 1) {
+
+            if (selectedSubject == subjects[i]) {
+
+                document.getElementById(subjects[i]).setAttribute('selected', 'selected');
+            }
+        }
+    })();
+</script>
+
+<script>
+    (function () {
+        //set grade option
+        var gradeOptions = "<option selected disabled value=''>" + "-Select-" + "</option>";
+
+        var grades = ["5**", "5*", "5", "4", "3", "2", "1", "U"];
+
+        for (i = 0; i < grades.length; i++) {
+            gradeOptions += "<option id='" + grades[i] + "'>" + grades[i] + "</option>";
+        }
+        document.getElementById("grade").innerHTML = gradeOptions;
+
+        //is an array
+        '<% if (application.academicQualificationData != null && application.academicQualificationData.AcademicQualification.grade[0] != null) { %>'
+        var selectedFirstGrade = '<%= application.academicQualificationData.AcademicQualification.grade[0] %>';
+        '<% } %>'
+
+        for (i = 0; i < grades.length; i = i + 1) {
+
+            if (selectedFirstGrade == grades[i]) {
+
+                document.getElementById(grades[i]).setAttribute('selected', 'selected');
+            }
+        }
+
+        '<% if (application.academicQualificationData != null && application.academicQualificationData.AcademicQualification.grade != null) { %>'
+        var selectedGrade = '<%= application.academicQualificationData.AcademicQualification.grade %>';
+        '<% } %>'
+
+        for (i = 0; i < grades.length; i++) {
+
+            if (selectedGrade == grades[i]) {
+
+                document.getElementById(grades[i]).setAttribute('selected', 'selected');
+            }
+        }
+    })();
+</script>

@@ -1,0 +1,484 @@
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<style type="text/css">
+    .main-nav-ul ul {
+        display: none;
+    }
+
+    .main-nav-ul li:hover ul {
+        display: block;
+    }
+
+    .sub-arrow:after {
+        content: '\203A';
+        float: right;
+        margin-right: 20px;
+    }
+
+    body {
+        background: #e0ded6;
+        font-family: "Helvetica Neue", Helvetica, Arial;
+        padding-top: 20px;
+    }
+
+    table,
+    th {
+        border: 2px solid;
+        border-collapse: collapse;
+        border-color: #f6f6f6
+    }
+
+    .table-header {
+        /* padding-top: 8px;
+        background-color: #f6f6f6 */
+        background: #f6f6f6;
+        width: 800px;
+        height: 30px;
+        padding-top: 3px;
+        padding-bottom: 3px;
+    }
+
+    tr {
+        border-bottom: 1px solid #f6f6f6;
+    }
+
+    .table-content {
+        padding: 14px 0px;
+    }
+
+
+    ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        width: 250px;
+        background-color: #f1f1f1;
+    }
+
+    li a {
+        display: block;
+        color: #000;
+        padding: 8px 16px;
+        text-decoration: none;
+    }
+
+    li a.active {
+        background-color: #8AA0AB;
+        color: white;
+    }
+
+    li a:hover:not(.active) {
+        background-color: rgb(218, 218, 218);
+        color: #000;
+    }
+
+    #uploadBtn {
+        height: 30px;
+        padding-top: 2px;
+        padding-bottom: 2px;
+        margin-right: 15px;
+        margin-top: 1px;
+        margin-bottom: 10px;
+        background-color: #A39F92;
+        color: white;
+        border-color: #A39F92;
+        /* border-color: #A8A497; */
+        /* width: 60px; */
+    }
+
+    #uploadBtn:hover {
+        background-color: #999589;
+        color: white;
+        border-color: #999589;
+        /* width: 60px; */
+    }
+
+    input[type="file"] {
+        position: fixed;
+        right: 100%;
+        bottom: 100%;
+    }
+
+    .custom-file-upload {
+        background-color: #ffffff;
+        color: #5e5d5d;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        font-size: 16px;
+        padding: 4px 9px 4px;
+        opacity: 0.8;
+        border: 1px solid rgb(230, 230, 230);
+        display: inline-block;
+        cursor: pointer;
+    }
+
+    .download-link:hover {
+        text-decoration: none !important;
+    }
+
+    .download-link {
+        text-decoration: underline;
+    }
+</style>
+
+<div class="container" style="width: 1140px; position: static; text-align:right;">
+    <% if (req.session.role !=undefined) {%>
+
+        <a href="/user/logout" class="item" style="color: black;">(Logout)</a>
+
+        <%}%>
+</div>
+
+<div class="container" style="width: 1140px;  justify-content: center; 
+    margin: 0 auto;  padding: 30px 15px 25px; background: #fff;
+    border-radius: 0px; position: static;">
+    <article class="page">
+        <div style="display: flex;">
+
+            <nav class="main-nav">
+                <ul class="main-nav-ul">
+                    <li class="menu-left_item lv1"><a href="/user/student/myInbox"><span class="sub-arrow">My
+                                Inbox</span></a></li>
+
+                    <li class="menu-left_item lv1"><a class="active" href="/user/student/myApplication">My
+                            Application<span class="sub-arrow"></span></a>
+                    </li>
+                    <li class="menu-left_item lv1"><a href="/user/student/applicationStatus"><span
+                                class="sub-arrow">Application Status</span></a>
+                    </li>
+                    <li class="menu-left_item lv1"><a href="/user/student/myProfile"><span class="sub-arrow">My
+                                Profile</span></a>
+                    </li>
+                </ul>
+            </nav>
+
+            <div class="main-content" style="margin-left: 40px">
+                <h3 style="color: #333333;
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 5px;">Supporting Documents</h3>
+
+                <div class="container"
+                    style="background: #C8D8CC; margin: 15px 0px 3px; width: 800px; height: 30px; padding-top: 3px; padding-bottom: 3px;">
+                    <p>Required Documents</p>
+                </div>
+
+                <!-- academic transcript -->
+                <form action="/user/student/upload/document" method="POST">
+                    <div class="container"
+                        style="background: #f6f6f6; width: 800px; height: 30px; padding-top: 3px; padding-bottom: 3px;">
+                        <p><b>Academic Transcript</b></p>
+                    </div>
+
+                    <table style="color: #333333; margin-top: 4px; margin-bottom: 5px; width: 800px;">
+                        <tr>
+                            <td class="table-header" style="text-align: left; width: 350px; padding-left: 15px;">
+                                Filename
+                            </td>
+                            <td class="table-header" style="text-align: left; width: 300px;">Submission Data/ Time</td>
+                            <td class="table-header" style="text-align: left; width: 150px;"></td>
+                        </tr>
+
+                        <tr>
+                            <td class="table-content" style="text-align: left; padding-left: 15px;">
+
+                                <% if(user.acadTranscript) { var type=user.acadTranscript.split(';');%>
+                                    <div>
+                                        <% if(type[0]=='data:application/pdf' ) { %>
+                                            <a download="<%= user.idCode %>_transcript" href="<%=user.acadTranscript%>"
+                                                class="download-link" style="color: #5e5d5d" target="_blank">
+                                                <%= user.idCode %>_transcript
+                                            </a>
+                                            <br>
+                                            <% } else if(type[0]=='data:image/jpeg' || type[0]=='data:image/png' ) { %>
+                                                <a download="<%= user.idCode %>_transcript" class="download-link"
+                                                    style="color: #5e5d5d" href="<%=user.acadTranscript%>"
+                                                    target="_blank">
+                                                    <%= user.idCode %>_transcript
+                                                </a>
+                                                <br>
+
+                                                <% } %>
+                                    </div>
+                                    <% } %>
+                                        <!-- <img src="<%=user.acadTranscript%>" style="height:150px; width:auto" /> -->
+
+                            </td>
+                            <td></td>
+                            <td style="text-align: center; padding-right: 10px;">
+                                <label for="file-upload" class="custom-file-upload">
+                                    <i class="fa fa-cloud-upload"></i> Upload File
+                                </label>
+                                <input type="file" id="file-upload" accept="image/*,application/pdf"
+                                    onchange="handleFile(this.files, 1)" />
+                                <input id="file1" type="hidden" name="User[acadTranscript]" />
+                            </td>
+                        </tr>
+
+                    </table>
+                    <div style="text-align:left">
+                        <button type="submit" id="uploadBtn" class="btn btn-primary">Submit</button>
+                    </div>
+                </form>
+
+
+
+                <!-- graduation certificate -->
+                <form action="/user/student/upload/document" method="POST">
+                    <div class="container"
+                        style="background: #f6f6f6; width: 800px; height: 30px; padding-top: 3px; padding-bottom: 3px;">
+                        <p><b>Graduation Certificate</b></p>
+                    </div>
+
+                    <table style="color: #333333; margin-top: 4px; margin-bottom: 5px; width: 800px;">
+                        <tr>
+                            <td class="table-header" style="text-align: left; width: 350px; padding-left: 15px;">
+                                Filename
+                            </td>
+                            <td class="table-header" style="text-align: left; width: 300px;">Submission Data/ Time</td>
+                            <td class="table-header" style="text-align: left; width: 150px;"></td>
+                        </tr>
+
+                        <tr>
+                            <td class="table-content" style="text-align: left; padding-left: 15px;">
+
+                                <% if(user.gradCert) { var type=user.gradCert.split(';');%>
+                                    <div>
+                                        <% if(type[0]=='data:application/pdf' ) { %>
+                                            <a download="<%= user.idCode %>_graduation certificate"
+                                                class="download-link" style="color: #5e5d5d" href="<%=user.gradCert%>"
+                                                target="_blank">
+                                                <%= user.idCode %>_graduation certificate
+                                            </a>
+                                            <br>
+                                            <% } else if(type[0]=='data:image/jpeg' || type[0]=='data:image/png' ) { %>
+                                                <a download="<%= user.idCode %>_graduation certificate"
+                                                    class="download-link" style="color: #5e5d5d"
+                                                    href="<%=user.gradCert%>" target="_blank">
+                                                    <%= user.idCode %>_graduation certificate
+                                                </a>
+                                                <br>
+
+                                                <% } %>
+                                    </div>
+                                    <% } %>
+                                        <!-- <img src="<%=user.gradCert%>" style="height:150px; width:auto" /> -->
+
+                            </td>
+                            <td></td>
+                            <td style="text-align: center; padding-right: 10px;">
+                                <label for="gradCert-upload" class="custom-file-upload">
+                                    <i class="fa fa-cloud-upload"></i> Upload File
+                                </label>
+                                <input type="file" id="gradCert-upload" accept="image/*,application/pdf"
+                                    onchange="handleFile(this.files, 2)" />
+                                <input id="file2" type="hidden" name="User[gradCert]" />
+                            </td>
+                        </tr>
+
+                    </table>
+                    <div style="text-align:left">
+                        <button type="submit" id="uploadBtn" class="btn btn-primary">Submit</button>
+                    </div>
+                </form>
+
+                <!-- public examination result -->
+                <form action="/user/student/upload/document" method="POST">
+                    <div class="container"
+                        style="background: #f6f6f6; width: 800px; height: 30px; padding-top: 3px; padding-bottom: 3px;">
+                        <p><b>Public Examination Result</b></p>
+                    </div>
+
+                    <table style="color: #333333; margin-top: 4px; margin-bottom: 5px; width: 800px;">
+                        <tr>
+                            <td class="table-header" style="text-align: left; width: 350px; padding-left: 15px;">
+                                Filename
+                            </td>
+                            <td class="table-header" style="text-align: left; width: 300px;">Submission Data/ Time</td>
+                            <td class="table-header" style="text-align: left; width: 150px;"></td>
+                        </tr>
+
+                        <tr>
+                            <td class="table-content" style="text-align: left; padding-left: 15px;">
+
+                                <% if(user.examResultSlip) { var type=user.examResultSlip.split(';');%>
+                                    <div>
+                                        <% if(type[0]=='data:application/pdf' ) { %>
+                                            <a download="<%= user.idCode %>_examination result"
+                                                href="<%=user.examResultSlip%>" class="download-link"
+                                                style="color: #5e5d5d" target="_blank">
+                                                <%= user.idCode %>_examination result
+                                            </a>
+                                            <br>
+                                            <% } else if(type[0]=='data:image/jpeg' || type[0]=='data:image/png' ) { %>
+                                                <a download="<%= user.idCode %>_examination result" href="<%=user.examResultSlip%>"
+                                                    style="color: #5e5d5d" class="download-link"
+                                                    target="_blank">
+                                                    <%= user.idCode %>_examination result
+                                                </a>
+                                                <br>
+
+                                                <% } %>
+                                    </div>
+                                    <% } %>
+                                        <!-- <img src="<%=user.examResultSlip%>" style="height:150px; width:auto" /> -->
+
+                            </td>
+                            <td></td>
+                            <td style="text-align: center; padding-right: 10px;">
+                                <label for="examResultSlip-upload" class="custom-file-upload">
+                                    <i class="fa fa-cloud-upload"></i> Upload File
+                                </label>
+                                <input type="file" id="examResultSlip-upload" accept="image/*,application/pdf"
+                                    onchange="handleFile(this.files, 3)" />
+                                <input id="file3" type="hidden" name="User[examResultSlip]" />
+                            </td>
+                        </tr>
+
+                    </table>
+                    <div style="text-align:left">
+                        <button type="submit" id="uploadBtn" class="btn btn-primary">Submit</button>
+                    </div>
+                </form>
+
+                <!-- others -->
+                <form action="/user/student/upload/document" method="POST">
+                    <div class="container"
+                        style="background: #f6f6f6; width: 800px; height: 30px; padding-top: 3px; padding-bottom: 3px;">
+                        <p><b>Others</b></p>
+                    </div>
+
+                    <table style="color: #333333; margin-top: 4px; margin-bottom: 5px; width: 800px;">
+                        <tr>
+                            <td class="table-header" style="text-align: left; width: 350px; padding-left: 15px;">
+                                Filename
+                            </td>
+                            <td class="table-header" style="text-align: left; width: 300px;">Submission Data/ Time</td>
+                            <td class="table-header" style="text-align: left; width: 150px;"></td>
+                        </tr>
+
+                        <tr>
+                            <td class="table-content" style="text-align: left; padding-left: 15px;">
+
+                                <% if(user.otherDoc) { var type=user.otherDoc.split(';');%>
+                                    <div>
+                                        <% if(type[0]=='data:application/pdf' ) { %>
+                                            <a download="<%= user.idCode %>_others" href="<%=user.otherDoc%>" class="download-link"
+                                                target="_blank" style="color: #5e5d5d">
+                                                <%= user.idCode %>_others
+                                            </a>
+                                            <br>
+                                            <% } else if(type[0]=='data:image/jpeg' || type[0]=='data:image/png' ) { %>
+                                                <a download="<%= user.idCode %>_others" class="download-link" 
+                                                    href="<%=user.otherDoc%>" target="_blank" style="color: #5e5d5d">
+                                                    <%= user.idCode %>_others
+                                                </a>
+                                                <br>
+
+                                                <% } %>
+                                    </div>
+                                    <% } %>
+                                        <!-- <img src="<%=user.otherDoc%>" style="height:150px; width:auto" /> -->
+
+                            </td>
+                            <td></td>
+                            <td style="text-align: center; padding-right: 10px;">
+                                <label for="otherDoc-upload" class="custom-file-upload">
+                                    <i class="fa fa-cloud-upload"></i> Upload File
+                                </label>
+                                <input type="file" id="otherDoc-upload" accept="image/*,application/pdf"
+                                    onchange="handleFile(this.files, 4)" />
+                                <input id="file4" type="hidden" name="User[otherDoc]" />
+                            </td>
+                        </tr>
+
+                    </table>
+                    <div style="text-align:left">
+                        <button type="submit" id="uploadBtn" class="btn btn-primary">Submit</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+
+    </article>
+</div>
+
+<script>
+    function handleFile(files, n) {
+
+        const file = files[0];
+        if (!file.type.startsWith('image/') && !file.type == 'application/pdf') return;
+
+        // var preview = document.getElementById('preview');
+
+        var reader = new FileReader();
+        if (file.type.startsWith('image/')) {
+            reader.onload = function (e) {
+                // preview.innerHTML = "";
+
+                var img = document.createElement('img');
+                img.src = e.target.result;
+                img.style.width = "auto";
+                img.style.height = "150px";
+
+                // var input = document.createElement('input');
+                // input.type = 'hidden';
+                // input.name = 'User[acadTranscript]';
+                // input.value = e.target.result;
+                document.getElementById("file" + n).value = e.target.result;
+
+            }
+        } else if (file.type == 'application/pdf') {
+            reader.onload = function (e) {
+
+                // var input = document.createElement('input');
+                // input.type = 'hidden';
+                // input.name = 'User[acadTranscript]';
+                // input.value = e.target.result;
+                document.getElementById("file" + n).value = e.target.result;
+
+            }
+        }
+        reader.readAsDataURL(file);
+    }
+</script>
+
+<script>
+    function handleFile2(files) {
+
+        const file = files[0];
+        if (!file.type.startsWith('image/') && !file.type == 'application/pdf') return;
+
+        // var preview = document.getElementById('preview');
+
+        var reader = new FileReader();
+        if (file.type.startsWith('image/')) {
+            reader.onload = function (e) {
+                // preview.innerHTML = "";
+
+                var img = document.createElement('img');
+                img.src = e.target.result;
+                img.style.width = "auto";
+                img.style.height = "150px";
+
+                document.getElementById("certificate").value = e.target.result;
+
+            }
+        } else if (file.type == 'application/pdf') {
+            reader.onload = function (e) {
+
+                document.getElementById("certificate").value = e.target.result;
+
+            }
+        }
+        reader.readAsDataURL(file);
+    }
+</script>

@@ -1,0 +1,828 @@
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<style type="text/css">
+    .main-nav-ul ul {
+        display: none;
+    }
+
+    .main-nav-ul li:hover ul {
+        display: block;
+    }
+
+    .sub-arrow:after {
+        content: '\203A';
+        float: right;
+        margin-right: 20px;
+    }
+
+
+    body {
+        background: #e0ded6;
+        font-family: "Helvetica Neue", Helvetica, Arial;
+        padding-top: 20px;
+    }
+
+    table,
+    th {
+        border: 2px solid;
+        border-collapse: collapse;
+        border-color: #f6f6f6
+    }
+
+    th {
+        padding-top: 8px;
+        background-color: #f6f6f6
+    }
+
+    tr {
+        border-bottom: 1px solid #f6f6f6;
+    }
+
+    .table-content {
+        padding: 14px 0px;
+    }
+
+    ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        width: 250px;
+        background-color: #f1f1f1;
+    }
+
+    li a {
+        display: block;
+        color: #000;
+        padding: 8px 16px;
+        text-decoration: none;
+    }
+
+    li a.active {
+        background-color: #8AA0AB;
+        color: white;
+    }
+
+    li a:hover:not(.active) {
+        background-color: rgb(218, 218, 218);
+        color: #000;
+    }
+
+    #redirect-link:hover,
+    #redirect-link:focus {
+        text-decoration: underline;
+    }
+
+    #message {
+        box-sizing: border-box;
+        position: relative;
+        flex-direction: column;
+        width: 780px;
+        background-clip: border-box;
+        border-radius: 3px;
+        background-color: #ffffff;
+        border: 1px solid #e5e5e5;
+        display: block;
+        padding: 10px 24px 10px 16px;
+        font-family: "Flama", "Open Sans", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+        font-size: 1rem;
+        font-weight: 400;
+        line-height: 1.5;
+        color: #202020;
+    }
+
+    /* #statusContainer {
+        padding: 8px 10px;
+        text-align: center;
+        display: inline;
+        color: #fff;
+        border-radius: 5px;
+        background-image: linear-gradient(#a39c92, #b6b0a6);
+        text-shadow:
+            0px 0px 3px rgba(255, 255, 255, 0.3),
+            0px 0px 0px rgba(8, 8, 8, 0);
+    } */
+
+    #statusContainer {
+        margin-right: 30px;
+        padding: 6px 13px;
+        text-align: center;
+        display: inline;
+        border-radius: 20px;
+        background-color: #cfc9be;
+        color: #52504d;
+        font-weight: 500;
+        opacity: 0.9;
+        text-shadow:
+            0px 0px 3px rgba(255, 255, 255, 0.3),
+            0px 0px 0px rgba(8, 8, 8, 0);
+    }
+
+    #signup .inputs #submitBtn:hover {
+        background: -moz-linear-gradient(top,
+                #a4b0cb 0%,
+                #b9c5dd);
+        background: -webkit-gradient(linear, left top, left bottom,
+                from(#a4b0cb),
+                to(#b9c5dd));
+    }
+
+    #acceptOfferBtn {
+        background-color: #97ac96;
+        color: #ffffff;
+        width: 95px;
+        margin-bottom: 10px;
+        margin-top: 10px;
+        margin-right: 5px;
+        font-size: 16px;
+        padding: 4px 9px 4px;
+        opacity: 0.7;
+    }
+
+    #acceptOfferBtn:hover {
+        opacity: 0.8;
+    }
+
+    #declineOfferBtn {
+        background-color: #f5f5f5;
+        color: #777777;
+        width: 95px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        font-size: 16px;
+        padding: 4px 9px 4px;
+        opacity: 0.8;
+    }
+
+    #declineOfferBtn:hover {
+        opacity: 0.9;
+    }
+
+    .modalBtn {
+        background-color: #4CAF50;
+        color: white;
+        padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        cursor: pointer;
+        width: 100%;
+        opacity: 0.9;
+    }
+
+    .modalBtn:hover {
+        opacity: 1;
+    }
+
+    .acceptbtn:focus,
+    .rejectbtn:focus {
+        color: black;
+    }
+
+    .cancelbtn,
+    .rejectbtn,
+    .acceptbtn {
+        float: left;
+        width: 50%;
+    }
+
+    .cancelbtn {
+        background-color: #ccc;
+        color: black;
+    }
+
+    .rejectbtn {
+        background-color: #F16C6D;
+    }
+
+    .acceptbtn {
+        background-color: #869A85;
+    }
+
+    .modal-container {
+        padding: 16px;
+        padding-left: 30px;
+        padding-right: 30px;
+        text-align: left;
+    }
+
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 3;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(8, 8, 8, 0.5);
+        padding-top: 50px;
+    }
+
+    .modal-content {
+        background-color: #fefefe;
+        margin: 5% auto 15% auto;
+        border: 1px solid #888;
+        width: 80%;
+        font-family: "Helvetica Neue", Helvetica, Arial;
+    }
+</style>
+
+<div class="container" style="width: 1140px; position: static; text-align:right;">
+    <% if (req.session.role !=undefined) {%>
+
+        <a href="/user/logout" class="item" style="color: black;">(Logout)</a>
+
+        <%}%>
+</div>
+
+<div class="container" style="width: 1140px;  justify-content: left; 
+    margin: 0 auto;  padding: 30px 15px 25px; background: #fff;
+    border-radius: 0px; position: static;">
+    <article class="page">
+        <div style="display: flex;">
+            <nav class="main-nav">
+                <ul class="main-nav-ul">
+                    <li class="menu-left_item lv1"><a href="/user/student/myInbox"><span class="sub-arrow">My
+                                Inbox</span></a></li>
+                    <li class="menu-left_item lv1"><a href="/user/student/myApplication">My Application<span
+                                class="sub-arrow"></span></a>
+                    </li>
+                    <li class="menu-left_item lv1"><a class="active" href="/user/student/applicationStatus"><span
+                                class="sub-arrow">Application Status</span></a>
+                    </li>
+                    <li class="menu-left_item lv1"><a href="/user/student/myProfile"><span class="sub-arrow">My
+                                Profile</span></a>
+                    </li>
+                </ul>
+            </nav>
+
+            <div class="main-content" style="margin-left: 40px">
+                <h3 style="color: #333333;
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 5px;">Application Status</h3>
+                <br>
+                <p>Full Name: <%= user.Surname%>
+                        <%= user.GivenName%>
+                </p>
+
+                <% if (user.status=="new" || user.status=="In progress" ){ %>
+                    <p id="message">You have not submitted any application.</p>
+                    <% } %>
+
+                        <% if (user.status !="new" && user.status !="In progress" ){ %>
+                            <div class="container"
+                                style="background: #C8D8CC; margin: 15px 0px 3px; width: 800px; height: 30px; padding-top: 3px; padding-bottom: 3px;">
+                                <p>Application Details</p>
+                            </div>
+                            <div class="container"
+                                style="background: #f6f6f6; width: 800px; height: 30px; padding-top: 3px; padding-bottom: 3px;">
+                                <p>Admission Year: <%= new Date().getFullYear() %>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Application
+                                        No.: <%= user.idCode %>
+                                </p>
+                            </div>
+                            <table style="color: #333333; margin-top: 4px; padding-top: 0px; width: 800px;">
+                                <tr>
+                                    <th style="text-align: left; width: 530px; padding-left: 15px;">Programme</th>
+                                    <th style="text-align: left; width: 255px;">Status</th>
+                                    <th style="text-align: left; width: 300px;">Action</th>
+                                </tr>
+                                <% if (user.program1 !="" ) {%>
+                                    <tr>
+                                        <td class="table-content"
+                                            style="text-align: left; padding-left: 15px; padding-right: 25px">
+                                            <%= user.program1 %>
+                                        </td>
+
+                                        <td class="table-content" style="text-align: left;">
+                                            <div class="container" id="statusContainer"><span>
+                                                    <%= user.programmeStatus1 %>
+                                                </span></div>
+                                        </td>
+
+                                        <td>
+                                            <% if (user.programmeStatus1=="Offered" && user.program2IsEnrolled !='Yes'
+                                                && user.program3IsEnrolled !='Yes' ) {%>
+                                                <div class="row" style="margin-left: 0px; clear: both">
+                                                    <!-- accept offer button -->
+                                                    <button class="form-control btn-lg"
+                                                        onclick="document.getElementById('acceptModal1').style.display='block'"
+                                                        id="acceptOfferBtn">Accept</button>
+
+                                                    <!-- confirm box -->
+                                                    <div id="acceptModal1" class="modal">
+                                                        <div class="modal-content">
+                                                            <div class="modal-container">
+
+                                                                <div class="modal-header">
+                                                                    <h2 style="text-align: center !important;">
+                                                                        <b>Offer
+                                                                            Acceptance</b>
+                                                                    </h2>
+                                                                    <!-- modal-header -->
+                                                                </div>
+
+                                                                <div class="modal-body">
+                                                                    <!-- modal-body -->
+                                                                    <p>
+                                                                        <span style="padding-right: 95px;"><b>Offered
+                                                                                Programme :</b></span>
+                                                                        <%= user.program1
+                                                                            %>
+                                                                    </p>
+                                                                    <p>
+                                                                        <span style="padding-right: 146px;"><b>Year
+                                                                                of Entry :</b></span>
+                                                                        <%= user.entryYear1
+                                                                            %>
+                                                                    </p>
+                                                                    <p>
+                                                                        <span style="padding-right: 125px;"><b>Admission
+                                                                                Year :</b></span>
+                                                                        <%= new Date().getFullYear() %>
+                                                                    </p>
+                                                                </div>
+
+                                                                <div class="modal-footer"
+                                                                    style="justify-content: left;">
+                                                                    <p style="text-align: left !important;">
+                                                                        Do you accept your offer of
+                                                                        admission?</p>
+                                                                </div>
+
+                                                                <button type="button" class="cancelbtn modalBtn"
+                                                                    onclick="document.getElementById('acceptModal1').style.display='none'">
+                                                                    Cancel</button>
+
+                                                                <button type="button" class="acceptbtn modalBtn"
+                                                                    onclick="acceptOffer1('<%= user.id%>')">Yes,
+                                                                    I accept the offer.</button>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- end -->
+
+                                                    <!-- decline offer button -->
+                                                    <button class="form-control btn-lg" id="declineOfferBtn"
+                                                        onclick="document.getElementById('declineModal1').style.display='block'">Decline</button>
+                                                    <p id="blank"><br></p>
+
+                                                    <!-- confirm box -->
+                                                    <div id="declineModal1" class="modal">
+                                                        <div class="modal-content">
+                                                            <div class="modal-container">
+
+                                                                <div class="modal-header">
+                                                                    <h2 style="text-align: center !important;">
+                                                                        <b>Offer
+                                                                            Rejection</b>
+                                                                    </h2>
+                                                                    <!-- modal-header -->
+                                                                </div>
+
+                                                                <div class="modal-body">
+                                                                    <!-- modal-body -->
+                                                                    <p>
+                                                                        <span style="padding-right: 95px;"><b>Offered
+                                                                                Programme :</b></span>
+                                                                        <%= user.program1
+                                                                            %>
+                                                                    </p>
+                                                                    <p>
+                                                                        <span style="padding-right: 146px;"><b>Year
+                                                                                of Entry :</b></span>
+                                                                        <%= user.entryYear1
+                                                                            %>
+                                                                    </p>
+                                                                    <p>
+                                                                        <span style="padding-right: 125px;"><b>Admission
+                                                                                Year :</b></span>
+                                                                        <%= new Date().getFullYear() %>
+                                                                    </p>
+                                                                </div>
+
+                                                                <div class="modal-footer"
+                                                                    style="justify-content: left;">
+                                                                    <p style="text-align: left !important;">
+                                                                        Do you accept your offer of
+                                                                        admission?</p>
+                                                                </div>
+
+                                                                <button type="button" class="cancelbtn modalBtn"
+                                                                    onclick="document.getElementById('declineModal1').style.display='none'">
+                                                                    Cancel</button>
+
+                                                                <button type="button" class="rejectbtn modalBtn"
+                                                                    onclick="declineOffer1('<%= user.id%>')">No,
+                                                                    I reject the offer.</button>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- end -->
+                                                </div>
+                                                <% } %>
+                                        </td>
+                                    </tr>
+                                    <% } %>
+                                        <% if (user.program2 !="" ) {%>
+                                            <tr>
+                                                <td class="table-content"
+                                                    style="text-align: left; padding-left: 15px; padding-right: 15px">
+                                                    <%= user.program2 %>
+                                                </td>
+
+                                                <td class="table-content"
+                                                    style="text-align: left; padding-right: 10px;">
+                                                    <div class="container" id="statusContainer"><span>
+                                                            <%= user.programmeStatus2 %>
+                                                        </span></div>
+                                                </td>
+
+                                                <td>
+                                                    <% if (user.programmeStatus2=="Offered" && user.program1IsEnrolled
+                                                        !='Yes' && user.program3IsEnrolled !='Yes' ) {%>
+                                                        <div class="row" style="margin-left: 0px; clear: both">
+                                                            <!-- accept offer button -->
+                                                            <button class="form-control btn-lg" id="acceptOfferBtn"
+                                                                onclick="document.getElementById('acceptModal2').style.display='block'">Accept</button>
+
+                                                            <!-- confirm box -->
+                                                            <div id="acceptModal2" class="modal">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-container">
+
+                                                                        <div class="modal-header">
+                                                                            <h2 style="text-align: center !important;">
+                                                                                <b>Offer
+                                                                                    Acceptance</b>
+                                                                            </h2>
+                                                                            <!-- modal-header -->
+                                                                        </div>
+
+                                                                        <div class="modal-body">
+                                                                            <!-- modal-body -->
+                                                                            <p>
+                                                                                <span style="padding-right: 95px;"><b>Offered
+                                                                                        Programme :</b></span>
+                                                                                <%= user.program2
+                                                                                    %>
+                                                                            </p>
+                                                                            <p>
+                                                                                <span style="padding-right: 146px;"><b>Year
+                                                                                        of Entry :</b></span>
+                                                                                <%= user.entryYear2
+                                                                                    %>
+                                                                            </p>
+                                                                            <p>
+                                                                                <span style="padding-right: 125px;"><b>Admission
+                                                                                        Year :</b></span>
+                                                                                <%= new Date().getFullYear() %>
+                                                                            </p>
+                                                                        </div>
+
+                                                                        <div class="modal-footer"
+                                                                            style="justify-content: left;">
+                                                                            <p style="text-align: left !important;">Do
+                                                                                you accept your offer of admission?</p>
+                                                                        </div>
+
+                                                                        <button type="button" class="cancelbtn modalBtn"
+                                                                            onclick="document.getElementById('acceptModal2').style.display='none'">
+                                                                            Cancel</button>
+
+                                                                        <button type="button" class="acceptbtn modalBtn"
+                                                                            onclick="acceptOffer2('<%= user.id%>')">Yes,
+                                                                            I accept the offer.</button>
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <!-- end -->
+
+                                                            <!-- decline offer button -->
+                                                            <button class="form-control btn-lg" id="declineOfferBtn"
+                                                                onclick="document.getElementById('declineModal2').style.display='block'">Decline</button>
+                                                            <p id="blank"><br></p>
+
+                                                            <!-- confirm box -->
+                                                            <div id="declineModal2" class="modal">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-container">
+
+                                                                        <div class="modal-header">
+                                                                            <h2 style="text-align: center !important;">
+                                                                                <b>Offer
+                                                                                    Rejection</b>
+                                                                            </h2>
+                                                                            <!-- modal-header -->
+                                                                        </div>
+
+                                                                        <div class="modal-body">
+                                                                            <!-- modal-body -->
+                                                                            <p>
+                                                                                <span style="padding-right: 95px;"><b>Offered
+                                                                                        Programme :</b></span>
+                                                                                <%= user.program2
+                                                                                    %>
+                                                                            </p>
+                                                                            <p>
+                                                                                <span style="padding-right: 146px;"><b>Year
+                                                                                        of Entry :</b></span>
+                                                                                <%= user.entryYear2
+                                                                                    %>
+                                                                            </p>
+                                                                            <p>
+                                                                                <span style="padding-right: 125px;"><b>Admission
+                                                                                        Year :</b></span>
+                                                                                <%= new Date().getFullYear() %>
+                                                                            </p>
+                                                                        </div>
+
+                                                                        <div class="modal-footer"
+                                                                            style="justify-content: left;">
+                                                                            <p style="text-align: left !important;">
+                                                                                Do you accept your offer of
+                                                                                admission?</p>
+                                                                        </div>
+
+                                                                        <button type="button" class="cancelbtn modalBtn"
+                                                                            onclick="document.getElementById('declineModal2').style.display='none'">
+                                                                            Cancel</button>
+
+                                                                        <button type="button" class="rejectbtn modalBtn"
+                                                                            onclick="declineOffer2('<%= user.id%>')">No,
+                                                                            I reject the offer.</button>
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <!-- end -->
+                                                        </div>
+                                                        <% } %>
+                                                </td>
+                                            </tr>
+                                            <% } %>
+                                                <% if (user.program3 !="" ) {%>
+                                                    <tr>
+                                                        <td class="table-content"
+                                                            style="text-align: left; padding-left: 15px; padding-right: 15px">
+                                                            <%= user.program3
+                                                                %>
+                                                        </td>
+
+                                                        <td class="table-content"
+                                                            style="text-align: left; padding-right: 10px;">
+                                                            <div class="container" id="statusContainer"><span>
+                                                                    <%= user.programmeStatus3 %>
+                                                                </span></div>
+                                                        </td>
+
+                                                        <td>
+                                                            <% if (user.programmeStatus3=="Offered" &&
+                                                                user.program1IsEnrolled !='Yes' &&
+                                                                user.program2IsEnrolled !='Yes' ) {%>
+                                                                <div class="row" style="margin-left: 0px; clear: both">
+                                                                    <!-- send email button -->
+                                                                    <button class="form-control btn-lg"
+                                                                        id="acceptOfferBtn"
+                                                                        onclick="document.getElementById('acceptModal3').style.display='block'">Accept</button>
+
+                                                                    <!-- confirm box -->
+                                                                    <div id="acceptModal3" class="modal">
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-container">
+
+                                                                                <div class="modal-header">
+                                                                                    <h2
+                                                                                        style="text-align: center !important;">
+                                                                                        <b>Offer
+                                                                                            Acceptance</b>
+                                                                                    </h2>
+                                                                                    <!-- modal-header -->
+                                                                                </div>
+
+                                                                                <div class="modal-body">
+                                                                                    <!-- modal-body -->
+                                                                                    <p>
+                                                                                        <span
+                                                                                            style="padding-right: 95px;"><b>Offered
+                                                                                                Programme :</b></span>
+                                                                                        <%= user.program3
+                                                                                            %>
+                                                                                    </p>
+                                                                                    <p>
+                                                                                        <span
+                                                                                            style="padding-right: 146px;"><b>Year
+                                                                                                of Entry :</b></span>
+                                                                                        <%= user.entryYear3
+                                                                                            %>
+                                                                                    </p>
+                                                                                    <p>
+                                                                                        <span
+                                                                                            style="padding-right: 125px;"><b>Admission
+                                                                                                Year :</b></span>
+                                                                                        <%= new Date().getFullYear() %>
+                                                                                    </p>
+                                                                                </div>
+
+                                                                                <div class="modal-footer"
+                                                                                    style="justify-content: left;">
+                                                                                    <p
+                                                                                        style="text-align: left !important;">
+                                                                                        Do you accept your offer of
+                                                                                        admission?</p>
+                                                                                </div>
+
+                                                                                <button type="button"
+                                                                                    class="cancelbtn modalBtn"
+                                                                                    onclick="document.getElementById('acceptModal3').style.display='none'">
+                                                                                    Cancel</button>
+
+                                                                                <button type="button"
+                                                                                    class="acceptbtn modalBtn"
+                                                                                    onclick="acceptOffer3('<%= user.id%>')">Yes,
+                                                                                    I accept the offer.</button>
+
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <!-- end -->
+
+                                                                    <!-- decline offer button -->
+                                                                    <button class="form-control btn-lg"
+                                                                        id="declineOfferBtn"
+                                                                        onclick="document.getElementById('declineModal3').style.display='block'">Decline</button>
+                                                                    <p id="blank"><br></p>
+
+                                                                    <!-- confirm box -->
+                                                                    <div id="declineModal3" class="modal">
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-container">
+
+                                                                                <div class="modal-header">
+                                                                                    <h2
+                                                                                        style="text-align: center !important;">
+                                                                                        <b>Offer
+                                                                                            Rejection</b>
+                                                                                    </h2>
+                                                                                    <!-- modal-header -->
+                                                                                </div>
+
+                                                                                <div class="modal-body">
+                                                                                    <!-- modal-body -->
+                                                                                    <p>
+                                                                                        <span
+                                                                                            style="padding-right: 95px;"><b>Offered
+                                                                                                Programme :</b></span>
+                                                                                        <%= user.program3
+                                                                                            %>
+                                                                                    </p>
+                                                                                    <p>
+                                                                                        <span
+                                                                                            style="padding-right: 146px;"><b>Year
+                                                                                                of Entry :</b></span>
+                                                                                        <%= user.entryYear3
+                                                                                            %>
+                                                                                    </p>
+                                                                                    <p>
+                                                                                        <span
+                                                                                            style="padding-right: 125px;"><b>Admission
+                                                                                                Year :</b></span>
+                                                                                        <%= new Date().getFullYear() %>
+                                                                                    </p>
+                                                                                </div>
+
+                                                                                <div class="modal-footer"
+                                                                                    style="justify-content: left;">
+                                                                                    <p
+                                                                                        style="text-align: left !important;">
+                                                                                        Do you accept your offer of
+                                                                                        admission?</p>
+                                                                                </div>
+
+                                                                                <button type="button"
+                                                                                    class="cancelbtn modalBtn"
+                                                                                    onclick="document.getElementById('declineModal3').style.display='none'">
+                                                                                    Cancel</button>
+
+                                                                                <button type="button"
+                                                                                    class="rejectbtn modalBtn"
+                                                                                    onclick="declineOffer3('<%= user.id%>')">No,
+                                                                                    I reject the offer.</button>
+
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <!-- end -->
+                                                                </div>
+                                                                <% } %>
+                                                        </td>
+                                                    </tr>
+                                                    <% } %>
+                            </table>
+                            <% } %>
+            </div>
+        </div>
+
+    </article>
+</div>
+
+<script>
+    async function acceptOffer1(id) {
+
+        var response = await fetch("/offer/firstChoice/accept/" + id, {
+            method: "POST",
+            credentials: 'same-origin',
+        });
+        if (response.ok) {
+            var data = await response.json();
+            alert(data.message);
+            location.reload();
+        } else {
+            alert(response.status + ": " + response.statusText);
+        }
+    };
+
+    async function acceptOffer2(id) {
+
+        var response = await fetch("/offer/secondChoice/accept/" + id, {
+            method: "POST",
+            credentials: 'same-origin',
+        });
+        if (response.ok) {
+            var data = await response.json();
+            alert(data.message);
+            location.reload();
+        } else {
+            alert(response.status + ": " + response.statusText);
+        }
+    };
+
+    async function acceptOffer3(id) {
+
+        var response = await fetch("/offer/thirdChoice/accept/" + id, {
+            method: "POST",
+            credentials: 'same-origin',
+        });
+        if (response.ok) {
+            var data = await response.json();
+            alert(data.message);
+            location.reload();
+        } else {
+            alert(response.status + ": " + response.statusText);
+        }
+    };
+
+    async function declineOffer1(id) {
+
+        var response = await fetch("/offer/firstChoice/decline/" + id, {
+            method: "POST",
+            credentials: 'same-origin',
+        });
+        if (response.ok) {
+            var data = await response.json();
+            alert(data.message);
+            location.reload();
+        } else {
+            alert(response.status + ": " + response.statusText);
+        }
+    };
+
+    async function declineOffer2(id) {
+
+        var response = await fetch("/offer/secondChoice/decline/" + id, {
+            method: "POST",
+            credentials: 'same-origin',
+        });
+        if (response.ok) {
+            var data = await response.json();
+            alert(data.message);
+            location.reload();
+        } else {
+            alert(response.status + ": " + response.statusText);
+        }
+    };
+    async function declineOffer3(id) {
+
+        var response = await fetch("/offer/thirdChoice/decline/" + id, {
+            method: "POST",
+            credentials: 'same-origin',
+        });
+        if (response.ok) {
+            var data = await response.json();
+            alert(data.message);
+            location.reload();
+        } else {
+            alert(response.status + ": " + response.statusText);
+        }
+    };
+</script>

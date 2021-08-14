@@ -1,0 +1,400 @@
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<style type="text/css">
+    .topnav {
+        overflow: hidden;
+        background-color: #f0f0f0;
+        width: 100%;
+        justify-content: center;
+        margin: 0 auto;
+        padding-left: 110px;
+        border-radius: 0px;
+        position: static;
+    }
+
+    .topnav a {
+        float: left;
+        color: #000;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+        font-size: 17px;
+    }
+
+    .topnav a:hover:not(.active) {
+        background-color: rgb(218, 218, 218);
+        color: #000;
+    }
+
+    .topnav a:hover,
+    .topnav a:focus {
+        text-decoration: underline;
+    }
+
+    .topnav a.active {
+        /* background-color:#697174; */
+        /* background-color:#717A7D; */
+        background-color: #8AA0AB;
+        color: white;
+    }
+
+    body {
+        background: #e0ded6;
+        font-family: "Helvetica Neue", Helvetica, Arial;
+    }
+
+    input::-webkit-input-placeholder {
+        color: #b5b5b5;
+    }
+
+    input:-moz-placeholder {
+        color: #b5b5b5;
+    }
+
+    .clearfix::after {
+        content: "";
+        clear: both;
+        display: table;
+    }
+
+    #backToDataTable:hover {
+        opacity: 1;
+    }
+
+    #backToDataTable {
+        background-color: #FEFAFF;
+        color: #666666;
+        border-radius: 2px;
+        width: 175px;
+        margin-bottom: 10px;
+        margin-right: 5px;
+        font-size: 14px;
+        padding: 4px 9px 4px;
+        opacity: 0.9;
+    }
+
+    .main-nav-ul ul {
+        display: none;
+    }
+
+    .main-nav-ul li:hover ul {
+        display: block;
+    }
+
+    .sub-arrow:after {
+        content: '\203A';
+        float: right;
+        margin-right: 20px;
+    }
+
+    ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        width: 250px;
+        background-color: #f8f8f8;
+    }
+
+    li a {
+        display: block;
+        color: #666666;
+        padding: 8px 16px;
+        text-decoration: none;
+    }
+
+    li a.active {
+        background-color: #908B85;
+        color: white;
+        opacity: 0.7;
+    }
+
+    li a:hover:not(.active) {
+        background-color: rgb(218, 218, 218);
+        color: #000;
+    }
+
+    table,
+    th,
+    td {
+        border: 2px solid;
+        border-collapse: collapse;
+        border-color: #f6f6f6;
+        font-size: 16px
+    }
+
+    .table-content {
+        padding: 4px 10px;
+        text-align: center;
+    }
+
+    #nextBtn {
+        background: -moz-linear-gradient(top,
+                #b9c5dd 0%,
+                #ACB9CA);
+        background: -webkit-gradient(linear, left top, left bottom,
+                from(#b9c5dd),
+                to(#ACB9CA));
+        color: #000;
+        border: 2px solid #ACB9CA;
+    }
+
+    #nextBtn:hover {
+        background: -moz-linear-gradient(top,
+                #ACB9CA 0%,
+                #b9c5dd);
+        background: -webkit-gradient(linear, left top, left bottom,
+                from(#ACB9CA),
+                to(#b9c5dd));
+    }
+
+    #prevBtn {
+        background: -moz-linear-gradient(top,
+                #D8D8D8 0%,
+                #C9C9C9);
+        background: -webkit-gradient(linear, left top, left bottom,
+                from(#D8D8D8),
+                to(#C9C9C9));
+        /* background: #D8D8D8; */
+        color: #000;
+        border: 2px solid #D8D8D8;
+    }
+
+    #prevBtn:hover {
+        background: -moz-linear-gradient(top,
+                #C9C9C9 0%,
+                #D8D8D8);
+        background: -webkit-gradient(linear, left top, left bottom,
+                from(#C9C9C9),
+                to(#D8D8D8));
+    }
+</style>
+
+<div class="wrapper" style="width: 100%;">
+    <div class="container-fluid no-gutters"
+        style="position: static; text-align: right; margin: 8px 0px; font-size: 14px;">
+
+        <% if (req.session.role !=undefined) {%>
+
+            Logged in as <b>
+                <%= req.session.user.Surname%>
+                    <%= req.session.user.GivenName%>
+            </b>&nbsp; |&nbsp;
+
+            <a style="color: black; padding: 5px 50px 25px 0px; color: #71838C" href="/user/logout">Logout</a>
+
+            <%}%>
+    </div>
+</div>
+
+<div class="wrapper" style="width: 100%; margin: 0 auto;">
+    <div class="container-fluid" style="justify-content: center; 
+    padding: 27px 15px 12px 115px; background: #fff;
+    border-radius: 0px; position: static;">
+        <h2 style="font-size: 40px;
+            font-weight: bold; color:#6A635A">HKBU Student Admission System</h2>
+    </div>
+</div>
+
+<div class="topnav">
+    <a class="active" href="/user/admin/applications/all/search">Applications</a>
+    <a href="/user/admin/statistics">Statistics</a>
+    <a href="/user/admin/profile">Profile</a>
+</div>
+
+<div class="wrapper" style="width: 100%; margin: 0 auto;">
+    <div class="container-fluid"
+        style="justify-content: center; height: 35px; font-size: 17px;
+background: #fff; border-radius: 0px; position: static; color: #888888; padding-top: 6px; padding-bottom: 5px; padding-left: 125px;">
+        <i class="fa fa-home" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;<i class="fa fa-angle-right"
+            aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;<span>Applications</span>&nbsp;&nbsp;
+    </div>
+</div>
+<br>
+
+<div class="wrapper" style="width: 1310px; margin: 0 auto;">
+    <div class="container-fluid" style="justify-content: center; 
+    padding: 30px 15px 25px; background: #fff;
+    border-radius: 0px; position: static;">
+
+        <div style="display: flex;">
+
+            <div class="main-content" style="margin-left: 40px;">
+
+                <div class="row" style="margin-left: 0px; clear: both">
+                    <!-- send email button -->
+                    <a id="redirect-link" style="color: #333333;" href="/user/admin/applications/all/search">
+                        <button class="form-control btn-lg" id="backToDataTable">
+                            << See all applications </button>
+                    </a>
+                </div>
+
+                <br>
+                <article class="page">
+                    <div style="display: flex;">
+
+                        <nav class="main-nav">
+                            <ul class="main-nav-ul">
+                                <li class="menu-left_item lv1"><a
+                                        href="/user/admin/applications/details/<%= application.id%>"><span
+                                            class="sub-arrow">Personal
+                                            Particulars</span></a></li>
+
+                                <li class="menu-left_item lv1"><a
+                                        href="/user/admin/applications/details/academicProfile/<%= application.id%>">Academic
+                                        Profile<span class="sub-arrow"></span></a>
+                                </li>
+                                <li class="menu-left_item lv1"><a
+                                        href="/user/admin/applications/details/academicQualification/<%= application.id%>"><span
+                                            class="sub-arrow">Academic
+                                            Qualification</span></a>
+                                </li>
+                                <li class="menu-left_item lv1"><a
+                                        href="/user/admin/applications/details/programmePreference/<%= application.id%>"><span
+                                            class="sub-arrow">Programme
+                                            Preference</span></a>
+                                </li>
+                                <li class="menu-left_item lv1"><a class="active"
+                                        href="/user/admin/applications/details/academicReference/<%= application.id%>"><span
+                                            class="sub-arrow">Academic Reference</span></a>
+                                </li>
+                                <li class="menu-left_item lv1"><a
+                                        href="/user/admin/applications/details/otherInformation/<%= application.id%>"><span
+                                            class="sub-arrow">Other
+                                            Information</span></a>
+                                </li>
+                            </ul>
+                        </nav>
+
+                        <div id="academicReference" action="/forms/academicReference" method="POST">
+
+                            <div class="main-content" style="margin-left: 40px">
+                                <h3 style="color: #666666;
+                                        font-size: 24px;
+                                        font-weight: bold;
+                                        margin-bottom: 5px;">Academic Reference</h3>
+
+                                <p style="width: 800px; padding-top: 5px; margin-right: 20px; color: #444444;"> Please provide
+                                    information of no
+                                    more than 2
+                                    referees upon receipt of their consent.
+                                    Nominated referee(s) will be invited by email
+                                    to submit the reference via the Online
+                                    Reference Upload System. Alternatively, you
+                                    may upload reference letter(s) via the
+                                    “Supporting Documents” section.
+                                </p>
+
+                                <table style="color: #333333; width: 800px; margin-top: 0px;">
+                                    <tr>
+                                        <td colspan="4" style="padding-left: 12px; background: #C8D8CC; margin-top: 15px; width: 800px; padding-top: 1px;
+                                    margin-left: 0px;">Referee Information</td>
+                                    </tr>
+                                    <tr style="background-color: #f6f6f6">
+                                        <td width="15%" style="text-align: center; padding: 5px 0;">Relationship</td>
+                                        <td width="21%" style="text-align: center;">Name</td>
+                                        <td width="27%" style="text-align: center;">Email</td>
+                                        <td width="37%" style="text-align: center;">Description</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="table-content">
+                                            <input type="text" class="form-control" name="AcademicReference[relationship1]"
+                                                style="height: 26px; width: 100%; margin-top: 3px; margin-bottom: 3px; padding: 3px;"
+                                                <% if(application.academicReferenceData !=null &&
+                                                application.academicReferenceData.AcademicReference.relationship1 !=null) { %>
+                                            value="<%=application.academicReferenceData.AcademicReference.relationship1%>" <% } %>
+                                                    />
+                                        </td>
+                                        <td class="table-content">
+                                            <input type="text" class="form-control" name="AcademicReference[refName1]"
+                                                style="height: 26px; width: 100%; margin-top: 3px; margin-bottom: 3px; padding: 3px;"
+                                                <% if(application.academicReferenceData !=null &&
+                                                application.academicReferenceData.AcademicReference.refName1 !=null) { %>
+                                            value="<%=application.academicReferenceData.AcademicReference.refName1%>" <% } %>
+                                                    />
+                                        </td>
+                                        <td class="table-content">
+                                            <input type="text" class="form-control" name="AcademicReference[email1]"
+                                                style="height: 26px; width: 100%; margin-top: 3px; margin-bottom: 3px; padding: 3px;" 
+                                                <% if(application.academicReferenceData !=null &&
+                                                application.academicReferenceData.AcademicReference.email1 !=null) { %>
+                                            value="<%=application.academicReferenceData.AcademicReference.email1%>" <% } %>
+                                            />
+                                        </td>
+                                        <td class="table-content">
+                                            <input type="text" class="form-control" name="AcademicReference[description1]"
+                                                style="height: 26px; width: 100%; margin-top: 3px; margin-bottom: 3px; padding: 3px;" 
+                                                <% if(application.academicReferenceData !=null &&
+                                                application.academicReferenceData.AcademicReference.description1 !=null) { %>
+                                            value="<%=application.academicReferenceData.AcademicReference.description1%>" <% } %>
+                                            />
+                                        </td>
+                                    </tr>
+            
+                                    <tr>
+                                        <td class="table-content">
+                                            <input type="text" class="form-control" name="AcademicReference[relationship2]"
+                                                style="height: 26px; width: 100%; margin-top: 3px; margin-bottom: 3px; padding: 3px;" 
+                                                <% if(application.academicReferenceData !=null &&
+                                                application.academicReferenceData.AcademicReference.relationship2 !=null) { %>
+                                            value="<%=application.academicReferenceData.AcademicReference.relationship2%>" <% } %>
+                                            />
+                                        </td>
+                                        <td class="table-content">
+                                            <input type="text" class="form-control" name="AcademicReference[refName2]"
+                                                style="height: 26px; width: 100%; margin-top: 3px; margin-bottom: 3px; padding: 3px;" 
+                                                <% if(application.academicReferenceData !=null &&
+                                                application.academicReferenceData.AcademicReference.refName2 !=null) { %>
+                                            value="<%=application.academicReferenceData.AcademicReference.refName2%>" <% } %>
+                                            />
+                                        </td>
+                                        <td class="table-content">
+                                            <input type="text" class="form-control" name="AcademicReference[email2]"
+                                                style="height: 26px; width: 100%; margin-top: 3px; margin-bottom: 3px; padding: 3px;" 
+                                                <% if(application.academicReferenceData !=null &&
+                                                application.academicReferenceData.AcademicReference.email2 !=null) { %>
+                                            value="<%=application.academicReferenceData.AcademicReference.email2%>" <% } %>
+                                            />
+                                        </td>
+                                        <td class="table-content">
+                                            <input type="text" class="form-control" name="AcademicReference[description2]"
+                                                style="height: 26px; width: 100%; margin-top: 3px; margin-bottom: 3px; padding: 3px;" 
+                                                <% if(application.academicReferenceData !=null &&
+                                                application.academicReferenceData.AcademicReference.description2 !=null) { %>
+                                            value="<%=application.academicReferenceData.AcademicReference.description2%>" <% } %>
+                                            />
+                                        </td>
+                                    </tr>
+                                </table>
+
+                                <div>
+                                    <br>
+                                    <!-- Previous -->
+                                    <a href="/user/admin/applications/details/programmePreference/<%= application.id%>">
+                                        <button id="prevBtn" class="btn btn-primary">
+                                            <b>
+                                                << Previous</b></button></a>
+
+                                    <!-- Next -->
+                                    <a href="/user/admin/applications/details/otherInformation/<%= application.id%>">
+                                        <button id="nextBtn" class="btn btn-primary"><b>Next
+                                                Page >></b></button>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </article>
+
+
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,2407 @@
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+<style type="text/css">
+    .topnav {
+        overflow: hidden;
+        background-color: #f1f1f1;
+        width: 100%;
+        justify-content: center;
+        margin: 0 auto;
+        padding-left: 110px;
+        border-radius: 0px;
+        position: static;
+    }
+
+    .topnav a {
+        float: left;
+        color: #000;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+        font-size: 17px;
+    }
+
+    .topnav a:hover:not(.active) {
+        background-color: rgb(218, 218, 218);
+        color: #000;
+    }
+
+    .topnav a:hover,
+    .topnav a:focus {
+        text-decoration: underline;
+    }
+
+    .topnav a.active {
+        /* background-color:#697174; */
+        /* background-color:#717A7D; */
+        background-color: #8AA0AB;
+        color: white;
+    }
+
+
+    body {
+        background: #e0ded6;
+        font-family: "Helvetica Neue", Helvetica, Arial;
+    }
+
+    #submitBtn {
+        background: -moz-linear-gradient(top,
+                #b9c5dd 0%,
+                #ACB9CA);
+        background: -webkit-gradient(linear, left top, left bottom,
+                from(#b9c5dd),
+                to(#ACB9CA));
+        color: #000;
+        border: 2px solid #ACB9CA;
+        /* border: 1px solid transparent; */
+        height: 40px;
+        border-radius: 3px;
+        border-style: solid;
+    }
+
+    #submitBtn:hover {
+        background: -moz-linear-gradient(top,
+                #ACB9CA 0%,
+                #b9c5dd);
+        background: -webkit-gradient(linear, left top, left bottom,
+                from(#ACB9CA),
+                to(#b9c5dd));
+    }
+
+    .form-inputs {
+        -webkit-tap-highlight-color: transparent;
+        user-select: none;
+        box-sizing: border-box;
+        font: inherit;
+        margin: 0;
+        font-family: inherit;
+        font-size: 14px;
+        line-height: 1.42857143;
+        display: block;
+        color: #555;
+        width: 100%;
+        padding: 6px 10px;
+        background-color: #fff;
+        background-image: none;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+        transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+        min-height: 40px;
+        height: 40px;
+        box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+        padding-right: 34px;
+        border-color: #ccc;
+    }
+
+    input::-webkit-input-placeholder {
+        color: #b5b5b5;
+    }
+
+    input:-moz-placeholder {
+        color: #b5b5b5;
+    }
+
+    #backToDataTable:hover {
+        opacity: 1;
+    }
+
+    #backToDataTable {
+        background-color: #FEFAFF;
+        color: #666666;
+        border-radius: 2px;
+        width: 175px;
+        margin-bottom: 10px;
+        margin-right: 5px;
+        font-size: 14px;
+        padding: 4px 9px 4px;
+        opacity: 0.9;
+    }
+
+    .redirect-link {
+        color: black;
+    }
+
+    .redirect-link:hover {
+        color: black;
+    }
+
+    table,
+    th,
+    td {
+        border: 2px solid;
+        border-collapse: collapse;
+        border-color: #f6f6f6;
+        font-size: 16px
+    }
+
+    .table-content {
+        padding: 4px 10px;
+        text-align: center;
+    }
+
+    #nextBtn {
+        background: -moz-linear-gradient(top,
+                #b9c5dd 0%,
+                #ACB9CA);
+        background: -webkit-gradient(linear, left top, left bottom,
+                from(#b9c5dd),
+                to(#ACB9CA));
+        color: #000;
+        border: 2px solid #ACB9CA;
+    }
+
+    #nextBtn:hover {
+        background: -moz-linear-gradient(top,
+                #ACB9CA 0%,
+                #b9c5dd);
+        background: -webkit-gradient(linear, left top, left bottom,
+                from(#ACB9CA),
+                to(#b9c5dd));
+    }
+
+    #prevBtn {
+        background: -moz-linear-gradient(top,
+                #D8D8D8 0%,
+                #C9C9C9);
+        background: -webkit-gradient(linear, left top, left bottom,
+                from(#D8D8D8),
+                to(#C9C9C9));
+        /* background: #D8D8D8; */
+        color: #000;
+        border: 2px solid #D8D8D8;
+    }
+
+    #prevBtn:hover {
+        background: -moz-linear-gradient(top,
+                #C9C9C9 0%,
+                #D8D8D8);
+        background: -webkit-gradient(linear, left top, left bottom,
+                from(#C9C9C9),
+                to(#D8D8D8));
+    }
+
+    table,
+    th,
+    td {
+        border: 2px solid;
+        border-collapse: collapse;
+        border-color: #e4dfdf;
+    }
+
+    th {
+        padding-top: 8px;
+        background-color: #EFEFEF;
+        text-align: center;
+        width: 300px;
+        font-size: 14px;
+    }
+
+    .table-content {
+        padding: 4px 10px;
+        text-align: center;
+    }
+
+    #examResults1 td, #examResults1, 
+    #examResults2 td, #examResults2,
+    #RefInfo td, #RefInfo{
+        border: 2px solid;
+        border-collapse: collapse;
+        border-color: #f0eaea;
+        font-size: 16px
+    }
+
+    .table-content {
+        padding: 4px 10px;
+        text-align: center;
+    }
+</style>
+
+
+<div class="wrapper" style="width: 100%;">
+    <div class="container-fluid no-gutters"
+        style="position: static; text-align: right; margin: 8px 0px; font-size: 14px;">
+
+        <% if (req.session.role !=undefined) {%>
+
+            Logged in as <b>
+                <%= req.session.user.Surname%>
+                    <%= req.session.user.GivenName%>
+            </b>&nbsp; |&nbsp;
+
+            <a style="color: black; padding: 5px 50px 25px 0px; color: #71838C" href="/user/logout">Logout</a>
+
+            <%}%>
+    </div>
+</div>
+
+<div class="wrapper" style="width: 100%; margin: 0 auto;">
+    <div class="container-fluid" style="justify-content: center; 
+    padding: 10px 15px 12px 115px; background: #fff;
+    border-radius: 0px; position: static;">
+        <h2 style="font-size: 40px;
+            font-weight: bold; color:#6A635A">HKBU Student Admission System</h2>
+    </div>
+</div>
+
+<div class="topnav">
+    <a class="active" href="/user/professor/applications/all">Applications</a>
+    <a href="/user/professor/profile">Profile</a>
+</div>
+
+<div class="wrapper" style="width: 100%; margin: 0 auto;">
+    <div class="container-fluid"
+        style="justify-content: center; height: 34px; font-size: 17px;
+background: #fff; border-radius: 0px; position: static; color: #888888; padding-top: 6px; padding-bottom: 5px; padding-left: 125px;">
+        <i class="fa fa-home" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;<i class="fa fa-angle-right"
+            aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;<span>Applications</span>&nbsp;&nbsp;
+    </div>
+</div>
+
+<br>
+<div class="wrapper" style="width: 1320px; margin: 0 auto;">
+    <div class="container-fluid" style="justify-content: center; 
+    padding: 30px 30px 25px; background: #fff;
+    border-radius: 0px; position: static;">
+
+        <div style="display: flex;">
+
+            <div class="main-content" style="margin-left: 20px;">
+
+                <div class="row" style="margin-left: 0px; clear: both">
+                    <!-- back to all applications button -->
+                    <a style="color: #333333;" href="/user/professor/applications/all">
+                        <button class="form-control btn-lg" id="backToDataTable">
+                            << See all applications </button>
+                    </a>
+                </div>
+
+                <ul class="nav nav-tabs">
+                    <li class="active"><a data-toggle="tab" href="#home" class="redirect-link">Academic Profile</a></li>
+                    <li><a data-toggle="tab" href="#menu1" class="redirect-link">Academic Qualification</a></li>
+                    <li><a data-toggle="tab" href="#menu2" class="redirect-link">Academic Reference</a></li>
+                </ul>
+
+                <div class="tab-content">
+                    <div id="home" class="tab-pane fade in active">
+                        <br>
+                        <div class="row" style="width: 100%; margin-top: 15px; margin-bottom: 25px;">
+                            <div class="form-group col-xl-6 col-12">
+                                <span style="font-size: 17px; font-weight: bold;">Application No.: <%= model1.idCode%>
+                                        </span>
+                            </div>
+                            <div class="form-group col-xl-6 col-12">
+                                <span style="font-size: 17px; font-weight: bold;">Application No.: <%= model2.idCode%>
+                                        </span>
+                            </div>
+                        </div>
+
+
+                        <div id="academicProfile">
+                            <div class="row" style="width: 100%;">
+
+                                <div class="form-group col-xl-6 col-12">
+                                    <span style="font-size: 17px; font-style: italic; color: #666666">Years of Schooling </span>
+                                </div>
+                                <div class="form-group col-xl-6 col-12">
+                                    <span style="font-size: 17px; font-style: italic; color: #666666">Years of Schooling</span>
+                                </div>
+
+
+                                <div id="div01" class="form-group col-xl-6 col-12">
+                                    <div class="row" style="margin-left: 0px;">
+                                        <label style="color: #666666" class="col-form-label"><span>Primary Education :
+                                                &nbsp;</span></label>
+                                        <input type="number" min="0" class="form-inputs input-lg"
+                                            name="AcademicProfile[primaryYrs]" style="width: 150px" <%
+                                            if(model1.academicProfileData !=null &&
+                                            model1.academicProfileData.AcademicProfile.primaryYrs !=null) { %>
+                                        value="<%=model1.academicProfileData.AcademicProfile.primaryYrs%>"
+                                            <% } %>
+                                                required>
+                                                <label class="col-form-label" style="color: #666666">&nbsp; years
+                                                    full-time study or
+                                                    its
+                                                    equivalent</label>
+                                    </div>
+                                </div>
+
+                                <div id="div02" class="form-group col-xl-6 col-12">
+                                    <div class="row" style="margin-left: 0px;">
+                                        <label style="color: #666666" class="col-form-label"><span>Primary Education :
+                                                &nbsp;</span></label>
+                                        <input type="number" min="0" class="form-inputs input-lg"
+                                            name="AcademicProfile[primaryYrs]" style="width: 150px" <%
+                                            if(model2.academicProfileData !=null &&
+                                            model2.academicProfileData.AcademicProfile.primaryYrs !=null) { %>
+                                        value="<%=model2.academicProfileData.AcademicProfile.primaryYrs%>"
+                                            <% } %>
+                                                required>
+                                                <label class="col-form-label" style="color: #666666">&nbsp; years
+                                                    full-time study or
+                                                    its
+                                                    equivalent</label>
+                                    </div>
+                                </div>
+
+                                <div id="div03" class="form-group col-xl-6 col-12">
+                                    <div class="row" style="margin-left: 0px ;">
+                                        <label style="color: #666666" class="col-form-label"><span>Secondary Education :
+                                                &nbsp;</span></label>
+                                        <input type="number" min="0" class="form-inputs input-lg"
+                                            name="AcademicProfile[secondaryYrs]" style="width: 150px" <%
+                                            if(model1.academicProfileData !=null &&
+                                            model1.academicProfileData.AcademicProfile.secondaryYrs !=null) { %>
+                                        value="<%=model1.academicProfileData.AcademicProfile.secondaryYrs%>"
+                                            <% } %>
+                                                required>
+                                                <label class="col-form-label" style="color: #666666">&nbsp; years
+                                                    full-time study or
+                                                    its
+                                                    equivalent</label>
+                                    </div>
+                                </div>
+
+                                <div id="div04" class="form-group col-xl-6 col-12">
+                                    <div class="row" style="margin-left: 0px ;">
+                                        <label style="color: #666666" class="col-form-label"><span>Secondary Education :
+                                                &nbsp;</span></label>
+                                        <input type="number" min="0" class="form-inputs input-lg"
+                                            name="AcademicProfile[secondaryYrs]" style="width: 150px" <%
+                                            if(model2.academicProfileData !=null &&
+                                            model2.academicProfileData.AcademicProfile.secondaryYrs !=null) { %>
+                                        value="<%=model2.academicProfileData.AcademicProfile.secondaryYrs%>"
+                                            <% } %>
+                                                required>
+                                                <label class="col-form-label" style="color: #666666">&nbsp; years
+                                                    full-time study or
+                                                    its
+                                                    equivalent</label>
+                                    </div>
+                                </div>
+
+                                <div id="div05" class="form-group col-xl-6 col-12">
+                                    <div class="row" style="margin-left: 0px ;">
+                                        <label style="color: #666666" class="col-form-label"><span>Tertiary Education :
+                                                &nbsp;</span></label>
+                                        <input type="number" min="0" class="form-inputs input-lg"
+                                            name="AcademicProfile[postYrs]" style="width: 150px" <%
+                                            if(model1.academicProfileData !=null &&
+                                            model1.academicProfileData.AcademicProfile.postYrs !=null) { %>
+                                        value="<%=model1.academicProfileData.AcademicProfile.postYrs%>"
+                                            <% } %>
+                                                required>
+                                                <label class="col-form-label" style="color: #666666">&nbsp; years
+                                                    full-time study or
+                                                    its
+                                                    equivalent</label>
+                                    </div>
+                                </div>
+
+                                <div id="div06" class="form-group col-xl-6 col-12">
+                                    <div class="row" style="margin-left: 0px ;">
+                                        <label style="color: #666666" class="col-form-label"><span>Tertiary Education :
+                                                &nbsp;</span></label>
+                                        <input type="number" min="0" class="form-inputs input-lg"
+                                            name="AcademicProfile[postYrs]" style="width: 150px" <%
+                                            if(model2.academicProfileData !=null &&
+                                            model2.academicProfileData.AcademicProfile.postYrs !=null) { %>
+                                        value="<%=model2.academicProfileData.AcademicProfile.postYrs%>"
+                                            <% } %>
+                                                required>
+                                                <label class="col-form-label" style="color: #666666">&nbsp; years
+                                                    full-time study or
+                                                    its
+                                                    equivalent</label>
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-xl-6 col-12" style="margin-top: 15px">
+                                    <span style="font-size: 17px; font-style: italic; color: #666666">Tertiary Education</span>
+                                </div>
+                                <div class="form-group col-xl-6 col-12" style="margin-top: 15px">
+                                    <span style="font-size: 17px; font-style: italic; color: #666666">Tertiary Education</span>
+                                </div>
+
+                                <div id="div07" class="form-group col-xl-6 col-12">
+                                    <div class="row" style="margin-left: 0px ;">
+                                        <table style="color: #666666; padding-top: 0px; max-width: 560px; ">
+                                            <tr>
+                                                <th>Country/ Region</th>
+                                                <td class="table-content">
+                                                    <select class="form-control" id="postCountry1"
+                                                        name="AcademicProfile[postCountry1]"
+                                                        style="height: 20px; padding: 0px;  width: 310px">
+                                                    </select>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <th>Name of Institution</th>
+                                                <td class="table-content">
+                                                    <input type="text" class="form-control" id="postInstitution1"
+                                                        name="AcademicProfile[postInstitution1]"
+                                                        style="height: 21px; padding: 4px; width: 350px" <%
+                                                        if(model1.academicProfileData !=null &&
+                                                        model1.academicProfileData.AcademicProfile.postInstitution1
+                                                        !=null) { %>
+                                                    value="<%=model1.academicProfileData.AcademicProfile.postInstitution1%>
+                                                        " <% }%>
+                                                            />
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <th>Programme Title</th>
+                                                <td class="table-content">
+                                                    <input type="text" class="form-control" id="postProgramTitle1"
+                                                        name="AcademicProfile[postProgramTitle1]"
+                                                        style="height: 21px; padding: 4px;" <%
+                                                        if(model1.academicProfileData !=null &&
+                                                        model1.academicProfileData.AcademicProfile.postProgramTitle1
+                                                        !=null) { %>
+                                                    value="<%=model1.academicProfileData.AcademicProfile.postProgramTitle1%>"
+                                                        <% } %>
+                                                            />
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <th>Study Status</th>
+                                                <td class="table-content">
+                                                    <select class="form-control" id="postStudyStatus1"
+                                                        name="AcademicProfile[postStudyStatus1]"
+                                                        style="height: 20px; padding: 0px; width: 150px">
+                                                        <option value="" selected="true" disabled="disabled">-Select-
+                                                        </option>
+                                                        <option value="graduated" <% if(model1.academicProfileData
+                                                            !=null &&
+                                                            model1.academicProfileData.AcademicProfile.postStudyStatus1
+                                                            !=null) { %>
+                                                            <%=(model1.academicProfileData.AcademicProfile.postStudyStatus1=='graduated'
+                                                                )? 'selected' :'' %>
+                                                                <% } %>
+                                                                    >Graduated
+                                                        </option>
+
+                                                        <option value="final year" <% if(model1.academicProfileData
+                                                            !=null &&
+                                                            model1.academicProfileData.AcademicProfile.postStudyStatus1
+                                                            !=null) { %>
+                                                            <%=(model1.academicProfileData.AcademicProfile.postStudyStatus1== 'final year'
+                                                                )? 'selected' :'' %>
+                                                                <% } %>
+                                                                    >Final year
+                                                        </option>
+
+                                                        <option value="non-final year" <%
+                                                            if(model1.academicProfileData !=null &&
+                                                            model1.academicProfileData.AcademicProfile.postStudyStatus1
+                                                            !=null) { %>
+                                                            <%=(model1.academicProfileData.AcademicProfile.postStudyStatus1== 'non-final year'
+                                                                )? 'selected' :'' %>
+                                                                <% } %>>Non-final year
+                                                        </option>
+
+                                                        <option value="withdrew" <% if(model1.academicProfileData
+                                                            !=null &&
+                                                            model1.academicProfileData.AcademicProfile.postStudyStatus1
+                                                            !=null) { %>
+                                                            <%=(model1.academicProfileData.AcademicProfile.postStudyStatus1=='withdrew'
+                                                                )? 'selected' :'' %>
+                                                                <% } %>>Withdrew
+                                                        </option>
+
+                                                        <option value="deferred" <% if(model1.academicProfileData
+                                                            !=null &&
+                                                            model1.academicProfileData.AcademicProfile.postStudyStatus1
+                                                            !=null) { %>
+                                                            <%=(model1.academicProfileData.AcademicProfile.postStudyStatus1=='deferred'
+                                                                )? 'selected' :'' %>
+                                                                <% } %>>Deferred
+                                                        </option>
+                                                    </select>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <th>Latest Cumulative GPA</th>
+                                                <td class="table-content">
+                                                    <div class="row" style="margin-left: 0px ;">
+                                                        <input type="text" class="form-control input-lg" id="postGPA1"
+                                                            name="AcademicProfile[postGPA1]" pattern="^\d*(\.\d{0,2})?$"
+                                                            style="height: 21px; padding: 4px; width: 75px; font-size: 14px"
+                                                            placeholder="e.g. 3.33" <%
+                                                            if(model1.academicProfileData !=null &&
+                                                            model1.academicProfileData.AcademicProfile.postGPA1
+                                                            !=null) { %>
+                                                        value="<%=model1.academicProfileData.AcademicProfile.postGPA1%>"
+                                                            <% } %>
+                                                                />
+                                                                <label class="col-form-label"
+                                                                    style="padding: 0px; margin: 0px;"><span
+                                                                        style="font-size: 14px;">&nbsp;out of maximum
+                                                                        cGPA&nbsp;</span></label>
+                                                                <input type="text" class="form-control input-lg"
+                                                                    id="postMaxGPA1" name="AcademicProfile[postMaxGPA1]"
+                                                                    style="height: 21px; padding: 4px; width: 65px; font-size: 14px"
+                                                                    placeholder="e.g. 4.0" <%
+                                                                    if(model1.academicProfileData !=null &&
+                                                                    model1.academicProfileData.AcademicProfile.postMaxGPA1
+                                                                    !=null) {%>
+                                                                value="<%=model1.academicProfileData.AcademicProfile.postMaxGPA1%>"
+                                                                    <% } %>
+                                                                        />
+                                                    </div>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <th>Date of Admission</th>
+                                                <td class="table-content">
+                                                    <input type="date" class="form-control" id="postPeriodFrom1"
+                                                        name="AcademicProfile[postPeriodFrom1]"
+                                                        style="height: 21px; width: 150px; padding: 4px;" <%
+                                                        if(model1.academicProfileData !=null &&
+                                                        model1.academicProfileData.AcademicProfile.postPeriodFrom1
+                                                        !=null) { %>
+                                                    value="<%=model1.academicProfileData.AcademicProfile.postPeriodFrom1%>" <% } %>
+                                                            />
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <th>Date / Expected Date of Completion</th>
+                                                <td class="table-content">
+                                                    <input type="date" class="form-control" id="postPeriodTo1"
+                                                        name="AcademicProfile[postPeriodTo1]" placeholder="From"
+                                                        style="height: 21px; width: 150px; padding: 4px;" <%
+                                                        if(model1.academicProfileData !=null &&
+                                                        model1.academicProfileData.AcademicProfile.postPeriodTo1
+                                                        !=null) { %>
+                                                    value="<%=model1.academicProfileData.AcademicProfile.postPeriodTo1%>"
+                                                        <% } %>
+                                                            />
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <th>Qualification Obtained / to be Obtained</th>
+                                                <td class="table-content">
+                                                    <div class="select_join">
+                                                        <select class="form-control" id="postQualification1"
+                                                            name="AcademicProfile[postQualification1]"
+                                                            style="height: 20px; padding: 0px; width: 280px">
+                                                        </select>
+                                                    </div>
+                                                </td>
+                                            </tr>
+
+                                        </table>
+                                    </div>
+                                </div>
+
+                                <div id="div08" class="form-group col-xl-6 col-12">
+                                    <div class="row" style="margin-left: 0px ;">
+                                        <table style="color: #666666; padding-top: 0px; max-width: 560px; ">
+                                            <tr>
+                                                <th>Country/ Region</th>
+                                                <td class="table-content">
+                                                    <select class="form-control" id="postCountry2"
+                                                        name="AcademicProfile[postCountry1]"
+                                                        style="height: 20px; padding: 0px;  width: 310px">
+                                                    </select>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <th>Name of Institution</th>
+                                                <td class="table-content">
+                                                    <input type="text" class="form-control" id="postInstitution1"
+                                                        name="AcademicProfile[postInstitution1]"
+                                                        style="height: 21px; padding: 4px; width: 350px" <%
+                                                        if(model2.academicProfileData !=null &&
+                                                        model2.academicProfileData.AcademicProfile.postInstitution1
+                                                        !=null) { %>
+                                                    value="<%=model2.academicProfileData.AcademicProfile.postInstitution1%>" <% }%>
+                                                            />
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <th>Programme Title</th>
+                                                <td class="table-content">
+                                                    <input type="text" class="form-control" id="postProgramTitle1"
+                                                        name="AcademicProfile[postProgramTitle1]"
+                                                        style="height: 21px; padding: 4px;" <%
+                                                        if(model2.academicProfileData !=null &&
+                                                        model2.academicProfileData.AcademicProfile.postProgramTitle1
+                                                        !=null) { %>
+                                                    value="<%=model2.academicProfileData.AcademicProfile.postProgramTitle1%>"
+                                                        <% } %>
+                                                            />
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <th>Study Status</th>
+                                                <td class="table-content">
+                                                    <select class="form-control" id="postStudyStatus1"
+                                                        name="AcademicProfile[postStudyStatus1]"
+                                                        style="height: 20px; padding: 0px; width: 150px">
+                                                        <option value="" selected="true" disabled="disabled">-Select-
+                                                        </option>
+                                                        <option value="graduated" <% if(model2.academicProfileData
+                                                            !=null &&
+                                                            model2.academicProfileData.AcademicProfile.postStudyStatus1
+                                                            !=null) { %>
+                                                            <%=(model2.academicProfileData.AcademicProfile.postStudyStatus1=='graduated'
+                                                                )? 'selected' :'' %>
+                                                                <% } %>
+                                                                    >Graduated
+                                                        </option>
+
+                                                        <option value="final year" <% if(model2.academicProfileData
+                                                            !=null &&
+                                                            model2.academicProfileData.AcademicProfile.postStudyStatus1
+                                                            !=null) { %>
+                                                            <%=(model2.academicProfileData.AcademicProfile.postStudyStatus1== 'final year'
+                                                                )? 'selected' :'' %>
+                                                                <% } %>
+                                                                    >Final year
+                                                        </option>
+
+                                                        <option value="non-final year" <%
+                                                            if(model2.academicProfileData !=null &&
+                                                            model2.academicProfileData.AcademicProfile.postStudyStatus1
+                                                            !=null) { %>
+                                                            <%=(model2.academicProfileData.AcademicProfile.postStudyStatus1== 'non-final year'
+                                                                )? 'selected' :'' %>
+                                                                <% } %>>Non-final year
+                                                        </option>
+
+                                                        <option value="withdrew" <% if(model2.academicProfileData
+                                                            !=null &&
+                                                            model2.academicProfileData.AcademicProfile.postStudyStatus1
+                                                            !=null) { %>
+                                                            <%=(model2.academicProfileData.AcademicProfile.postStudyStatus1=='withdrew'
+                                                                )? 'selected' :'' %>
+                                                                <% } %>>Withdrew
+                                                        </option>
+
+                                                        <option value="deferred" <% if(model2.academicProfileData
+                                                            !=null &&
+                                                            model2.academicProfileData.AcademicProfile.postStudyStatus1
+                                                            !=null) { %>
+                                                            <%=(model2.academicProfileData.AcademicProfile.postStudyStatus1=='deferred'
+                                                                )? 'selected' :'' %>
+                                                                <% } %>>Deferred
+                                                        </option>
+                                                    </select>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <th>Latest Cumulative GPA</th>
+                                                <td class="table-content">
+                                                    <div class="row" style="margin-left: 0px ;">
+                                                        <input type="text" class="form-control input-lg" id="postGPA1"
+                                                            name="AcademicProfile[postGPA1]" pattern="^\d*(\.\d{0,2})?$"
+                                                            style="height: 21px; padding: 4px; width: 75px; font-size: 14px"
+                                                            placeholder="e.g. 3.33" <%
+                                                            if(model2.academicProfileData !=null &&
+                                                            model2.academicProfileData.AcademicProfile.postGPA1
+                                                            !=null) { %>
+                                                        value="<%=model2.academicProfileData.AcademicProfile.postGPA1%>"
+                                                        <% } %>
+                                                                />
+                                                                <label class="col-form-label"
+                                                                    style="padding: 0px; margin: 0px;"><span
+                                                                        style="font-size: 14px;">&nbsp;out of maximum
+                                                                        cGPA&nbsp;</span></label>
+                                                                <input type="text" class="form-control input-lg"
+                                                                    id="postMaxGPA1" name="AcademicProfile[postMaxGPA1]"
+                                                                    style="height: 21px; padding: 4px; width: 65px; font-size: 14px"
+                                                                    placeholder="e.g. 4.0" <%
+                                                                    if(model2.academicProfileData !=null &&
+                                                                    model2.academicProfileData.AcademicProfile.postMaxGPA1
+                                                                    !=null) {%>
+                                                                value="<%=model2.academicProfileData.AcademicProfile.postMaxGPA1%>"
+                                                                    <% } %>
+                                                                        />
+                                                    </div>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <th>Date of Admission</th>
+                                                <td class="table-content">
+                                                    <input type="date" class="form-control" id="postPeriodFrom1"
+                                                        name="AcademicProfile[postPeriodFrom1]"
+                                                        style="height: 21px; width: 150px; padding: 4px;" <%
+                                                        if(model2.academicProfileData !=null &&
+                                                        model2.academicProfileData.AcademicProfile.postPeriodFrom1
+                                                        !=null) { %>
+                                                    value="<%=model2.academicProfileData.AcademicProfile.postPeriodFrom1%>"
+                                                    <% } %>
+                                                            />
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <th>Date / Expected Date of Completion</th>
+                                                <td class="table-content">
+                                                    <input type="date" class="form-control" id="postPeriodTo1"
+                                                        name="AcademicProfile[postPeriodTo1]" placeholder="From"
+                                                        style="height: 21px; width: 150px; padding: 4px;" <%
+                                                        if(model2.academicProfileData !=null &&
+                                                        model2.academicProfileData.AcademicProfile.postPeriodTo1
+                                                        !=null) { %>
+                                                    value="<%=model2.academicProfileData.AcademicProfile.postPeriodTo1%>"
+                                                        <% } %>
+                                                            />
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <th>Qualification Obtained / to be Obtained</th>
+                                                <td class="table-content">
+                                                    <div class="select_join">
+                                                        <select class="form-control" id="postQualification2"
+                                                            name="AcademicProfile[postQualification1]"
+                                                            style="height: 20px; padding: 0px; width: 280px">
+                                                        </select>
+                                                    </div>
+                                                </td>
+                                            </tr>
+
+                                        </table>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group col-xl-6 col-12" style="margin-top: 15px">
+                                    <span style="font-size: 17px; font-style: italic; color: #666666">Secondary Education</span>
+                                </div>
+                                <div class="form-group col-xl-6 col-12" style="margin-top: 15px">
+                                    <span style="font-size: 17px; font-style: italic; color: #666666">Secondary Education</span>
+                                </div>
+
+                                <div id="div09" class="form-group col-xl-6 col-12">
+                                    <div class="row" style="margin-left: 0px ;">
+                                        <table style="color: #666666; padding-top: 0px; max-width: 560px; ">
+                                            <tr>
+                                                <th>Country/ Region</th>
+                                                <td class="table-content">
+                                                    <select class="form-control" id="secCountry1"
+                                                        name="AcademicProfile[secCountry1]"
+                                                        style="height: 20px; padding: 0px; width: 310px">
+                                                    </select>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <th>Name of School</th>
+                                                <td class="table-content">
+                                                    <input type="text" class="form-control"
+                                                        name="AcademicProfile[secSchoolName1]"
+                                                        style="height: 21px; padding: 4px; width: 350px" <%
+                                                        if(model1.academicProfileData !=null &&
+                                                        model1.academicProfileData.AcademicProfile.secSchoolName1
+                                                        !=null) { %>
+                                                    value="<%=model1.academicProfileData.AcademicProfile.secSchoolName1%>"
+                                                        <% }%>
+                                                            />
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <th>Curriculum</th>
+                                                <td class="table-content">
+                                                    <select class="form-control" id="secCurriculum1"
+                                                        name="AcademicProfile[secCurriculum1]"
+                                                        style="height: 20px; padding: 0px; width: 310px">
+                                                    </select>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <th>Date of Admission</th>
+                                                <td class="table-content">
+                                                    <input type="date" class="form-control"
+                                                        name="AcademicProfile[secPeriodFrom1]"
+                                                        style="height: 21px; width: 150px; padding: 4px;" <%
+                                                        if(model1.academicProfileData !=null &&
+                                                        model1.academicProfileData.AcademicProfile.secPeriodFrom1
+                                                        !=null) { %>
+                                                    value="<%=model1.academicProfileData.AcademicProfile.secPeriodFrom1%>"
+                                                        <% } %>
+                                                            />
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <th>Date / Expected Date of Completion</th>
+                                                <td class="table-content">
+                                                    <input type="date" class="form-control"
+                                                        name="AcademicProfile[secPeriodTo1]" placeholder="From"
+                                                        style="height: 21px; width: 150px; padding: 4px;" <%
+                                                        if(model1.academicProfileData !=null &&
+                                                        model1.academicProfileData.AcademicProfile.secPeriodTo1
+                                                        !=null) { %>
+                                                    value="<%=model1.academicProfileData.AcademicProfile.secPeriodTo1%>"
+                                                        <% } %>
+                                                            />
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <% var year=new Date().getFullYear(); %>
+                                                    <th>Level Attained<br/>(by <%= year %>-08-31)</th>
+                                                    <td class="table-content">
+                                                        <div class="select_join">
+                                                            <select class="form-control" id="secLevelAttained1"
+                                                                name="AcademicProfile[secLevelAttained1]"
+                                                                style="height: 20px; padding: 0px; width: 280px">
+                                                            </select>
+                                                        </div>
+                                                    </td>
+                                            </tr>
+
+                                        </table>
+                                    </div>
+                                </div>
+
+                                <div id="div10" class="form-group col-xl-6 col-12">
+                                    <div class="row" style="margin-left: 0px ;">
+                                        <table style="color: #666666; padding-top: 0px; max-width: 560px; ">
+                                            <tr>
+                                                <th>Country/ Region</th>
+                                                <td class="table-content">
+                                                    <select class="form-control" id="secCountry2"
+                                                        name="AcademicProfile[secCountry1]"
+                                                        style="height: 20px; padding: 0px; width: 310px">
+                                                    </select>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <th>Name of School</th>
+                                                <td class="table-content">
+                                                    <input type="text" class="form-control"
+                                                        name="AcademicProfile[secSchoolName1]"
+                                                        style="height: 21px; padding: 4px; width: 350px" <%
+                                                        if(model2.academicProfileData !=null &&
+                                                        model2.academicProfileData.AcademicProfile
+                                                        !=null) { %>
+                                                    value="<%=model2.academicProfileData.AcademicProfile.secSchoolName1%>"
+                                                        <% }%>
+                                                            />
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <th>Curriculum</th>
+                                                <td class="table-content">
+                                                    <select class="form-control" id="secCurriculum2"
+                                                        name="AcademicProfile[secCurriculum1]"
+                                                        style="height: 20px; padding: 0px; width: 310px">
+                                                    </select>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <th>Date of Admission</th>
+                                                <td class="table-content">
+                                                    <input type="date" class="form-control"
+                                                        name="AcademicProfile[secPeriodFrom1]"
+                                                        style="height: 21px; width: 150px; padding: 4px;" <%
+                                                        if(model2.academicProfileData !=null &&
+                                                        model2.academicProfileData.AcademicProfile
+                                                        !=null) { %>
+                                                    value="<%=model2.academicProfileData.AcademicProfile.secPeriodFrom1%>"
+                                                        <% } %>
+                                                            />
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <th>Date / Expected Date of Completion</th>
+                                                <td class="table-content">
+                                                    <input type="date" class="form-control"
+                                                        name="AcademicProfile[secPeriodTo1]" placeholder="From"
+                                                        style="height: 21px; width: 150px; padding: 4px;" <%
+                                                        if(model2.academicProfileData !=null &&
+                                                        model2.academicProfileData.AcademicProfile.secPeriodTo1
+                                                        ) { %>
+                                                    value="<%=model2.academicProfileData.AcademicProfile.secPeriodTo1%>"
+                                                        <% } %>
+                                                            />
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <% var year=new Date().getFullYear(); %>
+                                                    <th>Level Attained<br/>(by <%= year %>-08-31)</th>
+                                                    <td class="table-content">
+                                                        <div class="select_join">
+                                                            <select class="form-control" id="secLevelAttained2"
+                                                                name="AcademicProfile[secLevelAttained1]"
+                                                                style="height: 20px; padding: 0px; width: 280px">
+                                                            </select>
+                                                        </div>
+                                                    </td>
+                                            </tr>
+
+                                        </table>
+                                    </div>
+                                </div>
+                                
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div id="menu1" class="tab-pane fade">
+                        <br>
+                        <div class="row" style="width: 100%; margin-top: 15px; margin-bottom: 15px;">
+                            <div class="form-group col-xl-12 col-12">
+                                <span style="font-size: 17px; font-weight: bold;">Application No.: <%= model1.idCode%>
+                                        </span>
+                            </div>                           
+                        </div>
+
+
+                        <div id="academicQualification">
+                            <div class="row" style="width: 100%;">
+
+                                <div class="form-group col-xl-12 col-12">
+                                    <span style="font-size: 17px; font-style: italic; color: #666666">Public Examination Results </span>
+                                </div>
+                                
+                                <div id="div11" class="form-group col-xl-12 col-12">
+                                    <div class="row" style="margin-left: 0px ;">
+                                        <table id="examResults1" style="color: #666666; padding-top: 0px; width: 1050px; ">
+                                            <tr style="background-color: #f6f6f6">
+                                                <td width="11%" style="text-align: center; padding: 5px 0;">Year</td>
+                                                <td width="35%" style="text-align: center;">Examination</td>
+                                                <td width="39%" style="text-align: center;">Subject</td>
+                                                <td width="20%" style="text-align: center;">Achieved Grade</td>
+                                            </tr>
+
+                                            <tr>
+                                                <td class="table-content">
+                                                    <select class="form-control" name="AcademicQualification[examYear]"
+                                                        id="examYear" style="height: 30px; font-size: 15px;" required>
+                                                    </select>
+                                                </td>
+                                                <td class="table-content">
+                                                    <select class="form-control" name="AcademicQualification[examName]"
+                                                        id="examName" style="height: 30px; font-size: 15px;" required>
+                                                    </select>
+                                                </td>
+                                                <td class="table-content">
+                                                    <select class="form-control" name="AcademicQualification[subject]"
+                                                        id="subject" style="height: 30px; font-size: 15px; " required>
+                                                    </select>
+                                                </td>
+                                                <td class="table-content">
+                                                    <select class="form-control" name="AcademicQualification[grade]" id="grade"
+                                                        style="height: 30px; font-size: 15px; " required>
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div> 
+
+                            </div>
+                        </div>
+
+                        <div class="row" style="width: 100%; margin-top: 25px; margin-bottom: 15px;">
+                            <div class="form-group col-xl-12 col-12">
+                                <span style="font-size: 17px; font-weight: bold;">Application No.: <%= model2.idCode%>
+                                        </span>
+                            </div>                           
+                        </div>
+
+                        <div id="academicQualification">
+                            <div class="row" style="width: 100%;">
+
+                                <div class="form-group col-xl-12 col-12">
+                                    <span style="font-size: 17px; font-style: italic; color: #666666">Public Examination Results </span>
+                                </div>
+                                
+                                <div id="div12" class="form-group col-xl-12 col-12">
+                                    <div class="row" style="margin-left: 0px ;">
+                                        <table id="examResults2" style="color: #666666; padding-top: 0px; width: 1050px; ">
+                                            <tr style="background-color: #f6f6f6">
+                                                <td width="11%" style="text-align: center; padding: 5px 0;">Year</td>
+                                                <td width="35%" style="text-align: center;">Examination</td>
+                                                <td width="39%" style="text-align: center;">Subject</td>
+                                                <td width="20%" style="text-align: center;">Achieved Grade</td>
+                                            </tr>
+
+                                            <tr>
+                                                <td class="table-content">
+                                                    <select class="form-control" name="AcademicQualification[examYear]"
+                                                        id="examYear2" style="height: 30px; font-size: 15px;" required>
+                                                    </select>
+                                                </td>
+                                                <td class="table-content">
+                                                    <select class="form-control" name="AcademicQualification[examName]"
+                                                        id="examName2" style="height: 30px; font-size: 15px;" required>
+                                                    </select>
+                                                </td>
+                                                <td class="table-content">
+                                                    <select class="form-control" name="AcademicQualification[subject]"
+                                                        id="subject2" style="height: 30px; font-size: 15px; " required>
+                                                    </select>
+                                                </td>
+                                                <td class="table-content">
+                                                    <select class="form-control" name="AcademicQualification[grade]" id="grade2"
+                                                        style="height: 30px; font-size: 15px; " required>
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div> 
+                            </div>
+                        </div>
+                        
+                    </div>
+
+                    <div id="menu2" class="tab-pane fade">
+                        <br>
+                        <div class="row" style="width: 100%; margin-top: 15px; margin-bottom: 15px;">
+                            <div class="form-group col-xl-12 col-12">
+                                <span style="font-size: 17px; font-weight: bold;">Application No.: <%= model1.idCode%>
+                                        </span>
+                            </div>                           
+                        </div>
+
+                        <div id="academicReference">
+                            <div class="row" style="width: 100%;">
+
+                                <div class="form-group col-xl-12 col-12">
+                                    <span style="font-size: 17px; font-style: italic; color: #666666">Referee Information</span>
+                                </div>
+                                
+                                <div id="div13" class="form-group col-xl-12 col-12">
+                                    <div class="row" style="margin-left: 0px ;">
+                                        <table id="RefInfo" style="color: #666666; padding-top: 0px; width: 1050px; ">
+
+                                            <tr style="background-color: #f6f6f6">
+                                                <td width="15%" style="text-align: center; padding: 5px 0;">Relationship</td>
+                                                <td width="21%" style="text-align: center;">Name</td>
+                                                <td width="27%" style="text-align: center;">Email</td>
+                                                <td width="37%" style="text-align: center;">Description</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="table-content">
+                                                    <input type="text" class="form-control" name="AcademicReference[relationship1]"
+                                                        style="height: 26px; width: 100%; margin-top: 3px; margin-bottom: 3px; padding: 3px;"
+                                                        <% if(model1.academicReferenceData !=null &&
+                                                        model1.academicReferenceData.AcademicReference.relationship1 !=null) { %>
+                                                    value="<%=model1.academicReferenceData.AcademicReference.relationship1%>" <% } %>
+                                                            />
+                                                </td>
+                                                <td class="table-content">
+                                                    <input type="text" class="form-control" name="AcademicReference[refName1]"
+                                                        style="height: 26px; width: 100%; margin-top: 3px; margin-bottom: 3px; padding: 3px;"
+                                                        <% if(model1.academicReferenceData !=null &&
+                                                        model1.academicReferenceData.AcademicReference.refName1 !=null) { %>
+                                                    value="<%=model1.academicReferenceData.AcademicReference.refName1%>" <% } %>
+                                                            />
+                                                </td>
+                                                <td class="table-content">
+                                                    <input type="text" class="form-control" name="AcademicReference[email1]"
+                                                        style="height: 26px; width: 100%; margin-top: 3px; margin-bottom: 3px; padding: 3px;" 
+                                                        <% if(model1.academicReferenceData !=null &&
+                                                        model1.academicReferenceData.AcademicReference.email1 !=null) { %>
+                                                    value="<%=model1.academicReferenceData.AcademicReference.email1%>" <% } %>
+                                                    />
+                                                </td>
+                                                <td class="table-content">
+                                                    <input type="text" class="form-control" name="AcademicReference[description1]"
+                                                        style="height: 26px; width: 100%; margin-top: 3px; margin-bottom: 3px; padding: 3px;" 
+                                                        <% if(model1.academicReferenceData !=null &&
+                                                        model1.academicReferenceData.AcademicReference.description1 !=null) { %>
+                                                    value="<%=model1.academicReferenceData.AcademicReference.description1%>" <% } %>
+                                                    />
+                                                </td>
+                                            </tr>
+                    
+                                            <tr>
+                                                <td class="table-content">
+                                                    <input type="text" class="form-control" name="AcademicReference[relationship2]"
+                                                        style="height: 26px; width: 100%; margin-top: 3px; margin-bottom: 3px; padding: 3px;" 
+                                                        <% if(model1.academicReferenceData !=null &&
+                                                        model1.academicReferenceData.AcademicReference.relationship2 !=null) { %>
+                                                    value="<%=model1.academicReferenceData.AcademicReference.relationship2%>" <% } %>
+                                                    />
+                                                </td>
+                                                <td class="table-content">
+                                                    <input type="text" class="form-control" name="AcademicReference[refName2]"
+                                                        style="height: 26px; width: 100%; margin-top: 3px; margin-bottom: 3px; padding: 3px;" 
+                                                        <% if(model1.academicReferenceData !=null &&
+                                                        model1.academicReferenceData.AcademicReference.refName2 !=null) { %>
+                                                    value="<%=model1.academicReferenceData.AcademicReference.refName2%>" <% } %>
+                                                    />
+                                                </td>
+                                                <td class="table-content">
+                                                    <input type="text" class="form-control" name="AcademicReference[email2]"
+                                                        style="height: 26px; width: 100%; margin-top: 3px; margin-bottom: 3px; padding: 3px;" 
+                                                        <% if(model1.academicReferenceData !=null &&
+                                                        model1.academicReferenceData.AcademicReference.email2 !=null) { %>
+                                                    value="<%=model1.academicReferenceData.AcademicReference.email2%>" <% } %>
+                                                    />
+                                                </td>
+                                                <td class="table-content">
+                                                    <input type="text" class="form-control" name="AcademicReference[description2]"
+                                                        style="height: 26px; width: 100%; margin-top: 3px; margin-bottom: 3px; padding: 3px;" 
+                                                        <% if(model1.academicReferenceData !=null &&
+                                                        model1.academicReferenceData.AcademicReference.description2 !=null) { %>
+                                                    value="<%=model1.academicReferenceData.AcademicReference.description2%>" <% } %>
+                                                    />
+                                                </td>
+                                            </tr>
+
+                                        </table>
+                                    </div>
+                                </div> 
+
+                            </div>
+                        </div>
+
+                        <br>
+                        <div class="row" style="width: 100%; margin-top: 15px; margin-bottom: 15px;">
+                            <div class="form-group col-xl-12 col-12">
+                                <span style="font-size: 17px; font-weight: bold;">Application No.: <%= model1.idCode%>
+                                        </span>
+                            </div>                           
+                        </div>
+
+                        <div id="academicReference">
+                            <div class="row" style="width: 100%;">
+
+                                <div class="form-group col-xl-12 col-12">
+                                    <span style="font-size: 17px; font-style: italic; color: #666666">Referee Information</span>
+                                </div>
+                                
+                                <div id="div14" class="form-group col-xl-12 col-12">
+                                    <div class="row" style="margin-left: 0px ;">
+                                        <table id="RefInfo" style="color: #666666; padding-top: 0px; width: 1050px; ">
+
+                                            <tr style="background-color: #f6f6f6">
+                                                <td width="15%" style="text-align: center; padding: 5px 0;">Relationship</td>
+                                                <td width="21%" style="text-align: center;">Name</td>
+                                                <td width="27%" style="text-align: center;">Email</td>
+                                                <td width="37%" style="text-align: center;">Description</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="table-content">
+                                                    <input type="text" class="form-control" name="AcademicReference[relationship1]"
+                                                        style="height: 26px; width: 100%; margin-top: 3px; margin-bottom: 3px; padding: 3px;"
+                                                        <% if(model2.academicReferenceData !=null &&
+                                                        model2.academicReferenceData.AcademicReference.relationship1 !=null) { %>
+                                                    value="<%=model2.academicReferenceData.AcademicReference.relationship1%>" <% } %>
+                                                            />
+                                                </td>
+                                                <td class="table-content">
+                                                    <input type="text" class="form-control" name="AcademicReference[refName1]"
+                                                        style="height: 26px; width: 100%; margin-top: 3px; margin-bottom: 3px; padding: 3px;"
+                                                        <% if(model2.academicReferenceData !=null &&
+                                                        model2.academicReferenceData.AcademicReference.refName1 !=null) { %>
+                                                    value="<%=model2.academicReferenceData.AcademicReference.refName1%>" <% } %>
+                                                            />
+                                                </td>
+                                                <td class="table-content">
+                                                    <input type="text" class="form-control" name="AcademicReference[email1]"
+                                                        style="height: 26px; width: 100%; margin-top: 3px; margin-bottom: 3px; padding: 3px;" 
+                                                        <% if(model2.academicReferenceData !=null &&
+                                                        model2.academicReferenceData.AcademicReference.email1 !=null) { %>
+                                                    value="<%=model2.academicReferenceData.AcademicReference.email1%>" <% } %>
+                                                    />
+                                                </td>
+                                                <td class="table-content">
+                                                    <input type="text" class="form-control" name="AcademicReference[description1]"
+                                                        style="height: 26px; width: 100%; margin-top: 3px; margin-bottom: 3px; padding: 3px;" 
+                                                        <% if(model2.academicReferenceData !=null &&
+                                                        model2.academicReferenceData.AcademicReference.description1 !=null) { %>
+                                                    value="<%=model2.academicReferenceData.AcademicReference.description1%>" <% } %>
+                                                    />
+                                                </td>
+                                            </tr>
+                    
+                                            <tr>
+                                                <td class="table-content">
+                                                    <input type="text" class="form-control" name="AcademicReference[relationship2]"
+                                                        style="height: 26px; width: 100%; margin-top: 3px; margin-bottom: 3px; padding: 3px;" 
+                                                        <% if(model2.academicReferenceData !=null &&
+                                                        model2.academicReferenceData.AcademicReference.relationship2 !=null) { %>
+                                                    value="<%=model2.academicReferenceData.AcademicReference.relationship2%>" <% } %>
+                                                    />
+                                                </td>
+                                                <td class="table-content">
+                                                    <input type="text" class="form-control" name="AcademicReference[refName2]"
+                                                        style="height: 26px; width: 100%; margin-top: 3px; margin-bottom: 3px; padding: 3px;" 
+                                                        <% if(model2.academicReferenceData !=null &&
+                                                        model2.academicReferenceData.AcademicReference.refName2 !=null) { %>
+                                                    value="<%=model2.academicReferenceData.AcademicReference.refName2%>" <% } %>
+                                                    />
+                                                </td>
+                                                <td class="table-content">
+                                                    <input type="text" class="form-control" name="AcademicReference[email2]"
+                                                        style="height: 26px; width: 100%; margin-top: 3px; margin-bottom: 3px; padding: 3px;" 
+                                                        <% if(model2.academicReferenceData !=null &&
+                                                        model2.academicReferenceData.AcademicReference.email2 !=null) { %>
+                                                    value="<%=model2.academicReferenceData.AcademicReference.email2%>" <% } %>
+                                                    />
+                                                </td>
+                                                <td class="table-content">
+                                                    <input type="text" class="form-control" name="AcademicReference[description2]"
+                                                        style="height: 26px; width: 100%; margin-top: 3px; margin-bottom: 3px; padding: 3px;" 
+                                                        <% if(model2.academicReferenceData !=null &&
+                                                        model2.academicReferenceData.AcademicReference.description2 !=null) { %>
+                                                    value="<%=model2.academicReferenceData.AcademicReference.description2%>" <% } %>
+                                                    />
+                                                </td>
+                                            </tr>
+                                            
+                                        </table>
+                                    </div>
+                                </div> 
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    (function () {
+
+        var secQualification1options = "<option disabled selected>" + "-Select-" + "</option>";
+        var qualifications = ["Doctoral Degree", "Master Degree", "Bachelor Degree (self-finance)", "Bachelor Degree (UGC funded)",
+            "Asscoiated Degree", "Higher Diploma", "Diploma", "Certificate"];
+
+        for (i = 0; i < qualifications.length; i = i + 1) {
+            secQualification1options += "<option value='" + qualifications[i] + "' id='" + qualifications[i] + "sec1'>" + qualifications[i] + "</option>";
+        }
+
+        document.getElementById("postQualification1").innerHTML = secQualification1options;
+
+        '<% if (model1.academicProfileData != null && model1.academicProfileData.AcademicProfile.postQualification1 != null) { %>'
+        var selectedSecQualification1 = '<%= model1.academicProfileData.AcademicProfile.postQualification1 %>';
+        '<% } %>'
+
+        for (i = 0; i < qualifications.length; i = i + 1) {
+
+            if (selectedSecQualification1 == qualifications[i]) {
+
+                document.getElementById(qualifications[i] + 'sec1').setAttribute('selected', 'selected');
+            }
+        }
+    })();
+</script>
+
+<script>
+    (function () {
+        var secCurriculum1options = "<option disabled selected>" + "-Select-" + "</option>";
+        var curriculums = [
+            "Australia - Australian Tertiary Admission Rank (ATAR)",
+            "Australia - Tertiary Entrance Rank (TER)",
+            "Australia - Universities Admission Index (UAI)",
+            "Australia - Equivalent National Tertiary Entrance Rank (ENTER)",
+            "Australia - Other provinces",
+            "Austria - Reifezeugnis/Matura",
+            "Bangladesh - Senior School Leaving Certificate",
+            "Belgium - Diploma van Secundair Onderwijs (DSC)",
+            "Belgium - Certificate d'Enseignment Secondire Superieur",
+            "Brunei - Brunei-Cambridge GCE Advanced Level",
+            "Canada - Alberta",
+            "Canada - British Columbia",
+            "Canada - Manitoba",
+            "Canada - Ontario",
+            "Canada - Other provinces",
+            "Chile - Licencia de Ensenanza Media (Certificate of Secondary Education)",
+            "China - Joint College Entrance Examination (Gao Kao)",
+            "China - Joint Entrance Exam for Universities in PRC (港澳台僑高考)",
+            "Czech Republic - Maturitni Zkouska / Maturita",
+            "Denmark - Studentereksamen (Upper Secondary School Leaving Certificate)",
+            "Europe - Europe Baccalaureate",
+            "Finland - Ylioppilastutkinto/Studentexamensbetyg (national matriculation examination)",
+            "France - Baccalaureate d'Enseignement du Second Degre",
+            "France - Baccalaureate General",
+            "France - Option Internationale du Baccalaureate (OIB)",
+            "Germany - Zeugnis der Allgemeinen Hochschulreife (German Abitur)",
+            "Greece - Apolytirio Eniaiou Lykeiou",
+            "Hong Kong SAR - Hong Kong Certificate of Education Examination (HKCEE)",
+            "Hong Kong SAR - Hong Kong Advanced Level Examination (HKALE)",
+            "Hong Kong SAR - Hong Kong Diploma of Secondary Education (HKDSE)",
+            "Hungary - Erettsegi/Matura",
+            "India - All India Senior School Certificate (CBSE)",
+            "India - Higher / Senior School Certificate / Examination (State Board)",
+            "India - Indian School Certificate (CISCE)",
+            "Indonesia - SMA Ujian Sekolah",
+            "Indonesia - SMA Ujian Nasional",
+            "International - International Baccalaureate (IB)",
+            "Iran - Peeshadaneshgahe (Pre-University Certificate)",
+            "Ireland - Irish Leaving Certificate",
+            "Israel - Bagrut",
+            "Italy - Diploma of Stato",
+            "Japan - Senior School-leaving Certificate",
+            "Luxembourg - Diplome de Fin d'Etudes Secondaires",
+            "Macau SAR - High School Curriculum",
+            "Malaysia - SPM",
+            "Malaysia - STPM",
+            "Malaysia - UEC",
+            "Mexico - Mexican bachillerato",
+            "The Netherlands - Diploma Voorbereidend Wetenschappelijk Onderwijs (VWO)",
+            "Nepal - Nepal School Leaving Certificate Examination",
+            "New Zealand - NCEA Level Three",
+            "Norway - Vitnwmal fra den Videregraende Skole (general studiekompetanse)",
+            "Pakistan - Higher Secondary School Certificate (HSS)",
+            "Poland - Matura with 3 subjects at extended level",
+            "Portugal - Certificado de fim de Estudos Secundarios (previously Certidao do Decimo Segundo Ano)",
+            "Romania - Diploma De Bacalaureat",
+            "Russia - Attestat o Srednem Obshchem Obrazovanii",
+            "Singapore - Singapore-Cambridge GCE A-Level",
+            "Singapore - Polytechnic Diploma",
+            "South Africa - National Senior Certificate",
+            "South Africa - Senior Certificate with Matriculation endorsement",
+            "South Korea - Senior Secondary School Graduation Diploma/Certificate",
+            "Spain - Titudo de Bachillerato",
+            "Sri Lanka - Sri Lanka Advanced Level",
+            "Sweden - Slutbetyg Fran Gymnasieskolan",
+            "Switzerland - Maturitatszeugnis",
+            "Switzerland - Certificate De Maturite",
+            "Switzerland - Baccalaureat",
+            "Switzerland - Attestato Di Maturita",
+            "Switzerland - Eidgenossisch Anerkanntes Kantonales Maturitatszeugnis",
+            "Switzerland - Certificate De Maturite Cantonal Reconnu Par La Confederation",
+            "Switzerland - Attestato Di Maturita Cantonale Riconosciuto Dalla Confederazione",
+            "Switzerland - Cantonal Maturity Certificate",
+            "Taiwan - High School Curriculum",
+            "Thailand - Mathayom Sukasa 6 (M6)",
+            "United Kingdom - GCE A-Level / International A-Level",
+            "United Kingdom - GCE AS Level / International-AS Level",
+            "United Kingdom - GCE-O-Level",
+            "United Kingdom - GCSE/IGCSE",
+            "United Kingdom - Cambridge Pre-U",
+            "United Kingdom - BTEC Extended Diploma",
+            "United States of America - High School Curriculum",
+            "Vietnam - Bàng Tót Nghiêp Phó Thông Trung Hoc (Upper Secondary School Graduation Certificate)",
+            "Zimbabwe - Cambridge Overseas Higher School Certificate (COHSC)",
+            "Zimbabwe - East African Advanced Certificate of Education (EAACE)"
+        ];
+
+        for (i = 0; i < curriculums.length; i = i + 1) {
+            secCurriculum1options += "<option value='" + curriculums[i] + "' id='" + curriculums[i] + "sec1'>" + curriculums[i] + "</option>";
+        }
+
+        document.getElementById("secCurriculum1").innerHTML = secCurriculum1options;
+
+        '<% if (model1.academicProfileData != null && model1.academicProfileData.AcademicProfile.secCurriculum1 != null) { %>'
+        var selectedSecCurriculum1 = '<%= model1.academicProfileData.AcademicProfile.secCurriculum1 %>';
+        '<% } %>'
+
+        for (i = 0; i < curriculums.length; i = i + 1) {
+
+            if (selectedSecCurriculum1 == curriculums[i]) {
+
+                document.getElementById(curriculums[i] + 'sec1').setAttribute('selected', 'selected');
+            }
+        }
+    })();
+</script>
+<script>
+    (function () {
+        var postCountry1options = "<option disabled selected>" + "-Select-" + "</option>";
+        var secCountry1options = "<option disabled selected>" + "-Select-" + "</option>";
+        var countries = [
+            "Afghanistan", "Åland Islands", "Albania", "Algeria", "American Samoa", "Andorra",
+            "Angola", "Anguilla", "Antarctica", "Antigua And Barbuda", "Argentina", "Armenia",
+            "Aruba", "Australia", "Austria", "Azerbaijan", "Bahamas", "Bahrain", "Bangladesh", "Barbados",
+            "Belarus", "Belgium", "Belize", "Benin", "Bermuda", "Bhutan", "Bolivia, Plurinational State Of",
+            "Bonaire, Sint Eustatius And Saba", "Bosnia And Herzegovina", "Botswana", "Bouvet Island",
+            "Brazil", "British Indian Ocean Territory", "Brunei Darussalam", "Bulgaria", "Burkina Faso",
+            "Burundi", "Cambodia", "Cameroon", "Canada", "Cape Verde", "Cayman Islands",
+            "Central African Republic", "Chad", "Chile", "China", "Christmas Island", "Cocos (keeling) Islands",
+            "Colombia", "Comoros", "Congo", "Congo, The Democratic Republic Of The", "Cook Islands", "Costa Rica",
+            "Côte D'ivoire", "Croatia", "Cuba", "Curaçao", "Cyprus", "Czech Republic", "Denmark", "Djibouti",
+            "Dominica", "Dominican Republic", "Ecuador", "Egypt", "El Salvador", "Equatorial Guinea", "Eritrea",
+            "Estonia", "Ethiopia", "Falkland Islands (malvinas)", "Faroe Islands", "Fiji", "Finland", "France",
+            "French Guiana", "French Polynesia", "French Southern Territories", "Gabon", "Gambia", "Georgia",
+            "Germany", "Ghana", "Gibraltar", "Greece", "Greenland", "Grenada", "Guadeloupe", "Guam", "Guatemala",
+            "Guernsey", "Guinea", "Guinea-bissau", "Guyana", "Haiti", "Heard Island And Mcdonald Islands",
+            "Holy See (vatican City State)", "Honduras", "Hong Kong", "Hungary", "Iceland", "India", "Indonesia",
+            "Iran, Islamic Republic Of", "Iraq", "Ireland", "Isle Of Man", "Israel", "Italy", "Jamaica", "Japan",
+            "Jersey", "Jordan", "Kazakhstan", "Kenya", "Kiribati", "Korea, Democratic People's Republic Of",
+            "Korea, Republic Of", "Kuwait", "Kyrgyzstan", "Lao People's Democratic Republic", "Latvia", "Lebanon",
+            "Lesotho", "Liberia", "Libya", "Liechtenstein", "Lithuania", "Luxembourg", "Macao",
+            "Macedonia, The Former Yugoslav Republic Of", "Madagascar", "Malawi", "Malaysia", "Maldives", "Mali",
+            "Malta", "Marshall Islands", "Martinique", "Mauritania", "Mauritius", "Mayotte", "Mexico",
+            "Micronesia, Federated States Of", "Moldova, Republic Of", "Monaco", "Mongolia", "Montenegro",
+            "Montserrat", "Morocco", "Mozambique", "Myanmar", "Namibia", "Nauru", "Nepal", "Netherlands",
+            "New Caledonia", "New Zealand", "Nicaragua", "Niger", "Nigeria", "Niue", "Norfolk Island",
+            "Northern Mariana Islands", "Norway", "Oman", "Pakistan", "Palau", "Palestine, State Of", "Panama",
+            "Papua New Guinea", "Paraguay", "Peru", "Philippines", "Pitcairn", "Poland", "Portugal", "Puerto Rico",
+            "Qatar", "Réunion", "Romania", "Russian Federation", "Rwanda", "Saint Barthélemy",
+            "Saint Helena, Ascension And Tristan Da Cunha", "Saint Kitts And Nevis", "Saint Lucia",
+            "Saint Martin (french Part)", "Saint Pierre And Miquelon", "Saint Vincent And The Grenadines",
+            "Samoa", "San Marino", "Sao Tome And Principe", "Saudi Arabia", "Senegal", "Serbia", "Seychelles",
+            "Sierra Leone", "Singapore", "Sint Maarten (dutch Part)", "Slovakia", "Slovenia", "Solomon Islands",
+            "Somalia", "South Africa", "South Georgia And The South Sandwich Islands", "South Sudan", "Spain",
+            "Sri Lanka", "Sudan", "Suriname", "Svalbard And Jan Mayen", "Swaziland", "Sweden", "Switzerland",
+            "Syrian Arab Republic", "Taiwan, Province Of China", "Tajikistan", "Tanzania, United Republic Of",
+            "Thailand", "Timor-leste", "Togo", "Tokelau", "Tonga", "Trinidad And Tobago", "Tunisia", "Turkey",
+            "Turkmenistan", "Turks And Caicos Islands", "Tuvalu", "Uganda", "Ukraine", "United Arab Emirates",
+            "United Kingdom", "United States", "United States Minor Outlying Islands", "Uruguay",
+            "Uzbekistan", "Vanuatu", "Venezuela, Bolivarian Republic Of", "Viet Nam",
+            "Virgin Islands, British", "Virgin Islands, U.s.", "Wallis And Futuna",
+            "Western Sahara", "Yemen", "Zambia", "Zimbabwe"
+        ];
+
+        for (i = 0; i < countries.length; i = i + 1) {
+            postCountry1options += "<option value='" + countries[i] + "' id='" + countries[i] + "postSec1'>" + countries[i] + "</option>";
+        }
+
+        for (i = 0; i < countries.length; i = i + 1) {
+            secCountry1options += "<option value='" + countries[i] + "' id='" + countries[i] + "sec1'>" + countries[i] + "</option>";
+        }
+
+        document.getElementById("postCountry1").innerHTML = postCountry1options;
+        document.getElementById("secCountry1").innerHTML = secCountry1options;
+
+        '<% if (model1.academicProfileData != null && model1.academicProfileData.AcademicProfile.postCountry1 != null) { %>'
+        var selectedPostCountry1 = '<%= model1.academicProfileData.AcademicProfile.postCountry1 %>';
+        '<% } %>'
+
+        '<% if (model1.academicProfileData != null && model1.academicProfileData.AcademicProfile.secCountry1 != null) { %>'
+        var selectedSecCountry1 = '<%= model1.academicProfileData.AcademicProfile.secCountry1 %>';
+        '<% } %>'
+
+        for (i = 0; i < countries.length; i = i + 1) {
+
+            if (selectedPostCountry1 == countries[i]) {
+
+                document.getElementById(countries[i] + 'postSec1').setAttribute('selected', 'selected');
+            }
+        }
+
+        for (i = 0; i < countries.length; i = i + 1) {
+
+            if (selectedSecCountry1 == countries[i]) {
+
+                document.getElementById(countries[i] + 'sec1').setAttribute('selected', 'selected');
+            }
+        }
+    })();
+
+    (function () {
+        var option = "<option disabled selected>" + "-Select-" + "</option>";
+        for (i = 1; i <= 7; i = i + 1) {
+            option += "<option value='Secondary " + i + "' id='Secondary " + i + "'>Secondary " + i + "</option>";
+        }
+        for (i = 7; i <= 13; i = i + 1) {
+            option += "<option value='Grade " + i + "' id='Grade " + i + "'>Grade " + i + "</option>";
+        }
+        document.getElementById("secLevelAttained1").innerHTML = option;
+
+        '<% if (model1.academicProfileData != null && model1.academicProfileData.AcademicProfile.secLevelAttained1 != null) { %>'
+        var selectedLevel = '<%= model1.academicProfileData.AcademicProfile.secLevelAttained1 %>';
+        '<% } %>'
+
+        for (i = 1; i <= 7; i = i + 1) {
+
+            if (selectedLevel == "Secondary " + i) {
+
+                document.getElementById("Secondary " + i).setAttribute('selected', 'selected');
+            }
+        }
+
+        for (i = 7; i <= 13; i = i + 1) {
+
+            if (selectedLevel == "Grade " + i) {
+
+                document.getElementById("Grade " + i).setAttribute('selected', 'selected');
+            }
+        }
+    })();
+</script>
+
+
+
+<script>
+    (function () {
+
+        var secQualification1options = "<option disabled selected>" + "-Select-" + "</option>";
+        var qualifications = ["Doctoral Degree", "Master Degree", "Bachelor Degree (self-finance)", "Bachelor Degree (UGC funded)",
+            "Asscoiated Degree", "Higher Diploma", "Diploma", "Certificate"];
+
+        for (i = 0; i < qualifications.length; i = i + 1) {
+            secQualification1options += "<option value='" + qualifications[i] + "' id='" + qualifications[i] + "2" + "sec1'>" + qualifications[i] + "</option>";
+        }
+
+        document.getElementById("postQualification2").innerHTML = secQualification1options;
+
+        '<% if (model2.academicProfileData != null && model2.academicProfileData.AcademicProfile.postQualification1 != null) { %>'
+        var selectedSecQualification1 = '<%= model2.academicProfileData.AcademicProfile.postQualification1 %>';
+        '<% } %>'
+
+        for (i = 0; i < qualifications.length; i = i + 1) {
+
+            if (selectedSecQualification1 == qualifications[i]) {
+
+                document.getElementById(qualifications[i] + "2" + 'sec1').setAttribute('selected', 'selected');
+            }
+        }
+    })();
+</script>
+
+<script>
+    (function () {
+        var secCurriculum1options = "<option disabled selected>" + "-Select-" + "</option>";
+        var curriculums = [
+            "Australia - Australian Tertiary Admission Rank (ATAR)",
+            "Australia - Tertiary Entrance Rank (TER)",
+            "Australia - Universities Admission Index (UAI)",
+            "Australia - Equivalent National Tertiary Entrance Rank (ENTER)",
+            "Australia - Other provinces",
+            "Austria - Reifezeugnis/Matura",
+            "Bangladesh - Senior School Leaving Certificate",
+            "Belgium - Diploma van Secundair Onderwijs (DSC)",
+            "Belgium - Certificate d'Enseignment Secondire Superieur",
+            "Brunei - Brunei-Cambridge GCE Advanced Level",
+            "Canada - Alberta",
+            "Canada - British Columbia",
+            "Canada - Manitoba",
+            "Canada - Ontario",
+            "Canada - Other provinces",
+            "Chile - Licencia de Ensenanza Media (Certificate of Secondary Education)",
+            "China - Joint College Entrance Examination (Gao Kao)",
+            "China - Joint Entrance Exam for Universities in PRC (港澳台僑高考)",
+            "Czech Republic - Maturitni Zkouska / Maturita",
+            "Denmark - Studentereksamen (Upper Secondary School Leaving Certificate)",
+            "Europe - Europe Baccalaureate",
+            "Finland - Ylioppilastutkinto/Studentexamensbetyg (national matriculation examination)",
+            "France - Baccalaureate d'Enseignement du Second Degre",
+            "France - Baccalaureate General",
+            "France - Option Internationale du Baccalaureate (OIB)",
+            "Germany - Zeugnis der Allgemeinen Hochschulreife (German Abitur)",
+            "Greece - Apolytirio Eniaiou Lykeiou",
+            "Hong Kong SAR - Hong Kong Certificate of Education Examination (HKCEE)",
+            "Hong Kong SAR - Hong Kong Advanced Level Examination (HKALE)",
+            "Hong Kong SAR - Hong Kong Diploma of Secondary Education (HKDSE)",
+            "Hungary - Erettsegi/Matura",
+            "India - All India Senior School Certificate (CBSE)",
+            "India - Higher / Senior School Certificate / Examination (State Board)",
+            "India - Indian School Certificate (CISCE)",
+            "Indonesia - SMA Ujian Sekolah",
+            "Indonesia - SMA Ujian Nasional",
+            "International - International Baccalaureate (IB)",
+            "Iran - Peeshadaneshgahe (Pre-University Certificate)",
+            "Ireland - Irish Leaving Certificate",
+            "Israel - Bagrut",
+            "Italy - Diploma of Stato",
+            "Japan - Senior School-leaving Certificate",
+            "Luxembourg - Diplome de Fin d'Etudes Secondaires",
+            "Macau SAR - High School Curriculum",
+            "Malaysia - SPM",
+            "Malaysia - STPM",
+            "Malaysia - UEC",
+            "Mexico - Mexican bachillerato",
+            "The Netherlands - Diploma Voorbereidend Wetenschappelijk Onderwijs (VWO)",
+            "Nepal - Nepal School Leaving Certificate Examination",
+            "New Zealand - NCEA Level Three",
+            "Norway - Vitnwmal fra den Videregraende Skole (general studiekompetanse)",
+            "Pakistan - Higher Secondary School Certificate (HSS)",
+            "Poland - Matura with 3 subjects at extended level",
+            "Portugal - Certificado de fim de Estudos Secundarios (previously Certidao do Decimo Segundo Ano)",
+            "Romania - Diploma De Bacalaureat",
+            "Russia - Attestat o Srednem Obshchem Obrazovanii",
+            "Singapore - Singapore-Cambridge GCE A-Level",
+            "Singapore - Polytechnic Diploma",
+            "South Africa - National Senior Certificate",
+            "South Africa - Senior Certificate with Matriculation endorsement",
+            "South Korea - Senior Secondary School Graduation Diploma/Certificate",
+            "Spain - Titudo de Bachillerato",
+            "Sri Lanka - Sri Lanka Advanced Level",
+            "Sweden - Slutbetyg Fran Gymnasieskolan",
+            "Switzerland - Maturitatszeugnis",
+            "Switzerland - Certificate De Maturite",
+            "Switzerland - Baccalaureat",
+            "Switzerland - Attestato Di Maturita",
+            "Switzerland - Eidgenossisch Anerkanntes Kantonales Maturitatszeugnis",
+            "Switzerland - Certificate De Maturite Cantonal Reconnu Par La Confederation",
+            "Switzerland - Attestato Di Maturita Cantonale Riconosciuto Dalla Confederazione",
+            "Switzerland - Cantonal Maturity Certificate",
+            "Taiwan - High School Curriculum",
+            "Thailand - Mathayom Sukasa 6 (M6)",
+            "United Kingdom - GCE A-Level / International A-Level",
+            "United Kingdom - GCE AS Level / International-AS Level",
+            "United Kingdom - GCE-O-Level",
+            "United Kingdom - GCSE/IGCSE",
+            "United Kingdom - Cambridge Pre-U",
+            "United Kingdom - BTEC Extended Diploma",
+            "United States of America - High School Curriculum",
+            "Vietnam - Bàng Tót Nghiêp Phó Thông Trung Hoc (Upper Secondary School Graduation Certificate)",
+            "Zimbabwe - Cambridge Overseas Higher School Certificate (COHSC)",
+            "Zimbabwe - East African Advanced Certificate of Education (EAACE)"
+        ];
+
+        for (i = 0; i < curriculums.length; i = i + 1) {
+            secCurriculum1options += "<option value='" + curriculums[i] + "' id='" + curriculums[i] + "2" + "sec1'>" + curriculums[i] + "</option>";
+        }
+
+        document.getElementById("secCurriculum2").innerHTML = secCurriculum1options;
+
+        '<% if (model2.academicProfileData != null && model2.academicProfileData.AcademicProfile.secCurriculum1 != null) { %>'
+        var selectedSecCurriculum1 = '<%= model2.academicProfileData.AcademicProfile.secCurriculum1 %>';
+        '<% } %>'
+
+        for (i = 0; i < curriculums.length; i = i + 1) {
+
+            if (selectedSecCurriculum1 == curriculums[i]) {
+
+                document.getElementById(curriculums[i] + "2"+ 'sec1').setAttribute('selected', 'selected');
+            }
+        }
+    })();
+</script>
+<script>
+    (function () {
+        var postCountry1options = "<option disabled selected>" + "-Select-" + "</option>";
+        var secCountry1options = "<option disabled selected>" + "-Select-" + "</option>";
+        var countries = [
+            "Afghanistan", "Åland Islands", "Albania", "Algeria", "American Samoa", "Andorra",
+            "Angola", "Anguilla", "Antarctica", "Antigua And Barbuda", "Argentina", "Armenia",
+            "Aruba", "Australia", "Austria", "Azerbaijan", "Bahamas", "Bahrain", "Bangladesh", "Barbados",
+            "Belarus", "Belgium", "Belize", "Benin", "Bermuda", "Bhutan", "Bolivia, Plurinational State Of",
+            "Bonaire, Sint Eustatius And Saba", "Bosnia And Herzegovina", "Botswana", "Bouvet Island",
+            "Brazil", "British Indian Ocean Territory", "Brunei Darussalam", "Bulgaria", "Burkina Faso",
+            "Burundi", "Cambodia", "Cameroon", "Canada", "Cape Verde", "Cayman Islands",
+            "Central African Republic", "Chad", "Chile", "China", "Christmas Island", "Cocos (keeling) Islands",
+            "Colombia", "Comoros", "Congo", "Congo, The Democratic Republic Of The", "Cook Islands", "Costa Rica",
+            "Côte D'ivoire", "Croatia", "Cuba", "Curaçao", "Cyprus", "Czech Republic", "Denmark", "Djibouti",
+            "Dominica", "Dominican Republic", "Ecuador", "Egypt", "El Salvador", "Equatorial Guinea", "Eritrea",
+            "Estonia", "Ethiopia", "Falkland Islands (malvinas)", "Faroe Islands", "Fiji", "Finland", "France",
+            "French Guiana", "French Polynesia", "French Southern Territories", "Gabon", "Gambia", "Georgia",
+            "Germany", "Ghana", "Gibraltar", "Greece", "Greenland", "Grenada", "Guadeloupe", "Guam", "Guatemala",
+            "Guernsey", "Guinea", "Guinea-bissau", "Guyana", "Haiti", "Heard Island And Mcdonald Islands",
+            "Holy See (vatican City State)", "Honduras", "Hong Kong", "Hungary", "Iceland", "India", "Indonesia",
+            "Iran, Islamic Republic Of", "Iraq", "Ireland", "Isle Of Man", "Israel", "Italy", "Jamaica", "Japan",
+            "Jersey", "Jordan", "Kazakhstan", "Kenya", "Kiribati", "Korea, Democratic People's Republic Of",
+            "Korea, Republic Of", "Kuwait", "Kyrgyzstan", "Lao People's Democratic Republic", "Latvia", "Lebanon",
+            "Lesotho", "Liberia", "Libya", "Liechtenstein", "Lithuania", "Luxembourg", "Macao",
+            "Macedonia, The Former Yugoslav Republic Of", "Madagascar", "Malawi", "Malaysia", "Maldives", "Mali",
+            "Malta", "Marshall Islands", "Martinique", "Mauritania", "Mauritius", "Mayotte", "Mexico",
+            "Micronesia, Federated States Of", "Moldova, Republic Of", "Monaco", "Mongolia", "Montenegro",
+            "Montserrat", "Morocco", "Mozambique", "Myanmar", "Namibia", "Nauru", "Nepal", "Netherlands",
+            "New Caledonia", "New Zealand", "Nicaragua", "Niger", "Nigeria", "Niue", "Norfolk Island",
+            "Northern Mariana Islands", "Norway", "Oman", "Pakistan", "Palau", "Palestine, State Of", "Panama",
+            "Papua New Guinea", "Paraguay", "Peru", "Philippines", "Pitcairn", "Poland", "Portugal", "Puerto Rico",
+            "Qatar", "Réunion", "Romania", "Russian Federation", "Rwanda", "Saint Barthélemy",
+            "Saint Helena, Ascension And Tristan Da Cunha", "Saint Kitts And Nevis", "Saint Lucia",
+            "Saint Martin (french Part)", "Saint Pierre And Miquelon", "Saint Vincent And The Grenadines",
+            "Samoa", "San Marino", "Sao Tome And Principe", "Saudi Arabia", "Senegal", "Serbia", "Seychelles",
+            "Sierra Leone", "Singapore", "Sint Maarten (dutch Part)", "Slovakia", "Slovenia", "Solomon Islands",
+            "Somalia", "South Africa", "South Georgia And The South Sandwich Islands", "South Sudan", "Spain",
+            "Sri Lanka", "Sudan", "Suriname", "Svalbard And Jan Mayen", "Swaziland", "Sweden", "Switzerland",
+            "Syrian Arab Republic", "Taiwan, Province Of China", "Tajikistan", "Tanzania, United Republic Of",
+            "Thailand", "Timor-leste", "Togo", "Tokelau", "Tonga", "Trinidad And Tobago", "Tunisia", "Turkey",
+            "Turkmenistan", "Turks And Caicos Islands", "Tuvalu", "Uganda", "Ukraine", "United Arab Emirates",
+            "United Kingdom", "United States", "United States Minor Outlying Islands", "Uruguay",
+            "Uzbekistan", "Vanuatu", "Venezuela, Bolivarian Republic Of", "Viet Nam",
+            "Virgin Islands, British", "Virgin Islands, U.s.", "Wallis And Futuna",
+            "Western Sahara", "Yemen", "Zambia", "Zimbabwe"
+        ];
+
+        for (i = 0; i < countries.length; i = i + 1) {
+            postCountry1options += "<option value='" + countries[i] + "' id='" + countries[i] + "2" + "postSec1'>" + countries[i] + "</option>";
+        }
+
+        for (i = 0; i < countries.length; i = i + 1) {
+            secCountry1options += "<option value='" + countries[i] + "' id='" + countries[i] + "2" + "sec1'>" + countries[i] + "</option>";
+        }
+
+        document.getElementById("postCountry2").innerHTML = postCountry1options;
+        document.getElementById("secCountry2").innerHTML = secCountry1options;
+
+        '<% if (model2.academicProfileData != null && model2.academicProfileData.AcademicProfile.postCountry1 != null) { %>'
+        var selectedPostCountry1 = '<%= model2.academicProfileData.AcademicProfile.postCountry1 %>';
+        '<% } %>'
+
+        '<% if (model2.academicProfileData != null && model2.academicProfileData.AcademicProfile.secCountry1 != null) { %>'
+        var selectedSecCountry1 = '<%= model2.academicProfileData.AcademicProfile.secCountry1 %>';
+        '<% } %>'
+
+        for (i = 0; i < countries.length; i = i + 1) {
+
+            if (selectedPostCountry1 == countries[i]) {
+
+                document.getElementById(countries[i] + "2" + 'postSec1').setAttribute('selected', 'selected');
+            }
+        }
+
+        for (i = 0; i < countries.length; i = i + 1) {
+
+            if (selectedSecCountry1 == countries[i]) {
+
+                document.getElementById(countries[i] + "2" + 'sec1').setAttribute('selected', 'selected');
+            }
+        }
+    })();
+
+    (function () {
+        var option = "<option disabled selected>" + "-Select-" + "</option>";
+        for (i = 1; i <= 7; i = i + 1) {
+            option += "<option value='Secondary " + i + "' id='Secondary " + "2" + i + "'>Secondary " + i + "</option>";
+        }
+        for (i = 7; i <= 13; i = i + 1) {
+            option += "<option value='Grade " + i + "' id='Grade " + "2" + i + "'>Grade " + i + "</option>";
+        }
+        document.getElementById("secLevelAttained2").innerHTML = option;
+
+        '<% if (model2.academicProfileData != null && model2.academicProfileData.AcademicProfile.secLevelAttained1 != null) { %>'
+        var selectedLevel = '<%= model2.academicProfileData.AcademicProfile.secLevelAttained1 %>';
+        '<% } %>'
+
+        for (i = 1; i <= 7; i = i + 1) {
+
+            if (selectedLevel == "Secondary " + i) {
+
+                document.getElementById("Secondary " + "2" + i).setAttribute('selected', 'selected');
+            }
+        }
+
+        for (i = 7; i <= 13; i = i + 1) {
+
+            if (selectedLevel == "Grade " + i) {
+
+                document.getElementById("Grade " + "2"+ i).setAttribute('selected', 'selected');
+            }
+        }
+    })();
+</script>
+
+
+
+<script>
+    (function () {
+        var table = document.getElementById("examResults1");
+        var rowCount = table.rows.length;
+        var row = table.insertRow(rowCount);
+
+        '<% if (model1.academicQualificationData != null && model1.academicQualificationData.AcademicQualification.examName != null) { %>'
+        var examArr = '<%= model1.academicQualificationData.AcademicQualification.examName %>';
+        '<% } %>'
+
+
+        var splitExamArr = examArr.split(",");
+
+        //show up
+        for (i = 1; i < splitExamArr.length; i = i + 1) {
+
+            table.innerHTML = table.innerHTML + '<td class="table-content"><select class="form-control" id="examYear' + i + '" name="AcademicQualification[examYear]" style="height: 30px; font-size: 15px;"></select></td><td class="table-content"><select class="form-control" id="examName' + i + '" style="height: 30px; font-size: 15px;" name="AcademicQualification[examName]"></select></td><td class="table-content"><select class="form-control" id="subject' + i + '" name="AcademicQualification[subject]" style="height: 30px; font-size: 15px;"></select></td><td class="table-content"><select class="form-control" id="grade' + i + '" name="AcademicQualification[grade]" style="height: 30px; font-size: 15px;"></select></td>'
+
+            //set examYear option
+            var todayYear = new Date().getFullYear();
+            var start = todayYear;
+            var end = 1944;
+            var yearOptions = "<option selected disabled value=''>" + "-Select-" + "</option>";
+
+            for (var year = start; year >= end; year--) {
+                yearOptions += "<option id='" + year + "" + i + "'>" + year + "</option>";
+            }
+
+            document.getElementById("examYear" + i).innerHTML = yearOptions;
+
+            document.getElementById("examYear" + i).setAttribute('required', '');
+
+            //retrieve the input - examYear
+            '<% if (model1.academicQualificationData != null && model1.academicQualificationData.AcademicQualification.examYear != null) { %>'
+            var yearArr = '<%= model1.academicQualificationData.AcademicQualification.examYear %>';
+            '<% } %>'
+
+
+            var splitYearArr = yearArr.split(",");
+
+            for (var year = start; year >= end; year--) {
+
+                if (splitYearArr[i] == year) {
+
+                    document.getElementById(year + "" + i).setAttribute('selected', 'selected');
+                }
+            }
+
+
+            //set examName option
+            var examOptions = "<option selected disabled value=''>" + "-Select-" + "</option>";
+            var exam = ["Hong Kong Diploma of Secondary Education", "Hong Kong Certificate of Exam", "Hong Kong A-Level Examination"]
+            for (j = 0; j < exam.length; j = j + 1) {
+                examOptions += "<option id='" + exam[j] + i + "'>" + exam[j] + "</option>";
+            }
+
+            document.getElementById("examName" + i).innerHTML = examOptions;
+
+            document.getElementById("examName" + i).setAttribute('required', '');
+
+
+            //populate select field - examName
+            for (k = 0; k < exam.length; k = k + 1) {
+
+                if (splitExamArr[i] == exam[k]) {
+
+                    document.getElementById(exam[k] + i).setAttribute('selected', 'selected');
+                }
+            }
+
+
+            //set subject options
+            var subjectOptions = "<option selected disabled value=''>" + "-Select-" + "</option>";
+            var subjects = ["Biology", "Business and Accounting and Financial Studies", "Chemistry", "Chinese History", "Chinese Language", "Chinese Literature",
+                "Combined Science", "Design and Applied Technology", "Economics", "English Language", "Ethics and Religious Studies", "Geography",
+                "Health Management and Social Care", "History", "Information and Communication Technology", "Integrated Science",
+                "Literature in English", "Mathematics", "Music", "Physical Education", "Physics", "Technology and Living", "Tourism and Hospitality Studies",
+                "Visual Arts"
+            ]
+
+            for (j = 0; j < subjects.length; j = j + 1) {
+                subjectOptions += "<option id='" + subjects[j] + i + "'>" + subjects[j] + "</option>";
+            }
+
+            document.getElementById("subject" + i).innerHTML = subjectOptions;
+
+            document.getElementById("subject" + i).setAttribute('required', '');
+
+            //retrieve the input - subject
+            '<% if (model1.academicQualificationData != null && model1.academicQualificationData.AcademicQualification.subject != null) { %>'
+            var subjectArr = '<%= model1.academicQualificationData.AcademicQualification.subject %>';
+            '<% } %>'
+
+            var result = subjectArr.split(",");
+
+            for (k = 0; k < subjects.length; k = k + 1) {
+
+                if (result[i] == subjects[k]) {
+
+                    document.getElementById(subjects[k] + i).setAttribute('selected', 'selected');
+                }
+            }
+
+            //set grade option
+            var gradeOptions = "<option selected disabled value=''>" + "-Select-" + "</option>";
+
+            var grades = ["5**", "5*", "5", "4", "3", "2", "1", "U"];
+
+            for (j = 0; j < grades.length; j = j + 1) {
+                gradeOptions += "<option id='" + grades[j] + i + "'>" + grades[j] + "</option>";
+            }
+
+            document.getElementById("grade" + i).innerHTML = gradeOptions;
+
+            document.getElementById("grade" + i).setAttribute('required', '');
+
+            //retrieve the input - grade
+
+            '<% if (model1.academicQualificationData != null && model1.academicQualificationData.AcademicQualification.grade != null) { %>'
+            var gradeArr = '<%= model1.academicQualificationData.AcademicQualification.grade %>';
+            '<% } %>'
+
+            var splitGradeArr = gradeArr.split(",");
+
+            for (k = 0; k < grades.length; k = k + 1) {
+
+                if (splitGradeArr[i] == grades[k]) {
+
+                    document.getElementById(grades[k] + i).setAttribute('selected', 'selected');
+                }
+            }
+        }
+    })();
+</script>
+
+<script>
+    (function () {
+        //set year options
+        var todayYear = new Date().getFullYear();
+        var start = todayYear;
+        var end = 1944;
+        var yearOptions = "<option selected disabled value=''>" + "-Select-" + "</option>";
+
+        for (var year = start; year >= end; year--) {
+            yearOptions += "<option id='" + year + "'>" + year + "</option>";
+        }
+
+        document.getElementById("examYear").innerHTML = yearOptions;
+
+
+        //is an array
+        '<% if (model1.academicQualificationData != null && model1.academicQualificationData.AcademicQualification.examYear[0] != null) { %>'
+        var selectedFirstYear = '<%= model1.academicQualificationData.AcademicQualification.examYear[0] %>';
+        '<% } %>'
+
+        for (var year = start; year >= end; year--) {
+
+            if (selectedFirstYear == year) {
+
+                document.getElementById(year).setAttribute('selected', 'selected');
+            }
+        }
+
+        '<% if (model1.academicQualificationData != null && model1.academicQualificationData.AcademicQualification.examYear != null) { %>'
+        var selectedYear = '<%= model1.academicQualificationData.AcademicQualification.examYear %>';
+        '<% } %>'
+
+        for (var year = start; year >= end; year--) {
+
+            if (selectedYear == year) {
+
+                document.getElementById(year).setAttribute('selected', 'selected');
+            }
+        }
+    })();
+</script>
+
+<script>
+    (function () {
+        //set exam name options
+        var examOptions = "<option selected disabled value=''>" + "-Select-" + "</option>";
+        var exam = [
+            "Hong Kong Diploma of Secondary Education",
+            "Hong Kong Certificate of Exam",
+            "Hong Kong A-Level Examination"]
+        for (i = 0; i < exam.length; i = i + 1) {
+            examOptions += "<option id='" + exam[i] + "'>" + exam[i] + "</option>";
+        }
+
+        document.getElementById("examName").innerHTML = examOptions;
+
+        //is an array
+        '<% if (model1.academicQualificationData != null && model1.academicQualificationData.AcademicQualification.examName[0] != null) { %>'
+        var selectedFirstExam = '<%= model1.academicQualificationData.AcademicQualification.examName[0] %>';
+        '<% } %>'
+
+        for (i = 0; i < exam.length; i = i + 1) {
+
+            if (selectedFirstExam == exam[i]) {
+
+                document.getElementById(exam[i]).setAttribute('selected', 'selected');
+            }
+        }
+
+        '<% if (model1.academicQualificationData != null && model1.academicQualificationData.AcademicQualification.examName != null) { %>'
+        var selectedExam = '<%= model1.academicQualificationData.AcademicQualification.examName %>';
+        '<% } %>'
+
+        for (i = 0; i < exam.length; i++) {
+
+            if (selectedExam == exam[i]) {
+
+                document.getElementById(exam[i]).setAttribute('selected', 'selected');
+            }
+        }
+    })();
+</script>
+
+<script>
+    (function () {
+        //set exam subject options
+        var subjectOptions = "<option selected disabled value=''>" + "-Select-" + "</option>";
+        var subjects = ["Biology", "Business and Accounting and Financial Studies", "Chemistry", "Chinese History", "Chinese Language", "Chinese Literature",
+            "Combined Science", "Design and Applied Technology", "Economics", "English Language", "Ethics and Religious Studies", "Geography",
+            "Health Management and Social Care", "History", "Information and Communication Technology", "Integrated Science",
+            "Literature in English", "Mathematics", "Music", "Physical Education", "Physics", "Technology and Living", "Tourism and Hospitality Studies",
+            "Visual Arts"
+        ]
+        for (i = 0; i < subjects.length; i = i + 1) {
+            subjectOptions += "<option id='" + subjects[i] + "'>" + subjects[i] + "</option>";
+        }
+
+        document.getElementById("subject").innerHTML = subjectOptions;
+
+        //is an array
+        '<% if (model1.academicQualificationData != null && model1.academicQualificationData.AcademicQualification.subject[0] != null) { %>'
+        var selectedFirstSubject = '<%= model1.academicQualificationData.AcademicQualification.subject[0] %>';
+        '<% } %>'
+
+        for (i = 0; i < subjects.length; i = i + 1) {
+
+            if (selectedFirstSubject == subjects[i]) {
+
+                document.getElementById(subjects[i]).setAttribute('selected', 'selected');
+            }
+        }
+
+        '<% if (model1.academicQualificationData != null && model1.academicQualificationData.AcademicQualification.subject != null) { %>'
+        var selectedSubject = '<%= model1.academicQualificationData.AcademicQualification.subject %>';
+        '<% } %>'
+
+        for (i = 0; i < subjects.length; i = i + 1) {
+
+            if (selectedSubject == subjects[i]) {
+
+                document.getElementById(subjects[i]).setAttribute('selected', 'selected');
+            }
+        }
+    })();
+</script>
+
+<script>
+    (function () {
+        //set grade option
+        var gradeOptions = "<option selected disabled value=''>" + "-Select-" + "</option>";
+
+        var grades = ["5**", "5*", "5", "4", "3", "2", "1", "U"];
+
+        for (i = 0; i < grades.length; i++) {
+            gradeOptions += "<option id='" + grades[i] + "'>" + grades[i] + "</option>";
+        }
+        document.getElementById("grade").innerHTML = gradeOptions;
+
+        //is an array
+        '<% if (model1.academicQualificationData != null && model1.academicQualificationData.AcademicQualification.grade[0] != null) { %>'
+        var selectedFirstGrade = '<%= model1.academicQualificationData.AcademicQualification.grade[0] %>';
+        '<% } %>'
+
+        for (i = 0; i < grades.length; i = i + 1) {
+
+            if (selectedFirstGrade == grades[i]) {
+
+                document.getElementById(grades[i]).setAttribute('selected', 'selected');
+            }
+        }
+
+        '<% if (model1.academicQualificationData != null && model1.academicQualificationData.AcademicQualification.grade != null) { %>'
+        var selectedGrade = '<%= model1.academicQualificationData.AcademicQualification.grade %>';
+        '<% } %>'
+
+        for (i = 0; i < grades.length; i++) {
+
+            if (selectedGrade == grades[i]) {
+
+                document.getElementById(grades[i]).setAttribute('selected', 'selected');
+            }
+        }
+    })();
+</script>
+
+
+
+<script>
+    (function () {
+        var table = document.getElementById("examResults2");
+        var rowCount = table.rows.length;
+        var row = table.insertRow(rowCount);
+
+        '<% if (model2.academicQualificationData != null && model2.academicQualificationData.AcademicQualification.examName != null) { %>'
+        var examArr = '<%= model2.academicQualificationData.AcademicQualification.examName %>';
+        '<% } %>'
+
+
+        var splitExamArr = examArr.split(",");
+
+        //show up
+        for (i = 1; i < splitExamArr.length; i = i + 1) {
+
+            table.innerHTML = table.innerHTML + '<td class="table-content"><select class="form-control" id="examYear2' + i + '" name="AcademicQualification[examYear]" style="height: 30px; font-size: 15px;"></select></td><td class="table-content"><select class="form-control" id="examName2' + i + '" style="height: 30px; font-size: 15px;" name="AcademicQualification[examName]"></select></td><td class="table-content"><select class="form-control" id="subject2' + i + '" name="AcademicQualification[subject]" style="height: 30px; font-size: 15px;"></select></td><td class="table-content"><select class="form-control" id="grade2' + i + '" name="AcademicQualification[grade]" style="height: 30px; font-size: 15px;"></select></td>'
+
+            //set examYear2 option
+            var todayYear = new Date().getFullYear();
+            var start = todayYear;
+            var end = 1944;
+            var yearOptions = "<option selected disabled value=''>" + "-Select-" + "</option>";
+
+            for (var year = start; year >= end; year--) {
+                yearOptions += "<option id='" + year + "" + i + "2" + "'>" + year + "</option>";
+            }
+
+            document.getElementById("examYear2" + i).innerHTML = yearOptions;
+
+            document.getElementById("examYear2" + i).setAttribute('required', '');
+
+            //retrieve the input - examYear2
+            '<% if (model2.academicQualificationData != null && model2.academicQualificationData.AcademicQualification.examYear != null) { %>'
+            var yearArr = '<%= model2.academicQualificationData.AcademicQualification.examYear %>';
+            '<% } %>'
+
+
+            var splitYearArr = yearArr.split(",");
+
+            for (var year = start; year >= end; year--) {
+
+                if (splitYearArr[i] == year) {
+
+                    document.getElementById(year + "" + i + "2").setAttribute('selected', 'selected');
+                }
+            }
+
+
+            //set examName2 option
+            var examOptions = "<option selected disabled value=''>" + "-Select-" + "</option>";
+            var exam = ["Hong Kong Diploma of Secondary Education", "Hong Kong Certificate of Exam", "Hong Kong A-Level Examination"]
+            for (j = 0; j < exam.length; j = j + 1) {
+                examOptions += "<option id='" + exam[j] + i + "2" + "'>" + exam[j] + "</option>";
+            }
+
+            document.getElementById("examName2" + i).innerHTML = examOptions;
+
+            document.getElementById("examName2" + i).setAttribute('required', '');
+
+
+            //populate select field - examName2
+            for (k = 0; k < exam.length; k = k + 1) {
+
+                if (splitExamArr[i] == exam[k]) {
+
+                    document.getElementById(exam[k] + i + "2").setAttribute('selected', 'selected');
+                }
+            }
+
+
+            //set subject2 options
+            var subjectOptions = "<option selected disabled value=''>" + "-Select-" + "</option>";
+            var subjects = ["Biology", "Business and Accounting and Financial Studies", "Chemistry", "Chinese History", "Chinese Language", "Chinese Literature",
+                "Combined Science", "Design and Applied Technology", "Economics", "English Language", "Ethics and Religious Studies", "Geography",
+                "Health Management and Social Care", "History", "Information and Communication Technology", "Integrated Science",
+                "Literature in English", "Mathematics", "Music", "Physical Education", "Physics", "Technology and Living", "Tourism and Hospitality Studies",
+                "Visual Arts"
+            ]
+
+            for (j = 0; j < subjects.length; j = j + 1) {
+                subjectOptions += "<option id='" + subjects[j] + i + "2" + "'>" + subjects[j] + "</option>";
+            }
+
+            document.getElementById("subject2" + i).innerHTML = subjectOptions;
+
+            document.getElementById("subject2" + i).setAttribute('required', '');
+
+            //retrieve the input - subject2
+            '<% if (model2.academicQualificationData != null && model2.academicQualificationData.AcademicQualification.subject != null) { %>'
+            var subjectArr = '<%= model2.academicQualificationData.AcademicQualification.subject %>';
+            '<% } %>'
+
+            var result = subjectArr.split(",");
+
+            for (k = 0; k < subjects.length; k = k + 1) {
+
+                if (result[i] == subjects[k]) {
+
+                    document.getElementById(subjects[k] + i + "2").setAttribute('selected', 'selected');
+                }
+            }
+
+            //set grade2 option
+            var gradeOptions = "<option selected disabled value=''>" + "-Select-" + "</option>";
+
+            var grades = ["5**", "5*", "5", "4", "3", "2", "1", "U"];
+
+            for (j = 0; j < grades.length; j = j + 1) {
+                gradeOptions += "<option id='" + grades[j] + i + "2" + "'>" + grades[j] + "</option>";
+            }
+
+            document.getElementById("grade2" + i).innerHTML = gradeOptions;
+
+            document.getElementById("grade2" + i).setAttribute('required', '');
+
+            //retrieve the input - grade2
+
+            '<% if (model2.academicQualificationData != null && model2.academicQualificationData.AcademicQualification.grade != null) { %>'
+            var gradeArr = '<%= model2.academicQualificationData.AcademicQualification.grade %>';
+            '<% } %>'
+
+            var splitGradeArr = gradeArr.split(",");
+
+            for (k = 0; k < grades.length; k = k + 1) {
+
+                if (splitGradeArr[i] == grades[k]) {
+
+                    document.getElementById(grades[k] + i + "2").setAttribute('selected', 'selected');
+                }
+            }
+        }
+    })();
+</script>
+
+<script>
+    (function () {
+        //set year options
+        var todayYear = new Date().getFullYear();
+        var start = todayYear;
+        var end = 1944;
+        var yearOptions = "<option selected disabled value=''>" + "-Select-" + "</option>";
+
+        for (var year = start; year >= end; year--) {
+            yearOptions += "<option id='" + year + "2" + "'>" + year + "</option>";
+        }
+
+        document.getElementById("examYear2").innerHTML = yearOptions;
+
+
+        //is an array
+        '<% if (model2.academicQualificationData != null && model2.academicQualificationData.AcademicQualification.examYear[0] != null) { %>'
+        var selectedFirstYear = '<%= model2.academicQualificationData.AcademicQualification.examYear[0] %>';
+        '<% } %>'
+
+        for (var year = start; year >= end; year--) {
+
+            if (selectedFirstYear == year) {
+
+                document.getElementById(year + "2").setAttribute('selected', 'selected');
+            }
+        }
+
+        '<% if (model2.academicQualificationData != null && model2.academicQualificationData.AcademicQualification.examYear != null) { %>'
+        var selectedYear = '<%= model2.academicQualificationData.AcademicQualification.examYear %>';
+        '<% } %>'
+
+        for (var year = start; year >= end; year--) {
+
+            if (selectedYear == year) {
+
+                document.getElementById(year + "2").setAttribute('selected', 'selected');
+            }
+        }
+    })();
+</script>
+
+<script>
+    (function () {
+        //set exam name options
+        var examOptions = "<option selected disabled value=''>" + "-Select-" + "</option>";
+        var exam = [
+            "Hong Kong Diploma of Secondary Education",
+            "Hong Kong Certificate of Exam",
+            "Hong Kong A-Level Examination"]
+        for (i = 0; i < exam.length; i = i + 1) {
+            examOptions += "<option id='" + exam[i] + "2" + "'>" + exam[i] + "</option>";
+        }
+
+        document.getElementById("examName2").innerHTML = examOptions;
+
+        //is an array
+        '<% if (model2.academicQualificationData != null && model2.academicQualificationData.AcademicQualification.examName[0] != null) { %>'
+        var selectedFirstExam = '<%= model2.academicQualificationData.AcademicQualification.examName[0] %>';
+        '<% } %>'
+
+        for (i = 0; i < exam.length; i = i + 1) {
+
+            if (selectedFirstExam == exam[i]) {
+
+                document.getElementById(exam[i] + "2").setAttribute('selected', 'selected');
+            }
+        }
+
+        '<% if (model2.academicQualificationData != null && model2.academicQualificationData.AcademicQualification.examName != null) { %>'
+        var selectedExam = '<%= model2.academicQualificationData.AcademicQualification.examName %>';
+        '<% } %>'
+
+        for (i = 0; i < exam.length; i++) {
+
+            if (selectedExam == exam[i]) {
+
+                document.getElementById(exam[i] + "2").setAttribute('selected', 'selected');
+            }
+        }
+    })();
+</script>
+
+<script>
+    (function () {
+        //set exam subject2 options
+        var subjectOptions = "<option selected disabled value=''>" + "-Select-" + "</option>";
+        var subjects = ["Biology", "Business and Accounting and Financial Studies", "Chemistry", "Chinese History", "Chinese Language", "Chinese Literature",
+            "Combined Science", "Design and Applied Technology", "Economics", "English Language", "Ethics and Religious Studies", "Geography",
+            "Health Management and Social Care", "History", "Information and Communication Technology", "Integrated Science",
+            "Literature in English", "Mathematics", "Music", "Physical Education", "Physics", "Technology and Living", "Tourism and Hospitality Studies",
+            "Visual Arts"
+        ]
+        for (i = 0; i < subjects.length; i = i + 1) {
+            subjectOptions += "<option id='" + subjects[i] + "2" + "'>" + subjects[i] + "</option>";
+        }
+
+        document.getElementById("subject2").innerHTML = subjectOptions;
+
+        //is an array
+        '<% if (model2.academicQualificationData != null && model2.academicQualificationData.AcademicQualification.subject[0] != null) { %>'
+        var selectedFirstSubject = '<%= model2.academicQualificationData.AcademicQualification.subject[0] %>';
+        '<% } %>'
+
+        for (i = 0; i < subjects.length; i = i + 1) {
+
+            if (selectedFirstSubject == subjects[i]) {
+
+                document.getElementById(subjects[i] + "2").setAttribute('selected', 'selected');
+            }
+        }
+
+        '<% if (model2.academicQualificationData != null && model2.academicQualificationData.AcademicQualification.subject != null) { %>'
+        var selectedSubject = '<%= model2.academicQualificationData.AcademicQualification.subject %>';
+        '<% } %>'
+
+        for (i = 0; i < subjects.length; i = i + 1) {
+
+            if (selectedSubject == subjects[i]) {
+
+                document.getElementById(subjects[i] + "2").setAttribute('selected', 'selected');
+            }
+        }
+    })();
+</script>
+
+<script>
+    (function () {
+        //set grade2 option
+        var gradeOptions = "<option selected disabled value=''>" + "-Select-" + "</option>";
+
+        var grades = ["5**", "5*", "5", "4", "3", "2", "1", "U"];
+
+        for (i = 0; i < grades.length; i++) {
+            gradeOptions += "<option id='" + grades[i] + "2" + "'>" + grades[i] + "</option>";
+        }
+        document.getElementById("grade2").innerHTML = gradeOptions;
+
+        //is an array
+        '<% if (model2.academicQualificationData != null && model2.academicQualificationData.AcademicQualification.grade[0] != null) { %>'
+        var selectedFirstGrade = '<%= model2.academicQualificationData.AcademicQualification.grade[0] %>';
+        '<% } %>'
+
+        for (i = 0; i < grades.length; i = i + 1) {
+
+            if (selectedFirstGrade == grades[i]) {
+
+                document.getElementById(grades[i] + "2").setAttribute('selected', 'selected');
+            }
+        }
+
+        '<% if (model2.academicQualificationData != null && model2.academicQualificationData.AcademicQualification.grade != null) { %>'
+        var selectedGrade = '<%= model2.academicQualificationData.AcademicQualification.grade %>';
+        '<% } %>'
+
+        for (i = 0; i < grades.length; i++) {
+
+            if (selectedGrade == grades[i]) {
+
+                document.getElementById(grades[i] + "2").setAttribute('selected', 'selected');
+            }
+        }
+    })();
+</script>

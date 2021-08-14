@@ -1,0 +1,939 @@
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js">
+</script>
+<script src="https://cdn.zingchart.com/zingchart.min.js"></script>
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+<script type="text/javascript">
+    function showHideRow(row) {
+        $("#" + row).toggle();
+    }
+</script>
+
+<style type="text/css">
+    .topnav {
+        overflow: hidden;
+        background-color: #f0f0f0;
+        width: 100%;
+        justify-content: center;
+        margin: 0 auto;
+        padding-left: 110px;
+        border-radius: 0px;
+        position: static;
+    }
+
+    .topnav a {
+        float: left;
+        color: #000;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+        font-size: 17px;
+    }
+
+    .topnav a:hover:not(.topnav-active) {
+        background-color: rgb(218, 218, 218);
+        color: #000;
+    }
+
+    .topnav a:hover,
+    .topnav a:focus {
+        text-decoration: underline;
+    }
+
+    .topnav a.topnav-active {
+        /* background-color:#697174; */
+        /* background-color:#717A7D; */
+        background-color: #8AA0AB;
+        color: black;
+    }
+
+    body {
+        background: #e0ded6;
+        font-family: "Helvetica Neue", Helvetica, Arial;
+    }
+
+    input::-webkit-input-placeholder {
+        color: #b5b5b5;
+    }
+
+    input:-moz-placeholder {
+        color: #b5b5b5;
+    }
+
+    .collapsible:after {
+        content: '\203A';
+        font-size: 21px;
+        float: right;
+        color: #888888;
+        margin-right: 20px;
+    }
+
+    .active:after {
+        content: '\203A';
+        transform: rotate(90deg);
+        -webkit-transform: rotate(90deg);
+        -moz-transform: rotate(90deg);
+    }
+
+    table,
+    th,
+    td {
+        border: 2px solid;
+        border-collapse: collapse;
+        border-color: #f6f6f6
+    }
+
+    th {
+        padding-top: 8px;
+        background-color: #f6f6f6
+    }
+
+    .table-content {
+        padding-top: 4px;
+        padding-bottom: 4px;
+        padding-left: 20px;
+    }
+</style>
+
+<div class="wrapper" style="width: 100%;">
+    <div class="container-fluid no-gutters"
+        style="position: static; text-align: right; margin: 8px 0px; font-size: 14px;">
+
+        <% if (req.session.role !=undefined) {%>
+            Logged in as <b>
+                <%= req.session.user.Surname%>
+                    <%= req.session.user.GivenName%>
+            </b>&nbsp; |&nbsp;
+            <a style="color: black; padding: 5px 50px 25px 0px; color: #71838C" href="/user/logout">Logout</a>
+            <%}%>
+
+    </div>
+</div>
+
+<div class="wrapper" style="width: 100%; margin: 0 auto;">
+    <div class="container-fluid" style="justify-content: center; 
+    padding: 27px 15px 12px 115px; background: #fff;
+    border-radius: 0px; position: static;">
+        <h2 style="font-size: 40px;
+            font-weight: bold; color:#6A635A">HKBU Student Admission System</h2>
+    </div>
+</div>
+
+<div class="topnav">
+    <a href="/user/admin/applications/all/search">Applications</a>
+    <a class="topnav-active" href="/user/admin/statistics">Statistics</a>
+    <a href="/user/admin/profile">Profile</a>
+</div>
+
+<div class="wrapper" style="width: 100%; margin: 0 auto;">
+    <div class="container-fluid"
+        style="justify-content: center; height: 35px; font-size: 17px;
+background: #fff; border-radius: 0px; position: static; color: #888888; padding-top: 6px; padding-bottom: 5px; padding-left: 125px;">
+        <i class="fa fa-home" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;<i class="fa fa-angle-right"
+            aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;<span>Applications</span>&nbsp;&nbsp;
+    </div>
+</div>
+<br>
+
+<div class="wrapper" style="width: 1310px; margin: 0 auto;">
+    <div class="container-fluid" style="justify-content: center; 
+    padding: 30px 15px 25px; background: #fff;
+    border-radius: 0px; position: static;">
+
+        <div style="display: flex;">
+
+            <div class="main-content" style="margin-left: 40px;">
+                <h3 style="color: #333333;
+            font-size: 32px;
+            font-weight: bold;
+            margin-bottom: 20px;">Admission Statisics
+                </h3>
+
+                <p>Admission Year: &nbsp;<%= new Date().getFullYear() %>
+                </p>
+                <p>Total number of applicants: &nbsp;<%=allNum %>
+                        <p>Total number of applications to programmes: &nbsp;<%=applicationNum %>
+                        </p>
+                        <div class="container" style="background: #C8D8CC; margin-top: 15px; width: 1000px; padding-top: 3px;
+                    font-size: 17px;">
+                            <p>Application Status</p>
+                        </div>
+                        <!-- <div id="myChart"></div> -->
+                        <div id="chartContainer" style="height: 370px; width: 100%;"></div>
+
+                        <div class="container" style="background: #C8D8CC; margin-top: 15px; width: 1000px; padding-top: 3px;
+                    font-size: 17px;">
+                            <p>Programme Application Status</p>
+                        </div>
+                        <div id="chartContainer2" style="height: 370px; width: 100%;"></div>
+                        <!-- <div id="piechart" style="height: 420px; width: 100%;"></div> -->
+
+                        <div id="myTable">
+                            <div class="container" style="background: #C8D8CC; margin-top: 15px; width: 1000px; padding-top: 3px;
+                    font-size: 17px;">
+                                <p>Programme Application</p>
+                            </div>
+
+                            <table style="color: #333333; margin-top: 0px; padding-top: 0px; width: 1000px; ">
+                                <tr>
+                                    <th width='70%' style="text-align: left; padding-left: 20px;">Full Programme Title
+                                    </th>
+                                    <th width='30%' style="text-align: center; padding-left: 20px;">Number of Applicants
+                                    </th>
+                                    <!-- <th style="text-align: center; width: 200px;">Preferred Concentration</th> -->
+                                </tr>
+
+                                <tr>
+                                    <td class="table-content">Bachelor of Arts
+                                    </td>
+                                    <td class="table-content" style="text-align: center;">
+                                        <%=BachelorOfArts%>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="table-content">Bachelor of Arts (Hons) in Creative and Professional
+                                        Writing
+                                    </td>
+                                    <td class="table-content" style="text-align: center;">
+                                        <%=ArtsCPW%>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="table-content">Bachelor of Arts (Hons) in Chinese Language and Literature
+                                    </td>
+                                    <td class="table-content" style="text-align: center;">
+                                        <%=ArtsCLL%>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="table-content">Bachelor of Arts (Hons) in English Language and Literature
+                                    </td>
+                                    <td class="table-content" style="text-align: center;">
+                                        <%=ArtsELL%>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="table-content">Bachelor of Arts (Hons) in Humanities
+                                    </td>
+                                    <td class="table-content" style="text-align: center;">
+                                        <%=ArtsHum%>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="table-content">Bachelor of Arts (Hons) in Music
+                                    </td>
+                                    <td class="table-content" style="text-align: center;">
+                                        <%=ArtsMusic%>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="table-content">Bachelor of Arts (Hons) in Religion, Philosophy and Ethics
+                                    </td>
+                                    <td class="table-content" style="text-align: center;">
+                                        <%=ArtsRPE%>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="table-content">Bachelor of Arts (Hons) in Translation
+                                    </td>
+                                    <td class="table-content" style="text-align: center;">
+                                        <%=ArtsTrans%>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="table-content">Bachelor of Arts (Hons) in Creative Industries
+                                    </td>
+                                    <td class="table-content" style="text-align: center;">
+                                        <%=ArtsCI%>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="table-content">Bachelor of Arts (Hons) in Visual Arts
+                                    </td>
+                                    <td class="table-content" style="text-align: center;">
+                                        <%=ArtsVA%>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="table-content">Bachelor of Business Administration (Honours)
+                                    </td>
+                                    <td class="table-content" style="text-align: center;">
+                                        <%=BBA%>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="table-content">Bachelor of Business Administration (Hons)-Accounting
+                                        Concentration
+                                    </td>
+                                    <td class="table-content" style="text-align: center;">
+                                        <%=ACCT%>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="table-content">Bachelor of Business Administration (Hons)-Accounting
+                                        Concentration
+                                    </td>
+                                    <td class="table-content" style="text-align: center;">
+                                        <%=ACCT%>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="table-content">Bachelor of Business Administration (Hons)-Applied
+                                        Economics
+                                        Concentration
+                                    </td>
+                                    <td class="table-content" style="text-align: center;">
+                                        <%=ECON%>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="table-content">Bachelor of Business Administration
+                                        (Hons)-Entrepreneurship
+                                        Concentration
+                                    </td>
+                                    <td class="table-content" style="text-align: center;">
+                                        <%=BBAEnt%>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="table-content">Bachelor of Business Administration (Hons)-Finance
+                                        Concentration
+                                    </td>
+                                    <td class="table-content" style="text-align: center;">
+                                        <%=BBAFin%>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="table-content">Bachelor of Business Administration (Hons)-Human Resources
+                                        Management Concentration
+                                    </td>
+                                    <td class="table-content" style="text-align: center;">
+                                        <%=BBAHR%>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="table-content">Bachelor of Business Administration (Hons)-Information
+                                        Systems and
+                                        e-Business Management Concentration
+                                    </td>
+                                    <td class="table-content" style="text-align: center;">
+                                        <%=BBAisem%>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="table-content">Bachelor of Business Administration (Hons) Marketing
+                                        Concentration
+                                    </td>
+                                    <td class="table-content" style="text-align: center;">
+                                        <%=BBAmarket%>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="table-content">Bachelor of Chinese Medicine and Bachelor of Science
+                                        (Honours) in
+                                        Biomedical Science
+                                    </td>
+                                    <td class="table-content" style="text-align: center;">
+                                        <%=Medi%>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="table-content">Bachelor of Pharmacy (Honours) in Chinese Medicine
+                                    </td>
+                                    <td class="table-content" style="text-align: center;">
+                                        <%=Phar%>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="table-content">Bachelor of Communication (Hons) in Film (Animation and
+                                        Media Arts
+                                        Concentration)
+                                    </td>
+                                    <td class="table-content" style="text-align: center;">
+                                        <%=CommAM%>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="table-content">Bachelor of Communication (Hons) in Film (Film and
+                                        Television
+                                        Concentration)
+                                    </td>
+                                    <td class="table-content" style="text-align: center;">
+                                        <%=CommFT%>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="table-content">Bachelor of Communication (Hons) in Journalism
+                                    </td>
+                                    <td class="table-content" style="text-align: center;">
+                                        <%=Journ%>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="table-content">Bachelor of Communication (Hons) in Journalism and Digital
+                                        Media
+                                    </td>
+                                    <td class="table-content" style="text-align: center;">
+                                        <%=CommJDM%>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="table-content">Bachelor of Communication (Hons) in Journalism (Chinese
+                                        Journalism
+                                        Concentration)
+                                    </td>
+                                    <td class="table-content" style="text-align: center;">
+                                        <%=CommCJ%>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="table-content">Bachelor of Communication (Hons) in Journalism (Data and
+                                        Media
+                                        Communication Concentration)
+                                    </td>
+                                    <td class="table-content" style="text-align: center;">
+                                        <%=CommDMC%>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="table-content">Bachelor of Communication (Hons) in Public Relations and
+                                        Advertising
+                                    </td>
+                                    <td class="table-content" style="text-align: center;">
+                                        <%=PR%>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="table-content">Bachelor of Fine Arts (Hons) in Acting for Global Screen
+                                    </td>
+                                    <td class="table-content" style="text-align: center;">
+                                        <%=AGS%>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="table-content">Bachelor of Communication (Hons) in Journalism
+                                        (International
+                                        Journalism Concentration)
+                                    </td>
+                                    <td class="table-content" style="text-align: center;">
+                                        <%=CommIJ%>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="table-content">Bachelor of Communication (Hons) in Public Relations and
+                                        Advertising (Advertising and Branding Concentration)
+                                    </td>
+                                    <td class="table-content" style="text-align: center;">
+                                        <%=CommAB%>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="table-content">Bachelor of Communication (Hons) in Public Relations and
+                                        Advertising (Organizational Communication Concentration)
+                                    </td>
+                                    <td class="table-content" style="text-align: center;">
+                                        <%=CommOC%>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="table-content">Bachelor of Communication (Hons) in Public Relations and
+                                        Advertising (Public Relations Concentration)
+                                    </td>
+                                    <td class="table-content" style="text-align: center;">
+                                        <%=CommPR%>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="table-content">Bachelor of Science (Honours)
+                                    </td>
+                                    <td class="table-content" style="text-align: center;">
+                                        <%=BSC%>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="table-content">Bachelor of Science (Hons) in Analytical and Testing
+                                        Sciences
+                                    </td>
+                                    <td class="table-content" style="text-align: center;">
+                                        <%=ATS%>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="table-content">Bachelor of Science (Hons) in Applied
+                                        Biology-Biotechnology
+                                        Concentration
+                                    </td>
+                                    <td class="table-content" style="text-align: center;">
+                                        <%=Biotech%>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="table-content">Bachelor of Science (Hons) in Applied
+                                        Biology-Environmental
+                                        Science Concentration
+                                    </td>
+                                    <td class="table-content" style="text-align: center;">
+                                        <%=BioEnv%>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="table-content">Bachelor of Science (Hons) in Business Computing and Data
+                                        Analytics
+                                    </td>
+                                    <td class="table-content" style="text-align: center;">
+                                        <%=BCDA%>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="table-content">Bachelor of Science (Hons) in Bioresource and Agricultural
+                                        Science
+                                    </td>
+                                    <td class="table-content" style="text-align: center;">
+                                        <%=BAS%>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="table-content">Bachelor of Science (Hons) in Chemistry
+                                    </td>
+                                    <td class="table-content" style="text-align: center;">
+                                        <%=Chem%>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="table-content">Bachelor of Science (Hons) in Computer Science-Computing
+                                        and
+                                        Software Technologies Concentration
+                                    </td>
+                                    <td class="table-content" style="text-align: center;">
+                                        <%=CST%>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="table-content">Bachelor of Science (Hons) in Computer Science-Computing
+                                        and
+                                        Software Technologies Concentration
+                                    </td>
+                                    <td class="table-content" style="text-align: center;">
+                                        <%=CST%>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="table-content">Bachelor of Science (Hons) in Computer Science-Data and
+                                        Media
+                                        Communication Concentration
+                                    </td>
+                                    <td class="table-content" style="text-align: center;">
+                                        <%=DMC%>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="table-content">Bachelor of Science (Hons) in Computer Science-Information
+                                        Systems
+                                        and Analytics Concentration
+                                    </td>
+                                    <td class="table-content" style="text-align: center;">
+                                        <%=ISA%>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="table-content">Bachelor of Science (Hons) in Mathematics and Statistics
+                                    </td>
+                                    <td class="table-content" style="text-align: center;">
+                                        <%=Maths%>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="table-content">Bachelor of Science (Hons) in Physics and Green Energy
+                                    </td>
+                                    <td class="table-content" style="text-align: center;">
+                                        <%=Physics%>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="table-content">Bachelor of Arts (Hons) in Physical Education and
+                                        Recreation
+                                        Management
+                                    </td>
+                                    <td class="table-content" style="text-align: center;">
+                                        <%=PE%>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="table-content">Bachelor of Arts (Hons)/ Bachelor of Social Sciences
+                                        (Hons)
+                                        (Geography/ Government and International Studies/ History/ Sociology)
+                                    </td>
+                                    <td class="table-content" style="text-align: center;">
+                                        <%=GIS%>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="table-content">Bachelor of Social Work (Hons)
+                                    </td>
+                                    <td class="table-content" style="text-align: center;">
+                                        <%=SW%>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="table-content">Bachelor of Arts (Hons) in History
+                                    </td>
+                                    <td class="table-content" style="text-align: center;">
+                                        <%=History%>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="table-content">Bachelor of Social Sciences (Hons) in China
+                                        Studies-Economics
+                                        Concentration
+                                    </td>
+                                    <td class="table-content" style="text-align: center;">
+                                        <%=BssCSE%>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="table-content">Bachelor of Social Sciences (Hons) in European
+                                        Studies-French
+                                        Stream
+                                    </td>
+                                    <td class="table-content" style="text-align: center;">
+                                        <%=BssESF%>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="table-content">Bachelor of Social Sciences (Hons) in European
+                                        Studies-German
+                                        Stream
+                                    </td>
+                                    <td class="table-content" style="text-align: center;">
+                                        <%=BssESG%>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="table-content">Bachelor of Social Sciences (Hons) in Global and China
+                                        Studies
+                                    </td>
+                                    <td class="table-content" style="text-align: center;">
+                                        <%=BssGCS%>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="table-content">Bachelor of Social Sciences (Hons) in Geography
+                                    </td>
+                                    <td class="table-content" style="text-align: center;">
+                                        <%=Geog%>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="table-content">Bachelor of Social Sciences (Hons) in Government and
+                                        International
+                                        Studies
+                                    </td>
+                                    <td class="table-content" style="text-align: center;">
+                                        <%=BssGIS%>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="table-content">Bachelor of Social Sciences (Hons) in Sociology
+                                    </td>
+                                    <td class="table-content" style="text-align: center;">
+                                        <%=Sociology%>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- <script>
+    (function () {
+        var pending = "<%=pendingNum%>"
+        var approved = "<%=approvedNum%>";
+        var disapproved = "<%=disapprovedNum%>";
+        var chartData = {
+            type: 'pie',
+            backgroundColor: '#f6f6f6',
+            // title: {
+            //     text: 'Application status',
+            //     backgroundColor: '#FE9C8A', 
+            //     fontColor: '#1A1B26',
+            //     fontFamily: " Arial",
+            //     fontSize: '16px',
+            //     height: '40px'
+            // },
+            // subtitle: {
+            //     backgroundColor: '#202235',
+            //     height: '35px',
+            //     y: '40px'
+            // },
+            legend: {
+                backgroundColor: 'none',
+                borderWidth: '0px',
+                item: {
+                    fontColor: 'black'
+                },
+                layout: 'h',
+                marker: {
+                    type: 'circle',
+                    borderColor: 'black'
+                },
+                shadow: false,
+                toggleAction: 'remove',
+                x: '32.5%',
+                y: '40px'
+            },
+            plot: {
+                valueBox: [
+                    {
+                        text: '%t: %v',
+                        fontSize: '16px',
+                        placement: 'out'
+                    },
+                    {
+                        text: '%npv%',
+                        fontColor: '#1A1B26',
+                        fontSize: '16px',
+                        placement: 'in'
+                    }
+                ],
+                refAngle: 270
+            },
+            plotarea: {
+                margin: '90 30 25 30'
+            },
+            tooltip: {
+                borderColor: '#fff',
+                borderRadius: '3px',
+                borderWidth: '1px',
+                fontColor: '#1A1B26',
+                fontSize: '12px',
+                shadow: false
+            },
+            series: [
+                {
+                    values: ['<%=pendingNum%>'],
+                    text: "Pending",
+                    backgroundColor: '#7B7366'
+                },
+                {
+                    values: ['<%=disapprovedNum%>'],
+                    text: "Declined",
+                    backgroundColor: '#A29A8E'
+                },
+                {
+                    values: ['<%=approvedNum%>'],
+                    text: "Approved",
+                    backgroundColor: '#A4ADB0'
+                },
+            ]
+        };
+
+        zingchart.render({
+            id: 'myChart',
+            data: chartData,
+            height: 400,
+            width: "100%"
+        });
+    })();
+</script> -->
+
+<script>
+    window.onload = function () {
+        var approvedNum = '<%=approvedNum%>' / '<%=allNum%>' * 100;
+        var disapprovedNum = '<%=disapprovedNum%>' / '<%=allNum%>' * 100;
+        var pendingNum = '<%=pendingNum%>' / '<%=allNum%>' * 100;
+        var chart = new CanvasJS.Chart("chartContainer", {
+            title: {
+                text: "Application Status",
+                fontFamily: "Arial",
+                fontWeight: "bold"
+            },
+            data: [{
+                type: "pie",
+                legendText: "{indexLabel}",
+                startAngle: 240,
+                yValueFormatString: "##0.00\"%\"",
+                indexLabel: "{label} {y}",
+                dataPoints: [
+                    { y: approvedNum, label: "Approved (<%=approvedNum%>)", color: "#A4ADB0" },
+                    { y: disapprovedNum, label: "Disapproved (<%=disapprovedNum%>)", color: "#7B7366" },
+                    { y: pendingNum, label: "Pending (<%=pendingNum%>)", color: "#A29A8E" },
+
+                ]
+            }]
+        });
+        chart.render();
+    }
+
+    var acceptedNum = '<%=acceptedNum%>' / '<%=applicationNum%>' * 100;
+    var rejectedNum = '<%=rejectedNum%>' / '<%=applicationNum%>' * 100;
+    var underConsiderationNum = '<%=underConsiderationNum%>' / '<%=applicationNum%>' * 100;
+    var chart = new CanvasJS.Chart("chartContainer2", {
+        title: {
+            text: "Programme Application Status",
+            fontFamily: "Arial",
+            fontWeight: "bold"
+        },
+        data: [{
+            type: "pie",
+            legendText: "{indexLabel}",
+            startAngle: 240,
+            yValueFormatString: "##0.00\"%\"",
+            indexLabel: "{label} {y}",
+            dataPoints: [
+                { y: acceptedNum, label: "Accepted (<%=acceptedNum%>)", color: "#A4ADB0" },
+                { y: rejectedNum, label: "Declined (<%=rejectedNum%>)", color: "#7B7366" },
+                { y: underConsiderationNum, label: "Pending (<%=underConsiderationNum%>)", color: "#A29A8E" },
+
+            ]
+        }]
+    });
+    chart.render();
+
+</script>
+
+<!-- <script type="text/javascript">
+    google.charts.load('current', {'packages':['corechart']});
+    google.charts.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+
+      var data = google.visualization.arrayToDataTable([
+        ['Task', 'Hours per Day'],
+        ['Work', '<%=disapprovedNum%>'],
+        ['Eat', '<%=approvedNum%>'],
+        ['Sleep', '<%=pendingNum%>'],
+      ]);
+
+      var options = {
+        title: 'My Daily Activities',
+        colors: ["#A4ADB0", "#7B7366", "#A29A8E"]
+      };
+
+      var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+      chart.draw(data, options);
+    }
+  </script> -->
+
+<!-- <script type="text/javascript">
+    window.onload = function () {
+        var chart = new CanvasJS.Chart("chartContainer",
+            {
+                theme: "light2",
+                title: {
+                    text: "Gaming Consoles Sold in 2012"
+                },
+                data: [
+                    {
+                        type: "pie",
+                        showInLegend: true,
+                        toolTipContent: "{y} - #percent %",
+                        yValueFormatString: "#,##0,,.## Million",
+                        legendText: "{indexLabel}",
+                        dataPoints: [
+                            { y: '<%=approvedNum%>', label: "Approved", color: "#A4ADB0" },
+                            { y: '<%=disapprovedNum%>', label: "Disapprove", color: "#7B7366" },
+                            { y: '<%=pendingNum%>', label: "Pending", color: "#A29A8E" },
+                        ]
+                    }
+                ]
+            });
+        chart.render();
+    }
+</script> -->
+
+<!-- <script type="text/javascript">
+    window.onload = function () {
+        var chart = new CanvasJS.Chart("chartContainer",
+            {
+                title: {
+                    text: "Gaming Consoles Sold in 2012"
+                },
+                legend: {
+                    maxWidth: 350,
+                    itemWidth: 120
+                },
+                data: [
+                    {
+                        type: "pie",
+                        showInLegend: true,
+                        legendText: "{indexLabel}",
+                        dataPoints: [
+                            { y: '<%=approvedNum%>', label: "Approved", color: "#A4ADB0" },
+                            { y: '<%=disapprovedNum%>', label: "Disapprove", color: "#7B7366" },
+                            { y: '<%=pendingNum%>', label: "Pending", color: "#A29A8E" },
+                        ]
+                    }
+                ]
+            });
+        chart.render();
+    }
+</script> -->

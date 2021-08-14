@@ -1,0 +1,558 @@
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<script src="https://kit.fontawesome.com/a076d05399.js"></script>
+
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<style type="text/css">
+    .main-nav-ul ul a:before {
+        content: '\203A';
+        margin-right: 20px;
+    }
+
+    .sub-arrow-selected:after {
+        content: '\203A';
+        float: right;
+        margin-right: 20px;
+        transform: rotate(90deg);
+    }
+
+    .sub-arrow:after {
+        content: '\203A';
+        float: right;
+        margin-right: 20px;
+    }
+
+    body {
+        background: #e0ded6;
+        font-family: "Helvetica Neue", Helvetica, Arial;
+        padding-top: 20px;
+    }
+
+    table,
+    th,
+    td {
+        border: 2px solid;
+        border-collapse: collapse;
+        border-color: #f6f6f6
+    }
+
+    th {
+        padding-top: 8px;
+        background-color: #f6f6f6
+    }
+
+    .table-content {
+        padding-top: 4px;
+        padding-bottom: 4px;
+    }
+
+    ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        width: 250px;
+        background-color: #f1f1f1;
+    }
+
+    li a {
+        display: block;
+        color: #000;
+        padding: 8px 16px;
+        text-decoration: none;
+    }
+
+    #lv1_selected {
+        background-color: #8AA0AB;
+        color: white;
+    }
+
+    #lv2_selected {
+        background-color: #FCFEFE;
+        color: #000;
+    }
+
+    a:hover:not(.active) {
+        background-color: rgb(218, 218, 218);
+        color: #000;
+    }
+
+    #saveContinue_Btn {
+        background: -moz-linear-gradient(top,
+                #b9c5dd 0%,
+                #ACB9CA);
+        background: -webkit-gradient(linear, left top, left bottom,
+                from(#b9c5dd),
+                to(#ACB9CA));
+        color: #000;
+        border: 2px solid #ACB9CA;
+    }
+
+    #saveContinue_Btn:hover {
+        background: -moz-linear-gradient(top,
+                #ACB9CA 0%,
+                #b9c5dd);
+        background: -webkit-gradient(linear, left top, left bottom,
+                from(#ACB9CA),
+                to(#b9c5dd));
+    }
+
+    #saveBtn {
+        background: -moz-linear-gradient(top,
+                #D8D8D8 0%,
+                #C9C9C9);
+        background: -webkit-gradient(linear, left top, left bottom,
+                from(#D8D8D8),
+                to(#C9C9C9));
+        /* background: #D8D8D8; */
+        color: #000;
+        border: 2px solid #D8D8D8;
+    }
+
+    #saveBtn:hover {
+        background: -moz-linear-gradient(top,
+                #C9C9C9 0%,
+                #D8D8D8);
+        background: -webkit-gradient(linear, left top, left bottom,
+                from(#C9C9C9),
+                to(#D8D8D8));
+    }
+</style>
+
+<div style="text-align:right">
+    <% if (req.session.role !=undefined) {%>
+
+        <a style="color: black; padding: 5px 200px 25px 0px;" href="/user/logout">(Logout)</a>
+
+        <%}%>
+</div>
+
+<div class="container" style="width: 1140px;  justify-content: center; 
+    margin: 0 auto;  padding: 30px 15px 25px; background: #fff;
+    border-radius: 0px; position: static;">
+    <article class="page">
+        <div style="display: flex;">
+
+            <nav class="main-nav">
+                <ul class="main-nav-ul">
+                    <li class="menu-left_item lv1"><a href="/user/student/myInbox"><span class="nav-text lv1"> My
+                                Inbox</span><span class="sub-arrow"></span></a></li>
+
+                    <li class="menu-left_item lv1"><a class="active" id="lv1_selected"
+                            href="/user/student/myApplication">My
+                            Application<span class="sub-arrow-selected"></span></a>
+                        <ul>
+                            <li class="menu-left_item lv2"><a href="/forms/personalParticulars">Personal
+                                    Particulars</a></li>
+                            <li class="menu-left_item lv2"><a href="/forms/academicProfile">Academic Profile</a></li>
+                            <li class="menu-left_item lv2"><a href="/forms/academicQualification">Academic
+                                    Qualification</a></li>
+                            <li class="menu-left_item lv2"><a class="active" id="lv2_selected"
+                                    href="/forms/programmePreference">Programme Preference</a></li>
+                            <li class="menu-left_item lv2"><a href="#">Prize and Awards</a></li>
+                            <li class="menu-left_item lv2"><a href="#">Extra-curricular Activities</a></li>
+                            <li class="menu-left_item lv2"><a href="/forms/academicReference">Academic Reference</a>
+                            </li>
+                            <li class="menu-left_item lv2"><a href="/forms/OtherInformation">Other Information</a></li>
+                        </ul>
+                    </li>
+                    <li class="menu-left_item lv1"><a href="/user/student/applicationStatus"><span
+                                class="nav-text lv1">Application Status</span><span class="sub-arrow"></span></a>
+                    </li>
+                    <li class="menu-left_item lv1"><a href="/user/student/myProfile"><span class="nav-text lv1"> My
+                                Profile</span><span class="sub-arrow"></span></a>
+                    </li>
+                </ul>
+            </nav>
+
+            <div class="main-content" style="margin-left: 40px">
+                <h3 style="color: #333333;
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 5px;">Programme Preference</h3>
+
+                <p style="padding-top: 5px; margin-right: 20px; color: #444444;">You may choose no more than
+                    three
+                    programme choices. Note that all programmes will be considered as equally ranked and evaluation will
+                    take place concurrently and independently for all your programme choices.
+                    You are advised to check the admission
+                    requirements of each programme to make sure that you are qualified for the programme(s)
+                    you wish to
+                    apply.
+                </p>
+
+                <form id="programmePreference" action="/saveContinue/programmePreference" method="POST">
+                    <table style="color: #333333; margin-top: 0px; padding-top: 0px; max-width: 800px; ">
+                        <tr>
+                            <td colspan="4" style="padding-left: 12px; background: #C8D8CC; margin-top: 15px; max-width: 800px; padding-top: 1px;
+                        margin-left: 0px;">Programme Choice</td>
+                        </tr>
+                        <tr>
+                            <th style="text-align: center; width: 65px;">Choice</th>
+                            <th style="text-align: center; width: 200px;">Programme Full Title</th>
+                            <th style="text-align: center; width: 200px;">Entrance Year</th>
+                            <!-- <th style="text-align: center; width: 200px;">Preferred Concentration</th> -->
+                        </tr>
+
+                        <tr>
+                            <td class="table-content" style="text-align: center;">1</td>
+                            <!-- Programme full title -->
+                            <td class="table-content"
+                                style="text-align: center; padding-left: 10px; padding-right: 10px;">
+                                <select class="form-control" id="program1" name="User[program1]"
+                                    style="height: 30px; width: 180;" required>
+                                </select>
+                            </td>
+                            <!-- Entrance year -->
+                            <td class="table-content"
+                                style="text-align: center; padding-left: 10px; padding-right: 10px;">
+                                <select class="form-control" id="entryYear1" name="User[entryYear1]" style="height: 30px;">
+                                    <option value="" selected="true">-Select-</option>
+                                    <option value="Year 1" <% if( req.session.user.entryYear1 !="" ) { %>
+                                        <%=(req.session.user.entryYear1=='Year 1' )? 'selected' :'' %>
+                                            <% } %>
+                                                >Year 1
+                                    </option>
+                                    <option value="Year 3" <% if( req.session.user.entryYear1 !="" ) { %>
+                                        <%=(req.session.user.entryYear1=='Year 3' )? 'selected' :'' %>
+                                            <% } %>
+                                                >Year 3
+                                    </option>
+                                </select>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td class="table-content" style="text-align: center;">2</td>
+                            <!-- Programme full title -->
+                            <td class="table-content"
+                                style="text-align: center; padding-left: 10px; padding-right: 10px;">
+                                <select class="form-control" id="program2" name="User[program2]"
+                                    style="height: 30px; width: 180;" onchange="setMandatory()">
+                                </select>
+                            </td>
+                            <!-- Entrance year -->
+                            <td class="table-content"
+                                style="text-align: center; padding-left: 10px; padding-right: 10px;">
+                                <select class="form-control" id="entryYear2" name="User[entryYear2]" style="height: 30px;">
+                                    <option value="" selected="true">-Select-</option>
+                                    <option value="Year 1" <% if( req.session.user.entryYear2 !="" ) { %>
+                                        <%=(req.session.user.entryYear2=='Year 1' )? 'selected' :'' %>
+                                            <% } %>
+                                                >Year 1
+                                    </option>
+                                    <option value="Year 3" <% if( req.session.user.entryYear2 !="" ) { %>
+                                        <%=(req.session.user.entryYear2=='Year 3' )? 'selected' :'' %>
+                                            <% } %>
+                                                >Year 3
+                                    </option>
+                                </select>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td class="table-content" style="text-align: center;">3</td>
+                            <!-- Programme full title -->
+                            <td style="text-align: center; padding-left: 10px; padding-right: 10px;">
+                                <select class="form-control" id="program3" name="User[program3]" style="height: 30px;"
+                                    onchange="setMandatory()">
+                                </select>
+                            </td>
+                            <!-- Entrance year -->
+                            <td class="table-content"
+                                style="text-align: center; padding-left: 10px; padding-right: 10px;">
+                                <select class="form-control" name="User[entryYear3]" id="entryYear3"
+                                    style="height: 30px; width: 180;">
+                                    <option value="" selected="true">-Select-</option>
+                                    <option value="Year 1" <% if( req.session.user.entryYear3 !="" ) { %>
+                                        <%=(req.session.user.entryYear3=='Year 1' )? 'selected' :'' %>
+                                            <% } %>
+                                                >Year 1
+                                    </option>
+                                    <option value="Year 3" <% if( req.session.user.entryYear3 !="" ) { %>
+                                        <%=(req.session.user.entryYear3=='Year 3' )? 'selected' :'' %>
+                                            <% } %>
+                                                >Year 3
+                                    </option>
+                                </select>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <div>
+                        <br>
+                        <!-- Save -->
+                        <button type="submit" id="saveBtn" class="btn btn-primary"
+                            formaction="/save/programmePreference"><b>Save</b></button>
+
+                        <!-- Save and Continue -->
+                        <button type="submit" id="saveContinue_Btn" class="btn btn-primary">
+                            <b>Save and Continue</b></button>
+                    </div>
+                </form>
+            </div>
+    </article>
+</div>
+
+<script>
+    function setMandatory() {
+
+        var x = document.getElementById("program2").value;
+
+        if (x != "") {
+
+            document.getElementById("entryYear2").required = true;
+            document.getElementById("entryYear2").setAttribute('required', '');
+        }
+
+        if (document.getElementById("default3").selected != true) {
+
+            document.getElementById("entryYear3").required = true;
+        }
+    }
+</script>
+
+<script>
+    (function () {
+        var program1Options = "<option value='' disabled selected>" + "-Select-" + "</option>";
+        var program2Options = "<option value='' disabled selected>" + "-Select-" + "</option>";
+        var program3Options = "<option value='' disabled selected>" + "-Select-" + "</option>";
+        var programmes = [
+            "Bachelor of Arts",
+            "Bachelor of Arts (Hons) in Creative and Professional Writing",
+            "Bachelor of Arts (Hons) in Chinese Language and Literature",
+            "Bachelor of Arts (Hons) in English Language and Literature",
+            "Bachelor of Arts (Hons) in Humanities",
+            "Bachelor of Arts (Hons) in Music",
+            "Bachelor of Arts (Hons) in Religion, Philosophy and Ethics",
+            "Bachelor of Arts (Hons) in Translation",
+            "Bachelor of Arts (Hons) in Creative Industries",
+            "Bachelor of Arts (Hons) in Visual Arts",
+            "Bachelor of Business Administration (Honours)",
+            "Bachelor of Business Administration (Hons)-Accounting Concentration",
+            "Bachelor of Business Administration (Hons)-Applied Economics Concentration",
+            "Bachelor of Business Administration (Hons)-Entrepreneurship Concentration",
+            "Bachelor of Business Administration (Hons)-Finance Concentration",
+            "Bachelor of Business Administration (Hons)-Human Resources Management Concentration",
+            "Bachelor of Business Administration (Hons)-Information Systems and e-Business Management Concentration",
+            "Bachelor of Business Administration (Hons) Marketing Concentration",
+            "Bachelor of Chinese Medicine and Bachelor of Science (Honours) in Biomedical Science",
+            "Bachelor of Pharmacy (Honours) in Chinese Medicine",
+            "Bachelor of Communication (Hons) in Film (Animation and Media Arts Concentration)",
+            "Bachelor of Communication (Hons) in Film (Film and Television Concentration)",
+            "Bachelor of Communication (Hons) in Journalism",
+            "Bachelor of Communication (Hons) in Journalism and Digital Media",
+            "Bachelor of Communication (Hons) in Journalism (Chinese Journalism Concentration)",
+            "Bachelor of Communication (Hons) in Journalism (Data and Media Communication Concentration)",
+            "Bachelor of Communication (Hons) in Public Relations and Advertising",
+            "Bachelor of Fine Arts (Hons) in Acting for Global Screen",
+            "Bachelor of Communication (Hons) in Journalism (International Journalism Concentration)",
+            "Bachelor of Communication (Hons) in Public Relations and Advertising (Advertising and Branding Concentration)",
+            "Bachelor of Communication (Hons) in Public Relations and Advertising (Organizational Communication Concentration)",
+            "Bachelor of Communication (Hons) in Public Relations and Advertising (Public Relations Concentration)",
+            "Bachelor of Science (Honours)",
+            "Bachelor of Science (Hons) in Analytical and Testing Sciences",
+            "Bachelor of Science (Hons) in Applied Biology-Biotechnology Concentration",
+            "Bachelor of Science (Hons) in Applied Biology-Environmental Science Concentration",
+            "Bachelor of Science (Hons) in Business Computing and Data Analytics",
+            "Bachelor of Science (Hons) in Bioresource and Agricultural Science",
+            "Bachelor of Science (Hons) in Chemistry",
+            "Bachelor of Science (Hons) in Computer Science-Computing and Software Technologies Concentration",
+            "Bachelor of Science (Hons) in Computer Science-Data and Media Communication Concentration",
+            "Bachelor of Science (Hons) in Computer Science-Information Systems and Analytics Concentration",
+            "Bachelor of Science (Hons) in Mathematics and Statistics",
+            "Bachelor of Science (Hons) in Physics and Green Energy",
+            "Bachelor of Arts (Hons) in Physical Education and Recreation Management",
+            "Bachelor of Arts (Hons)/ Bachelor of Social Sciences (Hons) (Geography/ Government and International Studies/ History/ Sociology)",
+            "Bachelor of Social Work (Hons)",
+            "Bachelor of Arts (Hons) in History",
+            "Bachelor of Social Sciences (Hons) in China Studies-Economics Concentration",
+            "Bachelor of Social Sciences (Hons) in European Studies-French Stream",
+            "Bachelor of Social Sciences (Hons) in European Studies-German Stream",
+            "Bachelor of Social Sciences (Hons) in Global and China Studies",
+            "Bachelor of Social Sciences (Hons) in Geography",
+            "Bachelor of Social Sciences (Hons) in Government and International Studies",
+            "Bachelor of Social Sciences (Hons) in Sociology"];
+
+        for (i = 0; i < programmes.length; i = i + 1) {
+            program1Options += "<option value='" + programmes[i] + "' id='" + programmes[i] + "1'>" + programmes[i] + "</option>";
+        }
+
+        for (i = 0; i < programmes.length; i = i + 1) {
+            program2Options += "<option value='" + programmes[i] + "' id='" + programmes[i] + "2'>" + programmes[i] + "</option>";
+        }
+
+        for (i = 0; i < programmes.length; i = i + 1) {
+            program3Options += "<option value='" + programmes[i] + "' id='" + programmes[i] + "3'>" + programmes[i] + "</option>";
+        }
+
+        document.getElementById("program1").innerHTML = program1Options;
+        document.getElementById("program2").innerHTML = program2Options;
+        document.getElementById("program3").innerHTML = program3Options;
+
+        '<% if (req.session.user.program1 != "") { %>'
+        var selectedProgram1 = '<%= req.session.user.program1 %>';
+        '<% } %>'
+
+        '<% if (req.session.user.program2 != "") { %>'
+        var selectedProgram2 = '<%= req.session.user.program2 %>';
+        '<% } %>'
+
+        '<% if (req.session.user.program3 != "") { %>'
+        var selectedProgram3 = '<%= req.session.user.program3 %>';
+        '<% } %>'
+
+        for (i = 0; i < programmes.length; i = i + 1) {
+
+            if (selectedProgram1 == programmes[i]) {
+
+                document.getElementById(programmes[i] + '1').setAttribute('selected', 'selected');
+            }
+        }
+
+        for (i = 0; i < programmes.length; i = i + 1) {
+
+            if (selectedProgram2 == programmes[i]) {
+
+                document.getElementById(programmes[i] + '2').setAttribute('selected', 'selected');
+            }
+        }
+
+        for (i = 0; i < programmes.length; i = i + 1) {
+
+            if (selectedProgram3 == programmes[i]) {
+
+                document.getElementById(programmes[i] + '3').setAttribute('selected', 'selected');
+            }
+        }
+    })();
+</script>
+
+<script>
+    (function () {
+        document.getElementById("programmePreference").addEventListener('submit', function (event) {
+
+            if (document.getElementById("program2").value == document.getElementById("program1").value && document.getElementById("entryYear2").value == document.getElementById("entryYear1").value) {
+                event.preventDefault();
+                alert("Save unsuccess! You cannot have identical programme choices.");
+
+            } else if (document.getElementById("program2").value == document.getElementById("program3").value && document.getElementById("entryYear2").value == document.getElementById("entryYear3").value) {
+                if (document.getElementById("program2").value != "") {
+                    event.preventDefault();
+                    alert("Save unsuccess! You cannot have identical programme choices.");
+                }
+
+            } else if (document.getElementById("program3").value == document.getElementById("program1").value && document.getElementById("entryYear3").value == document.getElementById("entryYear1").value) {
+                if (document.getElementById("program3").value != "") {
+                    event.preventDefault();
+                    alert("Save unsuccess! You cannot have identical programme choices.");
+                }
+            }
+        }, false);
+    })();
+</script>
+
+<script>
+    function checkValidOption() {
+        var x = document.getElementById("program3");
+        var y = document.getElementById("entryYear3");
+
+        var yearOptions = "<option disabled selected>" + "-Select-" + "</option>";
+        var year1and3Entry = ["Year 1", "Year 3"]
+
+        if (document.getElementById("BACHELOR OF ARTS").selected === true
+            || document.getElementById("BACHELOR OF SCIENCE").selected === true
+            || document.getElementById("BBA").selected === true
+            || document.getElementById("BCM & BSC BIOMED").selected === true
+            || document.getElementById("BPHARM CHI MED").selected === true
+            || document.getElementById("BCOMM JOUR").selected === true
+            || document.getElementById("BCOMM JOUR & DM").selected === true
+            || document.getElementById("BCOMM PRA").selected === true
+            || document.getElementById("BFA AGS").selected === true
+            || document.getElementById("BA/BSSC").selected === true
+            || document.getElementById("BSSC EURO STD (FRENCH)").selected === true
+            || document.getElementById("BSSC EURO STD (GERMAN)").selected === true
+            || document.getElementById("BSSC GCS").selected === true
+        ) {
+
+            yearOptions += "<option value='Year 1' id='Year 1'>Year 1</option>";
+            y.innerHTML = yearOptions;
+
+        }
+        else if (document.getElementById("BBA (AP ECON)").selected === true ||
+            document.getElementById("BBA (ENTREP)").selected === true ||
+            document.getElementById("BBA (FINANCE)").selected === true ||
+            document.getElementById("BBA (HUM RES MGNT)").selected === true ||
+            document.getElementById("BBA (ISEM)").selected === true ||
+            document.getElementById("BBA (MARKETING)").selected === true ||
+            document.getElementById("BSSC CHINA STUDIES ECONOMICS").selected === true
+
+            || document.getElementById("BCOMM JOUR CHI").selected === true
+            || document.getElementById("BCOMM JOUR DMC").selected === true
+            || document.getElementById("BCOMM JOUR INTL").selected === true
+            || document.getElementById("BCOMM PRA AD & BRAND").selected === true
+            || document.getElementById("BCOMM PRA ORGC").selected === true
+            || document.getElementById("BCOMM PRA PR").selected === true
+
+            || document.getElementById("BSC ANALY TEST SCI").selected === true
+            || document.getElementById("BSC AP BIOL BIOTECH STD").selected === true
+            || document.getElementById("BSC AP BIOL ENVIRO SCI").selected === true
+            || document.getElementById("BSC BIO & AS").selected === true
+            || document.getElementById("BSC CHEM").selected === true
+            || document.getElementById("BSC COMPUTER SCI CST").selected === true
+            || document.getElementById("BSC COMPUTER SCI DMC").selected === true
+            || document.getElementById("BSC COMPUTER SCI ISA").selected === true
+            || document.getElementById("BSC MATH & STAT").selected === true
+            || document.getElementById("BSC PHYS & GENER").selected === true
+
+            || document.getElementById("BA HIST").selected === true
+            || document.getElementById("BA PE & REC MGNT").selected === true
+            || document.getElementById("BSOWK").selected === true
+            || document.getElementById("BSSC GEOG").selected === true
+            || document.getElementById("BSSC GIS").selected === true
+            || document.getElementById("BSSC SOC").selected === true
+        ) {
+
+            yearOptions += "<option value='Year 3' id='Year 3'>Year 3</option>";
+            y.innerHTML = yearOptions;
+
+        } else {
+
+            for (i = 0; i < year1and3Entry.length; i = i + 1) {
+                yearOptions += "<option value='" + year1and3Entry[i] + "' id='" + year1and3Entry[i] + "'>" + year1and3Entry[i] + "</option>";
+            }
+            y.innerHTML = yearOptions;
+        }
+
+        entryYearOption(yearOptions);
+    }
+
+    function entryYearOption(year) {
+
+        '<% if (req.session.programmePreferenceData != "" && req.session.user.entryYear3 != "") { %>'
+        var selectedYear = '<%= req.session.user.entryYear3 %>';
+        '<% } %>'
+
+        for (i = 0; i < yearOptions.length; i = i + 1) {
+
+            if (selectedYear == yearOptions[i]) {
+
+                document.getElementById(yearOptions[i]).setAttribute('selected', 'selected');
+            }
+        }
+
+        if (selectedYear == "Year 1") {
+
+            document.getElementById("Year 1").setAttribute('selected', 'selected');
+
+        } else if (selectedYear == "Year 3") {
+
+            document.getElementById("Year 3").setAttribute('selected', 'selected');
+        }
+
+    }
+</script>

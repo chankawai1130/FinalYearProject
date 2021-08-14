@@ -1,0 +1,174 @@
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+
+<style type="text/css">
+    .topnav {
+        overflow: hidden;
+        background-color: #F5F5F5;
+        width: 1140px;
+        justify-content: center;
+        margin: 0 auto;
+
+
+        border-radius: 0px;
+        position: static;
+    }
+
+    .topnav a {
+        float: left;
+        color: #000;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+        font-size: 17px;
+    }
+
+    .topnav a:hover:not(.active) {
+        background-color: rgb(218, 218, 218);
+        color: #000;
+    }
+
+    .topnav a:hover,
+    .topnav a:focus {
+        text-decoration: underline;
+    }
+
+    .topnav a.active {
+        /* background-color:#697174; */
+        /* background-color:#717A7D; */
+        background-color: #8AA0AB;
+        color: white;
+    }
+
+
+    body {
+        background: #e0ded6;
+        font-family: "Helvetica Neue", Helvetica, Arial;
+        padding-top: 20px;
+    }
+
+    #saveBtn {
+        background: -moz-linear-gradient(top,
+                #D8D8D8 0%,
+                #C9C9C9);
+        background: -webkit-gradient(linear, left top, left bottom,
+                from(#D8D8D8),
+                to(#C9C9C9));
+        /* background: #D8D8D8; */
+        color: #000;
+        border: 2px solid #D8D8D8;
+    }
+
+    #saveBtn:hover {
+        background: -moz-linear-gradient(top,
+                #C9C9C9 0%,
+                #D8D8D8);
+        background: -webkit-gradient(linear, left top, left bottom,
+                from(#C9C9C9),
+                to(#D8D8D8));
+    }
+
+    .form-inputs {
+        -webkit-tap-highlight-color: transparent;
+        user-select: none;
+        box-sizing: border-box;
+        font: inherit;
+        margin: 0;
+        font-family: inherit;
+        font-size: 14px;
+        line-height: 1.42857143;
+        display: block;
+        color: #555;
+        width: 100%;
+        padding: 6px 10px;
+        background-color: #fff;
+        background-image: none;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+        transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+        min-height: 40px;
+        height: 40px;
+        box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+        padding-right: 34px;
+        border-color: #ccc;
+    }
+
+    input::-webkit-input-placeholder {
+        color: #b5b5b5;
+    }
+
+    input:-moz-placeholder {
+        color: #b5b5b5;
+    }
+</style>
+
+
+<div style="text-align:right">
+    <% if (req.session.role !=undefined) {%>
+
+        <a style="color: black; padding: 5px 200px 25px 0px;" href="/user/logout">(Logout)</a>
+
+        <%}%>
+</div>
+
+<div class="topnav">
+    <a href="/user/admin/applications/all/search">Applications</a>
+    <a class="active" href="/user/admin/statistics">Email Content</a>
+    <a href="/user/admin/profile">Profile</a>
+</div>
+<br>
+<div class="container" style="width: 1140px;  justify-content: center; 
+    margin: 0 auto;  padding: 30px 15px 25px; background: #fff;
+    border-radius: 0px; position: static;">
+
+    <div style="display: flex;">
+
+        <div class="main-content" style="margin-left: 40px;">
+
+            <h3 style="color: #333333;
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 5px;">Email Content</h3>
+
+            <% emails.forEach(function(email) { %>
+                <form action="/user/admin/statistics/update/<%=email.id%>" method="POST">
+                    <!-- Application Submission Acknowledgement -->
+                    <div class="container"
+                        style="background: #C8D8CC; margin: 15px 0px 3px; width: 1020px; height: 30px; padding-top: 3px; padding-bottom: 3px;">
+                        <p style="font-size: 18px;"><%= email.title %></p>
+                    </div>
+
+                    <div class="row" style="width: 950px;">
+                        <div id="div01" class="form-group col-xl-12 col-12">
+                            <div class="row" style="margin-left: 0px;">
+                                <label class="col-form-label"><span>Subject : &nbsp;</span></label>
+                                <input type="text" class="form-control input-lg"
+                                    name="Email[emailtitle]" style="width: 800px; margin-left: 4px;" value="<%=email.emailtitle%>"
+                                    required>
+                                <br>
+                                <br>
+                                <label class="col-form-label"><span>Content : &nbsp;</span></label>
+                                <textarea rows="4" cols="50" class="form-control input-lg"
+                                    name="Email[emailcontent]" style="width: 800px" required><%=email.emailcontent%></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <button type="submit" id="saveBtn" class="btn btn-primary"><b>Save</b></button>
+                    </div>
+                </form>
+                <% }); %>
+
+                    
+
+        </div>
+    </div>
+</div>

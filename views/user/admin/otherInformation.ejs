@@ -1,0 +1,548 @@
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<style type="text/css">
+    .topnav {
+        overflow: hidden;
+        background-color: #f0f0f0;
+        width: 100%;
+        justify-content: center;
+        margin: 0 auto;
+        padding-left: 110px;
+        border-radius: 0px;
+        position: static;
+    }
+
+    .topnav a {
+        float: left;
+        color: #000;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+        font-size: 17px;
+    }
+
+    .topnav a:hover:not(.active) {
+        background-color: rgb(218, 218, 218);
+        color: #000;
+    }
+
+    .topnav a:hover,
+    .topnav a:focus {
+        text-decoration: underline;
+    }
+
+    .topnav a.active {
+        /* background-color:#697174; */
+        /* background-color:#717A7D; */
+        background-color: #8AA0AB;
+        color: white;
+    }
+
+    body {
+        background: #e0ded6;
+        font-family: "Helvetica Neue", Helvetica, Arial;
+    }
+
+    input::-webkit-input-placeholder {
+        color: #b5b5b5;
+    }
+
+    input:-moz-placeholder {
+        color: #b5b5b5;
+    }
+
+    .clearfix::after {
+        content: "";
+        clear: both;
+        display: table;
+    }
+
+    #backToDataTable:hover {
+        opacity: 1;
+    }
+
+    #backToDataTable {
+        background-color: #FEFAFF;
+        color: #666666;
+        border-radius: 2px;
+        width: 175px;
+        margin-bottom: 10px;
+        margin-right: 5px;
+        font-size: 14px;
+        padding: 4px 9px 4px;
+        opacity: 0.9;
+    }
+
+    .main-nav-ul ul {
+        display: none;
+    }
+
+    .main-nav-ul li:hover ul {
+        display: block;
+    }
+
+    .sub-arrow:after {
+        content: '\203A';
+        float: right;
+        margin-right: 20px;
+    }
+
+    ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        width: 250px;
+        background-color: #f8f8f8;
+    }
+
+    li a {
+        display: block;
+        color: #666666;
+        padding: 8px 16px;
+        text-decoration: none;
+    }
+
+    li a.active {
+        background-color: #908B85;
+        color: white;
+        opacity: 0.7;
+    }
+
+    li a:hover:not(.active) {
+        background-color: rgb(218, 218, 218);
+        color: #000;
+    }
+
+    table,
+    th,
+    td {
+        border: 2px solid;
+        border-collapse: collapse;
+        border-color: #e4dfdf;
+    }
+
+    th {
+        padding-top: 8px;
+        background-color: #EFEFEF;
+        text-align: center;
+        width: 300px;
+        font-size: 14px;
+    }
+
+    .table-content {
+        padding: 4px 10px;
+        text-align: center;
+        width: 500px;
+    }
+
+    #prevBtn {
+        background: -moz-linear-gradient(top,
+                #D8D8D8 0%,
+                #C9C9C9);
+        background: -webkit-gradient(linear, left top, left bottom,
+                from(#D8D8D8),
+                to(#C9C9C9));
+        /* background: #D8D8D8; */
+        color: #000;
+        border: 2px solid #D8D8D8;
+    }
+
+    #prevBtn:hover {
+        background: -moz-linear-gradient(top,
+                #C9C9C9 0%,
+                #D8D8D8);
+        background: -webkit-gradient(linear, left top, left bottom,
+                from(#C9C9C9),
+                to(#D8D8D8));
+    }
+
+</style>
+
+<div class="wrapper" style="width: 100%;">
+    <div class="container-fluid no-gutters"
+        style="position: static; text-align: right; margin: 8px 0px; font-size: 14px;">
+
+        <% if (req.session.role !=undefined) {%>
+
+            Logged in as <b>
+                <%= req.session.user.Surname%>
+                    <%= req.session.user.GivenName%>
+            </b>&nbsp; |&nbsp;
+
+            <a style="color: black; padding: 5px 50px 25px 0px; color: #71838C" href="/user/logout">Logout</a>
+
+            <%}%>
+    </div>
+</div>
+
+<div class="wrapper" style="width: 100%; margin: 0 auto;">
+    <div class="container-fluid" style="justify-content: center; 
+    padding: 27px 15px 12px 115px; background: #fff;
+    border-radius: 0px; position: static;">
+        <h2 style="font-size: 40px;
+            font-weight: bold; color:#6A635A">HKBU Student Admission System</h2>
+    </div>
+</div>
+
+<div class="topnav">
+    <a class="active" href="/user/admin/applications/all/search">Applications</a>
+    <a href="/user/admin/statistics">Statistics</a>
+    <a href="/user/admin/profile">Profile</a>
+</div>
+
+<div class="wrapper" style="width: 100%; margin: 0 auto;">
+    <div class="container-fluid"
+        style="justify-content: center; height: 35px; font-size: 17px;
+background: #fff; border-radius: 0px; position: static; color: #888888; padding-top: 6px; padding-bottom: 5px; padding-left: 125px;">
+        <i class="fa fa-home" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;<i class="fa fa-angle-right"
+            aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;<span>Applications</span>&nbsp;&nbsp;
+    </div>
+</div>
+<br>
+
+<div class="wrapper" style="width: 1310px; margin: 0 auto;">
+    <div class="container-fluid" style="justify-content: center; 
+    padding: 30px 15px 25px; background: #fff;
+    border-radius: 0px; position: static;">
+
+        <div style="display: flex;">
+
+            <div class="main-content" style="margin-left: 40px;">
+
+                <div class="row" style="margin-left: 0px; clear: both">
+                    <!-- send email button -->
+                    <a id="redirect-link" style="color: #333333;" href="/user/admin/applications/all/search">
+                        <button class="form-control btn-lg" id="backToDataTable">
+                            << See all applications </button>
+                    </a>
+                </div>
+
+                <br>
+                <article class="page">
+                    <div style="display: flex;">
+
+                        <nav class="main-nav">
+                            <ul class="main-nav-ul">
+                                <li class="menu-left_item lv1"><a href="/user/admin/applications/details/<%= application.id%>"><span class="sub-arrow">Personal
+                                            Particulars</span></a></li>
+
+                                <li class="menu-left_item lv1"><a href="/user/admin/applications/details/academicProfile/<%= application.id%>">Academic Profile<span
+                                            class="sub-arrow"></span></a>
+                                </li>
+                                <li class="menu-left_item lv1"><a href="/user/admin/applications/details/academicQualification/<%= application.id%>"><span class="sub-arrow">Academic
+                                            Qualification</span></a>
+                                </li>
+                                <li class="menu-left_item lv1"><a href="/user/admin/applications/details/programmePreference/<%= application.id%>"><span class="sub-arrow">Programme
+                                            Preference</span></a>
+                                </li>
+                                <li class="menu-left_item lv1"><a href="/user/admin/applications/details/academicReference/<%= application.id%>"><span class="sub-arrow">Academic Reference</span></a>
+                                </li>
+                                <li class="menu-left_item lv1"><a class="active" href="/user/admin/applications/details/otherInformation/<%= application.id%>"><span class="sub-arrow">Other
+                                            Information</span></a>
+                                </li>
+                            </ul>
+                        </nav>
+
+                        <div id="OtherInformation">
+
+                            <div class="main-content" style="margin-left: 40px">
+                                <h3 style="color: #666666;
+                                        font-size: 24px;
+                                        font-weight: bold;
+                                        margin-bottom: 5px;">Other Information</h3>
+            
+                                <div class="container" style="background: #C8D8CC; margin-top: 15px; width: 800px; padding-top: 1px;
+                            margin-left: 0px ">
+                                    <p>Personal Statement</p>
+                                </div>
+            
+                                <div style="margin: 10px 0;">
+                                    <p style=" width: 800px; color: #444444;">Submission of personal statement is OPTIONAL, though
+                                        some
+                                        study programmes may make reference to
+                                        the personal statement during the selection process.
+                                        Please write no more than 600 words either in English or Chinese, such as reasons for
+                                        application, career aspiration, personal strengths, hobbies and interests, voluntary
+                                        services,
+                                        etc. If space provided is not enough, please upload your personal statement via the
+                                        "Supporting
+                                        Documents" section.</p>
+            
+                                    <div class="row">
+                                        <div id="div01" class="form-group col-xl-12 col-12">
+                                            <textarea rows="5" cols="50" maxlength="600" class="form-control input-lg"
+                                                name="OtherInformation[personalStatement]"
+                                                style="width: 800px; display:inline-block; vertical-align:left;"><% if(application.otherInformationData !=null && application.otherInformationData.OtherInformation.personalStatement !=null) 
+                                                { %><%=application.otherInformationData.OtherInformation.personalStatement %><% } %></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+            
+                                <div class="container" style="background: #C8D8CC; margin-top: 15px; width: 800px; padding-top: 1px;
+                                  margin-left: 0px;">
+                                    <p>Working Experience</p>
+                                </div>
+            
+                                <div class="row" style="max-width: 810px;">
+                                    <table style="color: #333333; margin-left: 20px; padding-top: 0px; max-width: 800px; ">
+                                        <tr>
+                                            <th>Name of Organization</th>
+                                            <td class=" table-content">
+                                                <input type="text" class="form-control" name="OtherInformation[organization1]"
+                                                    style="height: 21px; padding: 4px;" <% if(application.otherInformationData
+                                                    !=null && application.otherInformationData.OtherInformation.organization1
+                                                    !=null) { %>
+                                                value="<%=application.otherInformationData.OtherInformation.organization1 %>" <% }
+                                                        %>
+                                                        />
+                                            </td>
+                                        </tr>
+            
+                                        <tr>
+                                            <th>Position Held</th>
+                                            <td class="table-content">
+                                                <input type="text" class="form-control" name="OtherInformation[position1]"
+                                                    style="height: 21px; padding: 4px;" <% if(application.otherInformationData
+                                                    !=null && application.otherInformationData.OtherInformation.position1 !=null) {
+                                                    %>
+                                                value="<%=application.otherInformationData.OtherInformation.position1 %>" <% } %>
+                                                        />
+                                            </td>
+                                        </tr>
+            
+                                        <tr>
+                                            <th>Nature of Work</th>
+                                            <td class="table-content">
+                                                <select class="form-control" id="workNature1" name="OtherInformation[workNature1]"
+                                                    style="height: 20px; padding: 0px; width: 325px;">
+                                                </select>
+                                            </td>
+            
+                                        </tr>
+            
+                                        <tr>
+                                            <th>Work Mode</th>
+                                            <td class="table-content">
+                                                <div class="select_join">
+                                                    <select class="form-control" name="OtherInformation[workMode1]"
+                                                        style="height: 20px; padding: 0px; width: 200px;">
+                                                        <option value="" selected="true" disabled="disabled">-Select-</option>
+                                                        <option value="full-time" <% if(application.otherInformationData !=null &&
+                                                            application.otherInformationData.OtherInformation.workMode1 !=null) { %>
+                                                            <%=(application.otherInformationData.OtherInformation.workMode1=='full-time'
+                                                                )? 'selected' :'' %>
+                                                                <% } %>
+                                                                    >Full-time
+                                                        </option>
+                                                        <option value="part-time" <% if(application.otherInformationData !=null &&
+                                                            application.otherInformationData.OtherInformation.workMode1 !=null) { %>
+                                                            <%=(application.otherInformationData.OtherInformation.workMode1=='part-time'
+                                                                )? 'selected' :'' %>
+                                                                <% } %>
+                                                                    >Part-time
+                                                        </option>
+                                                        <option value="voluntary" <% if(application.otherInformationData !=null &&
+                                                            application.otherInformationData.OtherInformation.workMode1 !=null) { %>
+                                                            <%=(application.otherInformationData.OtherInformation.workMode1=='voluntary'
+                                                                )? 'selected' :'' %>
+                                                                <% } %>
+                                                                    >Voluntary
+                                                        </option>
+                                                    </select>
+                                                </div>
+                                            </td>
+                                        </tr>
+            
+                                        <tr>
+                                            <th>Period From</th>
+                                            <td class="table-content">
+                                                <div class="row" style="margin-left: 0px ;">
+                                                    <select class="form-control" id="periodFromMonth1"
+                                                        name="OtherInformation[periodFromMonth1]"
+                                                        style="height: 20px; padding: 0px; width: 105px;">
+                                                    </select>
+            
+                                                    <label class="col-form-label"
+                                                        style="padding: 0px; margin: 0px;"><span>&nbsp;/&nbsp;</span></label>
+            
+                                                    <select class="form-control" id="periodFromYear1"
+                                                        name="OtherInformation[periodFromYear1]"
+                                                        style="height: 20px; padding: 0px; width: 105px;">
+                                                    </select>
+                                                </div>
+                                            </td>
+                                        </tr>
+            
+                                        <tr>
+                                            <th>Period To</th>
+                                            <td class="table-content">
+                                                <div class="row" style="margin-left: 0px ;">
+                                                    <select class="form-control" id="periodToMonth1"
+                                                        name="OtherInformation[periodToMonth1]"
+                                                        style="height: 20px; padding: 0px; width: 105px;">
+                                                    </select>
+            
+                                                    <label class="col-form-label"
+                                                        style="padding: 0px; margin: 0px;"><span>&nbsp;/&nbsp;</span></label>
+            
+                                                    <select class="form-control" id="periodToYear1"
+                                                        name="OtherInformation[periodToYear1]"
+                                                        style="height: 20px; padding: 0px; width: 105px;">
+                                                    </select>
+                                                </div>
+                                            </td>
+                                        </tr>
+            
+                                        <tr>
+                                            <th>Duties</th>
+                                            <td class="table-content">
+                                                <textarea rows="2" cols="50" maxlength="100" class="form-control input-lg"
+                                                    name="OtherInformation[duties1]"><% if(application.otherInformationData !=null
+                                                    && application.otherInformationData.OtherInformation.duties1 !=null) 
+                                                    { %><%=application.otherInformationData.OtherInformation.duties1 %><% } %></textarea>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+            
+                                <div>
+                                    <br>
+                                    <!-- Previous -->
+                                    <a
+                                        href="/user/admin/applications/details/academicReference/<%= application.id%>">
+                                    <button id="prevBtn" class="btn btn-primary">
+                                        <b><< Previous</b></button></a>
+                                </div>
+                            </div>
+                        </div>
+                </article>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    (function () {
+        //set month options
+        var monthOptions1 = "<option selected value=''>" + "-Month-" + "</option>";
+        var monthOptions2 = "<option selected value=''>" + "-Month-" + "</option>";
+
+        var month = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+
+        for (i = 0; i < month.length; i = i + 1) {
+            monthOptions1 += "<option value='" + month[i] + "' id='" + month[i] + "1'>" + month[i] + "</option>";
+        }
+
+        for (i = 0; i < month.length; i = i + 1) {
+            monthOptions2 += "<option value='" + month[i] + "' id='" + month[i] + "2'>" + month[i] + "</option>";
+        }
+
+        document.getElementById("periodFromMonth1").innerHTML = monthOptions1;
+        document.getElementById("periodToMonth1").innerHTML = monthOptions2;
+
+        '<% if (application.otherInformationData != null && application.otherInformationData.OtherInformation.periodFromMonth1 != null) { %>'
+        var selectedPeriodFromMonth = '<%= application.otherInformationData.OtherInformation.periodFromMonth1 %>';
+        '<% } %>'
+
+        '<% if (application.otherInformationData != null && application.otherInformationData.OtherInformation.periodToMonth1 != null) { %>'
+        var selectedPeriodToMonth = '<%= application.otherInformationData.OtherInformation.periodToMonth1 %>';
+        '<% } %>'
+
+        for (i = 0; i < month.length; i = i + 1) {
+            if (selectedPeriodFromMonth == month[i]) {
+
+                document.getElementById(month[i] + '1').setAttribute('selected', 'selected');
+            }
+        }
+
+        for (i = 0; i < month.length; i = i + 1) {
+            if (selectedPeriodToMonth == month[i]) {
+
+                document.getElementById(month[i] + '2').setAttribute('selected', 'selected');
+            }
+        }
+    })();
+</script>
+
+<script>
+    (function () {
+        //set year options
+        var todayYear = new Date().getFullYear();
+        var start = todayYear;
+        var end = 1950;
+        var yearOptions1 = "<option selected value=''>" + "-Year-" + "</option>";
+        var yearOptions2 = "<option selected value=''>" + "-Year-" + "</option>";
+
+        for (var year = start; year >= end; year--) {
+            yearOptions1 += "<option id='" + year + "1'>" + year + "</option>";
+        }
+
+        for (var year = start; year >= end; year--) {
+            yearOptions2 += "<option id='" + year + "2'>" + year + "</option>";
+        }
+
+        document.getElementById("periodFromYear1").innerHTML = yearOptions1;
+        document.getElementById("periodToYear1").innerHTML = yearOptions2;
+
+        '<% if (application.otherInformationData != null && application.otherInformationData.OtherInformation.periodFromYear1 != null) { %>'
+        var selectedPeriodFromYear = '<%= application.otherInformationData.OtherInformation.periodFromYear1 %>';
+        '<% } %>'
+
+        '<% if (application.otherInformationData != null && application.otherInformationData.OtherInformation.periodToYear1 != null) { %>'
+        var selectedPeriodToYear = '<%= application.otherInformationData.OtherInformation.periodToYear1 %>';
+        '<% } %>'
+
+        for (var year = start; year >= end; year--) {
+            if (selectedPeriodFromYear == year) {
+
+                document.getElementById(year + '1').setAttribute('selected', 'selected');
+            }
+        }
+
+        for (var year = start; year >= end; year--) {
+            if (selectedPeriodToYear == year) {
+
+                document.getElementById(year + '2').setAttribute('selected', 'selected');
+            }
+        }
+    })();
+</script>
+
+<script>
+    (function () {
+        //set nature of work options
+        var workNatureOptions = "<option disabled selected>" + "-Select-" + "</option>";
+
+        var workNature = ['Accounting', 'Admin & HR', 'Banking / Finance', 'Beauty Care / Health', 'Building & Construction',
+            'Design', 'E-commerce', 'Education', 'Engineering', 'Hospitality / Food & Beverage', 'Information Technology (IT)', 'Insurance',
+            'Management', 'Manufacturing', 'Marketing / Public Relations', 'Medical Services', 'Mechanising & Purchasing', 'Profession Services',
+            'Property / Real Estate', 'Public / Civil', 'Sales, Customer Service & Business', 'Sciences, Lab, Research & Development',
+            'Transportation & Logistics', 'Others'];
+
+        for (i = 0; i < workNature.length; i = i + 1) {
+            workNatureOptions += "<option value='" + workNature[i] + "' id='" + workNature[i] + "'>" + workNature[i] + "</option>";
+        }
+
+        document.getElementById("workNature1").innerHTML = workNatureOptions;
+
+        '<% if (application.otherInformationData != null && application.otherInformationData.OtherInformation.workNature1 != null) { %>'
+        var selectedWorkNature = '<%= application.otherInformationData.OtherInformation.workNature1 %>';
+        '<% } %>'
+
+        for (i = 0; i < workNature.length; i = i + 1) {
+            if (selectedWorkNature == workNature[i]) {
+
+                document.getElementById(workNature[i]).setAttribute('selected', 'selected');
+            }
+        }
+    })();
+</script>

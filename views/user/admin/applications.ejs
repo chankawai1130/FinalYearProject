@@ -1,0 +1,1645 @@
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js">
+</script>
+
+<script type="text/javascript">
+    function showHideRow(row) {
+        $("#" + row).toggle();
+    }
+</script>
+
+<style type="text/css">
+    .topnav {
+        overflow: hidden;
+        background-color: #f0f0f0;
+        width: 100%;
+        justify-content: center;
+        margin: 0 auto;
+        padding-left: 110px;
+        border-radius: 0px;
+        position: static;
+    }
+
+    .topnav a {
+        float: left;
+        color: #000;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+        font-size: 17px;
+    }
+
+    .topnav a:hover:not(.topnav-active) {
+        background-color: rgb(218, 218, 218);
+        color: #000;
+    }
+
+    .topnav a:hover,
+    .topnav a:focus {
+        text-decoration: underline;
+    }
+
+    .topnav a.topnav-active {
+        /* background-color:#697174; */
+        /* background-color:#717A7D; */
+        background-color: #8AA0AB;
+        color: white;
+    }
+
+    body {
+        background: #e0ded6;
+        font-family: "Helvetica Neue", Helvetica, Arial;
+    }
+
+    input::-webkit-input-placeholder {
+        color: #b5b5b5;
+    }
+
+    input:-moz-placeholder {
+        color: #b5b5b5;
+    }
+
+    table {
+        border-collapse: collapse;
+        /* border:1px solid #f1f1f1; */
+        width: 100%;
+    }
+
+    th,
+    td {
+        text-align: left;
+        padding: 8px;
+    }
+
+    /* tr:nth-child(even) {
+        background-color: #FAFAFA;
+    } */
+
+    .modalBtn {
+        background-color: #4CAF50;
+        color: white;
+        padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        cursor: pointer;
+        width: 100%;
+        opacity: 0.9;
+    }
+
+    .modalBtn:hover {
+        opacity: 1;
+    }
+
+    .addBtn {
+        /* background: #A3B82B; */
+        background: #C4C491;
+        width: 25%;
+        margin-left: 325px;
+        padding: 10px 0px;
+        border-radius: 2px;
+    }
+
+    .addBtn:focus {
+        background: #C4C491;
+    }
+
+    .sendBtn {
+        /* background: #A3B82B; */
+        background: #C4C491;
+        width: 13%;
+        margin-left: 113px;
+        padding: 6px 0px;
+        border-radius: 2px;
+    }
+
+    .sendBtn:focus {
+        background: #C4C491;
+    }
+
+    .confirmbtn:focus,
+    .deletebtn:focus {
+        color: black;
+    }
+
+    .cancelbtn,
+    .deletebtn,
+    .confirmbtn {
+        float: left;
+        width: 50%;
+    }
+
+    .cancelbtn {
+        background-color: #ccc;
+        color: black;
+    }
+
+    .deletebtn {
+        background-color: #F16C6D;
+    }
+
+    .confirmbtn {
+        background-color: #869A85;
+    }
+
+    .modal-container {
+        padding: 16px;
+        text-align: center;
+    }
+
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 3;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(8, 8, 8, 0.5);
+        padding-top: 50px;
+    }
+
+    .modal-content {
+        background-color: #fefefe;
+        margin: 5% auto 15% auto;
+        border: 1px solid #888;
+        width: 80%;
+        font-family: "Helvetica Neue", Helvetica, Arial;
+    }
+
+    .interviewModal-content,
+    .emailModal-content {
+        background-color: #fefefe;
+        margin: 5% auto 15% auto;
+        border: 1px solid #888;
+        width: 64%;
+        font-family: "Helvetica Neue", Helvetica, Arial;
+    }
+
+    .clearfix::after {
+        content: "";
+        clear: both;
+        display: table;
+    }
+
+    @media screen and (max-width: 300px) {
+
+        .cancelbtn,
+        .deletebtn .confirmbtn {
+            width: 100%;
+        }
+    }
+
+    .fa-calendar {
+        /* color: #C0C0C0; */
+        color: #7F7F7F;
+    }
+
+    .fa-calendar:hover {
+        color: #666666;
+    }
+
+    .separator {
+        content: '';
+        display: inline-block;
+        background: #e0dfdf;
+        margin-left: 16px;
+        margin-right: 4px;
+        height: 38px;
+
+        vertical-align: top;
+    }
+
+    #selectDateBtn,
+    #dropDownBtn {
+        display: inline;
+        width: 20px;
+        height: 20px;
+        border: 0px;
+        padding: 0px;
+        margin-right: 4px;
+        outline: none !important;
+        box-shadow: none !important;
+    }
+
+    #selectDateBtn {
+        background: #FFFFFF;
+    }
+
+    #dropDownBtn {
+        background-color: transparent;
+    }
+
+    .collapsible:after {
+        content: '\203A';
+        font-size: 21px;
+        float: right;
+        color: #888888;
+        margin-right: 20px;
+    }
+
+    .active:after {
+        content: '\203A';
+        transform: rotate(90deg);
+        -webkit-transform: rotate(90deg);
+        -moz-transform: rotate(90deg);
+    }
+
+    #selectDateBtn:hover,
+    #selectDateBtn:focus {
+        border: 0px;
+    }
+
+    #interviewDate {
+        background: #FFFFFF;
+        width: 206px;
+        border-radius: 4px;
+        border: 1px solid #e0dfdf;
+        margin-bottom: 20px;
+        padding-top: 0px;
+        margin-left: 0px;
+        padding-right: 0px;
+    }
+
+    #searchField {
+        margin-right: 5px;
+        border-radius: 2px;
+        width: 270px;
+    }
+
+    #searchBtn {
+        background-color: #FEFAFF;
+        color: #666666;
+        border-radius: 2px;
+        width: 70px;
+        font-size: 17px;
+        padding: 0px !important;
+    }
+
+    #searchBtn:hover,
+    :focus {
+        background-color: #F9F5FA;
+    }
+
+    #sendEmail {
+        display: none;
+        background-color: #FEFAFF;
+        color: #666666;
+        border-radius: 2px;
+        width: 95px;
+        margin-bottom: 10px;
+        margin-right: 5px;
+        font-size: 14px;
+        padding: 4px 9px 4px;
+    }
+
+    #sendEmail:hover {
+        background-color: #F9F5FA;
+    }
+
+    #scheduleInterview {
+        display: none;
+        background-color: #FEFAFF;
+        color: #666666;
+        border-radius: 2px;
+        width: 145px;
+        margin-bottom: 10px;
+        font-size: 14px;
+        padding: 4px 9px 4px;
+    }
+
+    #scheduleInterview:hover,
+    :focus {
+        background-color: #F9F5FA;
+    }
+
+    .sendReminder {
+        background-color: #FEFAFF;
+        color: #666666;
+        border-radius: 2px;
+        width: 95px;
+        margin-bottom: 10px;
+        margin-right: 5px;
+        font-size: 14px;
+        padding: 4px 9px 4px;
+    }
+
+    .sendReminder:hover {
+        background-color: #F9F5FA;
+    }
+
+
+    #approveBtn {
+        width: 135px;
+        background-color: #869A85;
+        color: #fff;
+        font-weight: bold;
+        margin-bottom: 5px;
+        opacity: 0.7;
+    }
+
+    #disapproveBtn {
+        width: 135px;
+        font-weight: bold;
+        /* background-color: #F34541; */
+        /* background-color: #F16C6D; */
+        background-color: #E97D7D;
+        color: #fff;
+        opacity: 0.7;
+    }
+
+    #disapproveBtn:hover {
+        opacity: 0.8;
+    }
+
+    #approveBtn:hover {
+        opacity: 0.8;
+    }
+
+    #statusContainer {
+        margin-right: 30px;
+        padding: 6px 13px;
+        /* background-color: #89837A; */
+        text-align: center;
+        display: inline;
+        border-radius: 20px;
+        /* background-image: linear-gradient(#a39c92, #b6b0a6); */
+        /* color: #fff; */
+        background-color: #cfc9be;
+        color: #52504d;
+        font-weight: 500;
+        opacity: 0.9;
+        text-shadow:
+            0px 0px 3px rgba(255, 255, 255, 0.3),
+            0px 0px 0px rgba(8, 8, 8, 0);
+    }
+
+    .hidden_row {
+        display: none;
+    }
+
+    #declineOfferBtn {
+        background-color: #f5f5f5;
+        color: #777777;
+        width: 200px;
+        margin-top: 0px;
+        margin-bottom: 10px;
+        font-size: 16px;
+        padding: 4px 9px 4px;
+        opacity: 0.8;
+    }
+</style>
+
+<div class="wrapper" style="width: 100%;">
+    <div class="container-fluid no-gutters"
+        style="position: static; text-align: right; margin: 8px 0px; font-size: 14px;">
+
+        <% if (req.session.role !=undefined) {%>
+            Logged in as <b>
+                <%= req.session.user.Surname%>
+                    <%= req.session.user.GivenName%>
+            </b>&nbsp; |&nbsp;
+            <a style="color: black; padding: 5px 50px 25px 0px; color: #71838C" href="/user/logout">Logout</a>
+            <%}%>
+
+    </div>
+</div>
+
+<div class="wrapper" style="width: 100%; margin: 0 auto;">
+    <div class="container-fluid" style="justify-content: center; 
+    padding: 27px 15px 12px 115px; background: #fff;
+    border-radius: 0px; position: static;">
+        <h2 style="font-size: 40px;
+            font-weight: bold; color:#6A635A">HKBU Student Admission System</h2>
+    </div>
+</div>
+
+<div class="topnav">
+    <a class="topnav-active" href="/user/admin/applications/all/search">Applications</a>
+    <a href="/user/admin/statistics">Statistics</a>
+    <a href="/user/admin/profile">Profile</a>
+</div>
+
+<div class="wrapper" style="width: 100%; margin: 0 auto;">
+    <div class="container-fluid"
+        style="justify-content: center; height: 35px; font-size: 17px;
+background: #fff; border-radius: 0px; position: static; color: #888888; padding-top: 6px; padding-bottom: 5px; padding-left: 125px;">
+        <i class="fa fa-home" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;<i class="fa fa-angle-right"
+            aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;<span>Applications</span>&nbsp;&nbsp;
+    </div>
+</div>
+<br>
+<div class="wrapper" style="width: 1310px; margin: 0 auto;">
+    <div class="container-fluid" style="justify-content: center; 
+    padding: 30px 15px 25px; background: #fff;
+    border-radius: 0px; position: static;">
+
+        <div style="display: flex;">
+
+            <div class="main-content" style="margin-left: 40px;">
+                <h3 style="color: #333333;
+            font-size: 32px;
+            font-weight: bold;
+            margin-bottom: 20px;">Applications
+                </h3>
+
+                <div>
+                    <div style="margin-bottom: 10px; float: left">
+                        <span><b><a href="/user/admin/applications/all/search" style="color: #333333;">All </a></b></span><span style="color: #9b9696;">(<%= allNum%>)
+                                |</span>
+                        <span style="padding-left: 3px; font-weight: 600;"><a
+                                href="/user/admin/applications/approved/search" style="color:#6d8c9c;">
+                                Approved
+                            </a></span><span style="color: #9b9696;">(<%= approvedNum%>) |</span>
+                        <span style="padding-left: 3px; font-weight: 600;"><a
+                                href="/user/admin/applications/disapproved/search" style="color:#6d8c9c;">
+                                Disapproved
+                            </a></span><span style="color: #9b9696;">(<%= disapprovedNum%>) |</span>
+                    </div>
+
+                    <div style="float: right;">
+                        <div class="form-inline">
+                            <form action="/user/admin/applications/all/search" method="GET">
+                                <input type="text" id="searchField" class="form-control input-lg"
+                                    value="<%= req.query.sApplication %>" name="sApplication"
+                                    placeholder="Search applications">
+                                <button type="submit" id="searchBtn" class="form-control btn-lg">Search</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row" style="margin-left: 0px; clear: both">
+
+                    <div class="row" style="margin-left: 0px; clear: both">
+                        <button type="button" class="form-control btn-lg" id="sendEmail"
+                            onclick="document.getElementById('customerizeEmailModal').style.display='block'">Send
+                            Email</button>
+                    </div>
+                    <p id="blank"><br></p>
+
+                    <!-- confirm box -->
+                    <div id="customerizeEmailModal" class="modal">
+                        <form action="/user/admin/sendEmail" method="POST">
+                            <div class="interviewModal-content">
+                                <div style="padding: 16px 16px 16px 30px;">
+                                    <!-- modal-header -->
+                                    <span class="close"
+                                        onclick="document.getElementById('customerizeEmailModal').style.display='none'">&times;</span>
+                                    <h3 style="color: black;
+                                        font-size: 24px;
+                                        font-weight: 500;
+                                        margin-bottom: 20px;
+                                        margin-top: 15px;
+                                        padding-left: 27px;">New Message
+                                    </h3>
+
+                                    <div class="modal-body" style="color: #444444;">
+                                        <!-- modal-body -->
+                                        <div id="div01" class="form-group col-xl-12 col-12">
+                                            <div class="row" style="margin-left: 0px;">
+                                                <label class="col-form-label"
+                                                    style="padding-right: 30px;"><span>Recipient
+                                                    </span></label>
+                                                <input type="text" class="form-control input-lg" name="User[recipient]"
+                                                    style="width: 600px; margin-left: 4px; font-size: 14px;">
+                                            </div>
+                                        </div>
+
+                                        <div id="div02" class="form-group col-xl-12 col-12">
+                                            <div class="row" style="margin-left: 0px;">
+                                                <label class="col-form-label" style="padding-right: 43px;"><span>Subject
+                                                    </span></label>
+                                                <input type="text" class="form-control input-lg" name="User[subject]"
+                                                    style="width: 600px; margin-left: 4px; font-size: 14px;">
+                                            </div>
+                                        </div>
+
+                                        <div id="div03" class="form-group col-xl-12 col-12">
+                                            <div class="row" style="margin-left: 0px;">
+                                                <label class="col-form-label"
+                                                    style="padding-right: 43px;"><span>Content</span></label>
+                                                <textarea rows="10" cols="50" id="content" class="form-control input-lg"
+                                                    name="User[content]" style="width: 600px; font-size: 14px;"
+                                                    required></textarea>
+                                            </div>
+                                        </div>
+
+                                        <input type="hidden" id="sApplication" name="sApplication">
+                                        
+                                        <div>
+                                            <button type="submit" onclick="compareApplication('dataTable')"
+                                                class="sendBtn modalBtn" id="sendBtn1">
+                                                <i class="fa fa-envelope-o" aria-hidden="true"></i>&nbsp
+                                                Send</button>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- end -->
+
+                </div>
+
+                <!-- <div class="row" style="margin-left: 0px; clear: both">
+                    
+                    <button class="form-control btn-lg" id="sendEmail">Send Email</button>
+                    
+                    <button class="form-control btn-lg" id="scheduleInterview">Schedule Interview</button>
+                    <p id="blank"><br></p>
+                </div> -->
+
+
+                <table id="dataTable" style="width: 1190px;">
+
+                    <!-- table header -->
+                    <tr style="border-bottom: 1px solid #f1f1f1; color: #666666; font-weight: 500;">
+                        <td></td>
+                        <td><input type="checkbox" id="select-all"></td>
+                        <td>Application No.</td>
+                        <td>Applicant Name</td>
+                        <td>Applicant Email</td>
+                        <td style="text-align: center;  padding-right: 36px;">Status</td>
+                        <!-- <td>Scheduled Interview Date/ Time</td> -->
+                        <td>Action</td>
+                    </tr>
+                    <!-- end -->
+                    <% applications.forEach( function(model) { %>
+                        <tr style="height: 70px; border-bottom: 1px solid #f1f1f1;">
+                            <td width="2%" style="padding-left: 30px; padding-right: 10px; color:#5A6872;">
+                                <button class="collapsible" id="dropDownBtn"
+                                    onclick="showHideRow('hidden_row<%= model.id %>');"></button>
+                            </td>
+                            <td width="2%"><input type="checkbox" id="checkbox<% model.id %>" name="select-applications"
+                                    onclick="showContent();">
+                            </td>
+                            <td width="14%"><a href="/user/admin/applications/details/<%= model.id%>"
+                                    style="color:#4677B6; font-weight: 600;">
+                                    <%= model.idCode%>
+                                </a>
+                            </td>
+                            <td width="16%">
+                                <%= model.Surname%>
+                                    <%= model.GivenName%>
+                            </td>
+                            <td width="18%" style="color:#3D70B3;">
+                                <%= model.Email %>
+                            </td>
+                            <!-- 13/01/2021 &nbsp 01:59 AM-->
+                            <td width="16%" style="text-align: center; ">
+                                <div class="container" id="statusContainer">
+                                    <% if (model.status=="submitted" ) { %>
+                                        <span>
+                                            Submitted
+                                        </span>
+                                        <% } else if (model.status=="approved" ) { %>
+                                            <span>
+                                                Approved
+                                            </span>
+                                            <% } else if (model.status=="disapproved" ) { %>
+                                                <span>
+                                                    Disapproved
+                                                </span>
+                                                <% } %>
+                                </div>
+                            </td>
+
+                            <td width="15%">
+                                <% if (model.status=='submitted' ) { %>
+                                    <!-- approve button -->
+                                    <button class="form-control" id="approveBtn"
+                                        onclick="document.getElementById('approveModal').style.display='block'"><i
+                                            class="fa fa-check" aria-hidden="true"></i> APPROVE</button>
+
+                                    <!-- confirm box -->
+                                    <div id="approveModal" class="modal">
+                                        <div class="modal-content">
+                                            <div class="modal-container">
+                                                <!-- modal-header -->
+                                                <h1>Approve Application?</h1>
+                                                <h4 style="margin-bottom: 20px;">(Application No.: <%= model.idCode%>)
+                                                </h4>
+                                                <!-- modal-body -->
+                                                <p>Are you sure you want to approve this application?</p>
+                                                <div class="clearfix">
+                                                    <button type="button" class="cancelbtn modalBtn"
+                                                        onclick="document.getElementById('approveModal').style.display='none'">
+                                                        Cancel</button>
+                                                    <button type="button" class="confirmbtn modalBtn"
+                                                        onclick="approveApplication('<%= model.id%>')">Approve</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- end -->
+
+                                    <!-- disapprove button -->
+                                    <button class="form-control" id="disapproveBtn"
+                                        onclick="document.getElementById('disapproveModal').style.display='block'"><i
+                                            class="fa fa-times" aria-hidden="true"></i> DECLINE</button>
+
+                                    <!-- confirm box -->
+                                    <div id="disapproveModal" class="modal">
+                                        <div class="modal-content">
+                                            <div class="modal-container">
+                                                <h1>Disapprove Application?</h1>
+                                                <h4 style="margin-bottom: 20px;">(Application No.: <%= model.idCode%>)
+                                                </h4>
+                                                <p>Are you sure you want to disapprove this application?</p>
+                                                <div class="clearfix">
+                                                    <button type="button" class="cancelbtn modalBtn"
+                                                        onclick="document.getElementById('disapproveModal').style.display='none'">
+                                                        Cancel</button>
+                                                    <button type="button" class="deletebtn modalBtn"
+                                                        onclick="disapproveApplication('<%= model.id%>')">
+                                                        Disapprove</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- end -->
+                                    <% } %>
+
+                                        <% if (model.status=='approved' ) { %>
+                                            <div style="width: 120px;">--</div>
+                                            <% } %>
+
+                                                <% if (model.status=='disapproved' ) { %>
+                                                    <div style="width: 120px;">--</div>
+                                                    <% } %>
+                            </td>
+                            <!-- <td><a style="color:#0089CB;" href="#">Approve</a> | <a style="color:#0089CB;" href="#">Disapprove</a></td> -->
+                        </tr>
+
+                        <tr id="hidden_row<%= model.id %>" class="hidden_row">
+                            <td colspan=7 style="border-bottom: 1px solid #f1f1f1;">
+                                <table>
+                                    <tr style="color: #777777;">
+                                        <td width="60%"
+                                            style="padding-top: 30px; padding-bottom: 0px; padding-left: 115px;">1st
+                                            Programme Choice</td>
+                                        <td style="padding-top: 30px;">Scheduled Interview Date/ Time</td>
+                                    </tr>
+                                    <tr style="color: #333333;">
+                                        <td style="padding-top: 0px; padding-bottom: 20px; padding-left: 115px;">
+                                            <% if (model.program1 !="" ) {%>
+
+                                                <%= model.program1 %> (<%= model.entryYear1 %>)
+
+                                                        <% } %>
+                                        </td>
+                                        <td>
+
+                                            <% if (model.haveInterview1=="no" ) { %>
+                                                -
+                                                <% } else { %>
+                                                    <div class="container" id="interviewDate"
+                                                        style="display: inline-block;">
+                                                        <label class="col-form-label">
+                                                            <span style="max-width: 50px; color: #757575;">
+
+                                                                <% if (model.firstInterviewDate==null &&
+                                                                    model.firstInterviewTime==null) {%>
+                                                                    <span
+                                                                        style="color: #a5a4a4; padding-right: 5px;">Select
+                                                                        Date / Time</span>
+                                                                    <% } else {%>
+                                                                        <u>
+                                                                            <%= model.firstInterviewDate %> &nbsp; <%=
+                                                                                    model.firstInterviewTime %>
+                                                                        </u>
+                                                                        <% } %>
+
+                                                            </span>
+                                                        </label><span class="separator"></span>
+                                                        <%var interviewID="int" + model.id + 1%>
+                                                            <button class="form-control btn-lg" id="selectDateBtn"
+                                                                data-backdrop="static"
+                                                                onclick="document.getElementById('selectTimeSlotModal<%= interviewID%>').style.display='block'">
+                                                                <i class="fa fa-calendar" aria-hidden="true"></i>
+                                                            </button>
+
+                                                            <!-- confirm box -->
+                                                            <div id="selectTimeSlotModal<%= interviewID%>"
+                                                                class="modal">
+                                                                <form
+                                                                    action="/applications/firstPreference/scheduleInterview/<%= model.id %>"
+                                                                    method="POST">
+                                                                    <div class="interviewModal-content">
+                                                                        <div style="padding: 16px 16px 16px 30px;">
+                                                                            <!-- modal-header -->
+                                                                            <span class="close"
+                                                                                onclick="document.getElementById('selectTimeSlotModal<%= interviewID%>').style.display='none'">&times;</span>
+                                                                            <h3 style="color: black;
+                                                                            font-size: 24px;
+                                                                            font-weight: 500;
+                                                                            margin-bottom: 20px;
+                                                                            margin-top: 15px;
+                                                                            padding-left: 27px;">Select Interview Time
+                                                                                Slot
+                                                                            </h3>
+
+                                                                            <div class="modal-body"
+                                                                                style="color: #444444;">
+                                                                                <!-- modal-body -->
+                                                                                <div id="div01"
+                                                                                    class="form-group col-xl-12 col-12">
+                                                                                    <div class="row"
+                                                                                        style="margin-left: 0px;">
+                                                                                        <label class="col-form-label"
+                                                                                            style="padding-right: 160px;"><span>Date
+                                                                                                of
+                                                                                                the
+                                                                                                Interview</span></label>
+                                                                                        <input type="date"
+                                                                                            class="form-control input-lg"
+                                                                                            value="<%= model.firstInterviewDate %>"
+                                                                                            name="User[firstInterviewDate]"
+                                                                                            style="width: 350px"
+                                                                                            required>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div id="div02"
+                                                                                    class="form-group col-xl-12 col-12">
+                                                                                    <div class="row"
+                                                                                        style="margin-left: 0px;">
+                                                                                        <label class="col-form-label"
+                                                                                            style="padding-right: 160px;"><span>Time
+                                                                                                of
+                                                                                                the
+                                                                                                Interview</span></label>
+                                                                                        <input type="time"
+                                                                                            class="form-control input-lg"
+                                                                                            name="User[firstInterviewTime]"
+                                                                                            value="<%= model.firstInterviewTime %>"
+                                                                                            style="width: 350px"
+                                                                                            required>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div id="div03"
+                                                                                    class="form-group col-xl-12 col-12">
+                                                                                    <div class="row"
+                                                                                        style="margin-left: 0px;">
+                                                                                        <label class="col-form-label"
+                                                                                            style="padding-right: 248px;"><span>Location</span></label>
+                                                                                        <input type="text"
+                                                                                            class="form-control input-lg"
+                                                                                            value="<%= model.firstInterviewLocation %>"
+                                                                                            name="User[firstInterviewLocation]"
+                                                                                            style="width: 350px">
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div>
+                                                                                    <button type="submit"
+                                                                                        class="addBtn modalBtn"
+                                                                                        id="addBtn">
+                                                                                        <i class="fa fa-plus-circle"
+                                                                                            aria-hidden="true"></i>&nbsp
+                                                                                        Add Time Slot</button>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+                                                            <!-- end -->
+                                                    </div>
+
+                                                    <button class="sendReminder form-control btn-lg"
+                                                        style="display: inline-block; margin-left: 8px;"
+                                                        onclick="document.getElementById('sendEmailModal<%= interviewID%>').style.display='block'">Send
+                                                        Email</button>
+
+                                                    <!-- email template -->
+                                                    <div id="sendEmailModal<%= interviewID%>" class="modal">
+                                                        <form
+                                                            action="/applications/firstPreference/interviewInvitation/sendEmail/<%= model.id %>"
+                                                            method="POST">
+                                                            <div class="emailModal-content">
+                                                                <div style="padding: 16px 16px 16px 30px;">
+                                                                    <!-- modal-header -->
+                                                                    <span class="close"
+                                                                        onclick="document.getElementById('sendEmailModal<%= interviewID%>').style.display='none'">&times;</span>
+
+                                                                    <h3 style="color: black;
+                                                                        font-size: 24px;
+                                                                        font-weight: 500;
+                                                                        margin-bottom: 20px;
+                                                                        margin-top: 15px;
+                                                                        padding-left: 27px;">Interview Invitation Email
+                                                                    </h3>
+
+                                                                    <div class="modal-body" style="color: #444444;">
+                                                                        <!-- modal-body -->
+                                                                        <div id="div01"
+                                                                            class="form-group col-xl-12 col-12">
+                                                                            <div class="row" style="margin-left: 0px;">
+                                                                                <label class="col-form-label"
+                                                                                    style="padding-right: 30px;"><span>Recipient
+                                                                                    </span></label>
+                                                                                <input type="text"
+                                                                                    class="form-control input-lg"
+                                                                                    value="<%= model.Email %>"
+                                                                                    name="User[recipient1]"
+                                                                                    style="width: 600px; margin-left: 4px; font-size: 14px;">
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div id="div02"
+                                                                            class="form-group col-xl-12 col-12">
+                                                                            <div class="row" style="margin-left: 0px;">
+                                                                                <label class="col-form-label"
+                                                                                    style="padding-right: 43px;"><span>Subject
+                                                                                    </span></label>
+                                                                                <input type="text"
+                                                                                    class="form-control input-lg"
+                                                                                    value="HKBU Interview Invitation - <%= model.program1 %>"
+                                                                                    name="User[subject1]"
+                                                                                    style="width: 600px; margin-left: 4px; font-size: 14px;">
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div id="div03"
+                                                                            class="form-group col-xl-12 col-12">
+                                                                            <div class="row" style="margin-left: 0px;">
+                                                                                <label class="col-form-label"
+                                                                                    style="padding-right: 43px;"><span>Content</span></label>
+                                                                                <textarea rows="10" cols="50"
+                                                                                    id="content1"
+                                                                                    class="form-control input-lg"
+                                                                                    name="User[content1]"
+                                                                                    style="width: 600px; font-size: 14px;"
+                                                                                    required>Dear <%= model.Surname%> <%= model.GivenName%>,&#13;&#10;&#13;&#10;We would like to invite you to attend an interview for admission to the following undergraduate degree programme:&#13;&#10;&#13;&#10;Programme：<%= model.program1 %>&#13;&#10;Date： <%= model.firstInterviewDate %>&#13;&#10;Time： <%= model.firstInterviewTime %>&#13;&#10;Venue：<%= model.firstInterviewLocation %>&#13;&#10;&#13;&#10;When attending the interview, please note the following:&#13;&#10;- Interview Format: Group Interview;&#13;&#10;- Interview Language(s): English;&#13;&#10;- Arrive at the interview venue 30 minutes before the interview time;&#13;&#10;- Request for change of interview date or time will not be entertained. Absence without an acceptable reason could lead to disqualification of your application;&#13;&#10;&#13;&#10;Please write to us at admission@hkbu.edu.hk or contact us at telephone no. 3411 2200 should you have any enquiries.&#13;&#10;&#13;&#10;Yours sincerely,&#13;&#10;Admissions Section&#13;&#10;Academic Registry</textarea>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div>
+                                                                            <button type="submit"
+                                                                                onclick="toLineBreak1()"
+                                                                                class="sendBtn modalBtn" id="sendBtn1">
+                                                                                <i class="fa fa-envelope-o"
+                                                                                    aria-hidden="true"></i>&nbsp
+                                                                                Send</button>
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+                                                        </form>
+                                                    </div>
+                                                    <!-- end -->
+
+                                                    <% } %>
+
+
+
+                                        </td>
+                                    </tr>
+                                    <tr style="color: #777777;">
+                                        <td style="padding-bottom: 0px; padding-left: 115px;">2nd Programme Choice
+                                        </td>
+                                        <td>Scheduled Interview Date/ Time</td>
+                                    </tr>
+                                    <tr style="color: #333333;">
+                                        <td style="padding-top: 0px; padding-bottom: 20px; padding-left: 115px;">
+                                            <% if (model.program2 !="" ) {%>
+
+                                                <%= model.program2 %> (<%= model.entryYear2 %>)
+
+                                                        <% } %>
+                                        </td>
+                                        <td>
+
+                                            <% if (model.haveInterview2=="no" ) { %>
+                                                -
+                                                <% } else { %>
+                                                    <div class="container" id="interviewDate"
+                                                        style="display: inline-block;">
+                                                        <label class="col-form-label">
+                                                            <span style="max-width: 50px; color: #757575;">
+
+                                                                <% if (model.secondInterviewDate==null &&
+                                                                    model.secondInterviewTime==null) {%>
+                                                                    <span
+                                                                        style="color: #a5a4a4; padding-right: 5px;">Select
+                                                                        Date / Time</span>
+                                                                    <% } else {%>
+                                                                        <u>
+                                                                            <%= model.secondInterviewDate %> &nbsp; <%=
+                                                                                    model.secondInterviewTime %>
+                                                                        </u>
+                                                                        <% } %>
+
+                                                            </span>
+                                                        </label><span class="separator"></span>
+                                                        <%var interviewID="int" + model.id + 2%>
+                                                            <button class="form-control btn-lg" id="selectDateBtn"
+                                                                data-backdrop="static"
+                                                                onclick="document.getElementById('selectTimeSlotModal<%= interviewID%>').style.display='block'">
+                                                                <i class="fa fa-calendar" aria-hidden="true"></i>
+                                                            </button>
+
+                                                            <!-- confirm box -->
+                                                            <div id="selectTimeSlotModal<%= interviewID%>"
+                                                                class="modal">
+                                                                <form
+                                                                    action="/applications/secondPreference/scheduleInterview/<%= model.id %>"
+                                                                    method="POST">
+                                                                    <div class="interviewModal-content">
+                                                                        <div style="padding: 16px 16px 16px 30px;">
+                                                                            <!-- modal-header -->
+                                                                            <span class="close"
+                                                                                onclick="document.getElementById('selectTimeSlotModal<%= interviewID%>').style.display='none'">&times;</span>
+                                                                            <h3 style="color: black;
+                                                                            font-size: 24px;
+                                                                            font-weight: 500;
+                                                                            margin-bottom: 20px;
+                                                                            margin-top: 15px;
+                                                                            padding-left: 27px;">Select Interview Time
+                                                                                Slot
+                                                                            </h3>
+
+                                                                            <div class="modal-body"
+                                                                                style="color: #444444;">
+                                                                                <!-- modal-body -->
+                                                                                <div id="div01"
+                                                                                    class="form-group col-xl-12 col-12">
+                                                                                    <div class="row"
+                                                                                        style="margin-left: 0px;">
+                                                                                        <label class="col-form-label"
+                                                                                            style="padding-right: 160px;"><span>Date
+                                                                                                of
+                                                                                                the
+                                                                                                Interview</span></label>
+                                                                                        <input type="date"
+                                                                                            class="form-control input-lg"
+                                                                                            value="<%= model.secondInterviewDate %>"
+                                                                                            name="User[secondInterviewDate]"
+                                                                                            style="width: 350px"
+                                                                                            required>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div id="div02"
+                                                                                    class="form-group col-xl-12 col-12">
+                                                                                    <div class="row"
+                                                                                        style="margin-left: 0px;">
+                                                                                        <label class="col-form-label"
+                                                                                            style="padding-right: 160px;"><span>Time
+                                                                                                of
+                                                                                                the
+                                                                                                Interview</span></label>
+                                                                                        <input type="time"
+                                                                                            class="form-control input-lg"
+                                                                                            name="User[secondInterviewTime]"
+                                                                                            value="<%= model.secondInterviewLocation %>"
+                                                                                            style="width: 350px"
+                                                                                            required>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div id="div03"
+                                                                                    class="form-group col-xl-12 col-12">
+                                                                                    <div class="row"
+                                                                                        style="margin-left: 0px;">
+                                                                                        <label class="col-form-label"
+                                                                                            style="padding-right: 248px;"><span>Location</span></label>
+                                                                                        <input type="text"
+                                                                                            class="form-control input-lg"
+                                                                                            value="<%= model.secondInterviewLocation %>"
+                                                                                            name="User[secondInterviewLocation]"
+                                                                                            style="width: 350px">
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div>
+                                                                                    <button type="submit"
+                                                                                        class="addBtn modalBtn"
+                                                                                        id="addBtn">
+                                                                                        <i class="fa fa-plus-circle"
+                                                                                            aria-hidden="true"></i>&nbsp
+                                                                                        Add Time Slot</button>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+                                                            <!-- end -->
+                                                    </div>
+
+                                                    <button class="sendReminder form-control btn-lg"
+                                                        style="display: inline-block; margin-left: 8px;"
+                                                        onclick="document.getElementById('sendEmailModal<%= interviewID%>').style.display='block'">Send
+                                                        Email</button>
+
+                                                    <!-- email template -->
+                                                    <div id="sendEmailModal<%= interviewID%>" class="modal">
+                                                        <form
+                                                            action="/applications/secondPreference/interviewInvitation/sendEmail/<%= model.id %>"
+                                                            method="POST">
+                                                            <div class="emailModal-content">
+                                                                <div style="padding: 16px 16px 16px 30px;">
+                                                                    <!-- modal-header -->
+                                                                    <span class="close"
+                                                                        onclick="document.getElementById('sendEmailModal<%= interviewID%>').style.display='none'">&times;</span>
+
+                                                                    <h3 style="color: black;
+                    font-size: 24px;
+                    font-weight: 500;
+                    margin-bottom: 20px;
+                    margin-top: 15px;
+                    padding-left: 27px;">Interview Invitation Email
+                                                                    </h3>
+
+                                                                    <div class="modal-body" style="color: #444444;">
+                                                                        <!-- modal-body -->
+                                                                        <div id="div01"
+                                                                            class="form-group col-xl-12 col-12">
+                                                                            <div class="row" style="margin-left: 0px;">
+                                                                                <label class="col-form-label"
+                                                                                    style="padding-right: 30px;"><span>Recipient
+                                                                                    </span></label>
+                                                                                <input type="text"
+                                                                                    class="form-control input-lg"
+                                                                                    value="<%= model.Email %>"
+                                                                                    name="User[recipient2]"
+                                                                                    style="width: 600px; margin-left: 4px; font-size: 14px;">
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div id="div02"
+                                                                            class="form-group col-xl-12 col-12">
+                                                                            <div class="row" style="margin-left: 0px;">
+                                                                                <label class="col-form-label"
+                                                                                    style="padding-right: 43px;"><span>Subject
+                                                                                    </span></label>
+                                                                                <input type="text"
+                                                                                    class="form-control input-lg"
+                                                                                    value="HKBU Interview Invitation - <%= model.program2 %>"
+                                                                                    name="User[subject2]"
+                                                                                    style="width: 600px; margin-left: 4px; font-size: 14px;">
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div id="div03"
+                                                                            class="form-group col-xl-12 col-12">
+                                                                            <div class="row" style="margin-left: 0px;">
+                                                                                <label class="col-form-label"
+                                                                                    style="padding-right: 43px;"><span>Content</span></label>
+                                                                                <textarea rows="10" cols="50"
+                                                                                    id="content2"
+                                                                                    class="form-control input-lg"
+                                                                                    name="User[content2]"
+                                                                                    style="width: 600px; font-size: 14px;"
+                                                                                    required>Dear <%= model.Surname%> <%= model.GivenName%>,&#13;&#10;&#13;&#10;We would like to invite you to attend an interview for admission to the following undergraduate degree programme:&#13;&#10;&#13;&#10;Programme：<%= model.program2 %>&#13;&#10;Date： <%= model.secondInterviewDate %>&#13;&#10;Time： <%= model.secondInterviewTime %>&#13;&#10;Venue：<%= model.secondInterviewLocation %>&#13;&#10;&#13;&#10;When attending the interview, please note the following:&#13;&#10;- Interview Format: Group Interview;&#13;&#10;- Interview Language(s): English;&#13;&#10;- Arrive at the interview venue 30 minutes before the interview time;&#13;&#10;- Request for change of interview date or time will not be entertained. Absence without an acceptable reason could lead to disqualification of your application;&#13;&#10;&#13;&#10;Please write to us at admission@hkbu.edu.hk or contact us at telephone no. 3411 2200 should you have any enquiries.&#13;&#10;&#13;&#10;Yours sincerely,&#13;&#10;Admissions Section&#13;&#10;Academic Registry</textarea>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div>
+                                                                            <button type="submit"
+                                                                                onclick="toLineBreak2()"
+                                                                                class="sendBtn modalBtn" id="sendBtn2">
+                                                                                <i class="fa fa-envelope-o"
+                                                                                    aria-hidden="true"></i>&nbsp
+                                                                                Send</button>
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+                                                        </form>
+                                                    </div>
+                                                    <!-- end -->
+
+                                                    <% } %>
+
+
+
+                                        </td>
+                                    </tr>
+                                    <tr style="color: #777777;">
+                                        <td style="padding-bottom: 0px; padding-left: 115px;">3rd Programme Choice
+                                        </td>
+                                        <td>Scheduled Interview Date/ Time</td>
+                                    </tr>
+                                    <tr style="color: #333333;">
+                                        <td style="padding-top: 0px; padding-bottom: 20px; padding-left: 115px;">
+                                            <% if (model.program3 !="" ) {%>
+
+                                                <%= model.program3 %> (<%= model.entryYear3 %>)
+
+                                                        <% } %>
+                                        </td>
+                                        <td>
+
+                                            <% if (model.haveInterview3=="no" ) { %>
+                                                -
+                                                <% } else { %>
+                                                    <div class="container" id="interviewDate"
+                                                        style="display: inline-block;">
+                                                        <label class="col-form-label">
+                                                            <span style="max-width: 50px; color: #757575;">
+
+                                                                <% if (model.thirdInterviewDate==null &&
+                                                                    model.thirdInterviewTime==null) {%>
+                                                                    <span
+                                                                        style="color: #a5a4a4; padding-right: 5px;">Select
+                                                                        Date / Time</span>
+                                                                    <% } else {%>
+                                                                        <u>
+                                                                            <%= model.thirdInterviewDate %> &nbsp; <%=
+                                                                                    model.thirdInterviewTime %>
+                                                                        </u>
+                                                                        <% } %>
+
+                                                            </span>
+                                                        </label><span class="separator"></span>
+                                                        <%var interviewID="int" + model.id + 3%>
+                                                            <button class="form-control btn-lg" id="selectDateBtn"
+                                                                data-backdrop="static"
+                                                                onclick="document.getElementById('selectTimeSlotModal<%= interviewID%>').style.display='block'">
+                                                                <i class="fa fa-calendar" aria-hidden="true"></i>
+                                                            </button>
+
+                                                            <!-- confirm box -->
+                                                            <div id="selectTimeSlotModal<%= interviewID%>"
+                                                                class="modal">
+                                                                <form
+                                                                    action="/applications/thirdPreference/scheduleInterview/<%= model.id %>"
+                                                                    method="POST">
+                                                                    <div class="interviewModal-content">
+                                                                        <div style="padding: 16px 16px 16px 30px;">
+                                                                            <!-- modal-header -->
+                                                                            <span class="close"
+                                                                                onclick="document.getElementById('selectTimeSlotModal<%= interviewID%>').style.display='none'">&times;</span>
+                                                                            <h3 style="color: black;
+            font-size: 24px;
+            font-weight: 500;
+            margin-bottom: 20px;
+            margin-top: 15px;
+            padding-left: 27px;">Select Interview Time Slot
+                                                                            </h3>
+
+                                                                            <div class="modal-body"
+                                                                                style="color: #444444;">
+                                                                                <!-- modal-body -->
+                                                                                <div id="div01"
+                                                                                    class="form-group col-xl-12 col-12">
+                                                                                    <div class="row"
+                                                                                        style="margin-left: 0px;">
+                                                                                        <label class="col-form-label"
+                                                                                            style="padding-right: 160px;"><span>Date
+                                                                                                of
+                                                                                                the
+                                                                                                Interview</span></label>
+                                                                                        <input type="date"
+                                                                                            class="form-control input-lg"
+                                                                                            value="<%= model.thirdInterviewDate %>"
+                                                                                            name="User[thirdInterviewDate]"
+                                                                                            style="width: 350px"
+                                                                                            required>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div id="div02"
+                                                                                    class="form-group col-xl-12 col-12">
+                                                                                    <div class="row"
+                                                                                        style="margin-left: 0px;">
+                                                                                        <label class="col-form-label"
+                                                                                            style="padding-right: 160px;"><span>Time
+                                                                                                of
+                                                                                                the
+                                                                                                Interview</span></label>
+                                                                                        <input type="time"
+                                                                                            class="form-control input-lg"
+                                                                                            name="User[thirdInterviewTime]"
+                                                                                            value="<%= model.thirdInterviewTime%>"
+                                                                                            style="width: 350px"
+                                                                                            required>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div id="div03"
+                                                                                    class="form-group col-xl-12 col-12">
+                                                                                    <div class="row"
+                                                                                        style="margin-left: 0px;">
+                                                                                        <label class="col-form-label"
+                                                                                            style="padding-right: 248px;"><span>Location</span></label>
+                                                                                        <input type="text"
+                                                                                            class="form-control input-lg"
+                                                                                            value="<%= model.thirdInterviewLocation %>"
+                                                                                            name="User[thirdInterviewLocation]"
+                                                                                            style="width: 350px">
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div>
+                                                                                    <button type="submit"
+                                                                                        class="addBtn modalBtn"
+                                                                                        id="addBtn">
+                                                                                        <i class="fa fa-plus-circle"
+                                                                                            aria-hidden="true"></i>&nbsp
+                                                                                        Add Time Slot</button>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+                                                            <!-- end -->
+                                                    </div>
+
+                                                    <button class="sendReminder form-control btn-lg"
+                                                        style="display: inline-block; margin-left: 8px;"
+                                                        onclick="document.getElementById('sendEmailModal<%= interviewID%>').style.display='block'">Send
+                                                        Email</button>
+
+                                                    <!-- email template -->
+                                                    <div id="sendEmailModal<%= interviewID%>" class="modal">
+                                                        <form
+                                                            action="/applications/thirdPreference/interviewInvitation/sendEmail/<%= model.id %>"
+                                                            method="POST">
+                                                            <div class="emailModal-content">
+                                                                <div style="padding: 16px 16px 16px 30px;">
+                                                                    <!-- modal-header -->
+                                                                    <span class="close"
+                                                                        onclick="document.getElementById('sendEmailModal<%= interviewID%>').style.display='none'">&times;</span>
+
+                                                                    <h3 style="color: black;
+                    font-size: 24px;
+                    font-weight: 500;
+                    margin-bottom: 20px;
+                    margin-top: 15px;
+                    padding-left: 27px;">Interview Invitation Email
+                                                                    </h3>
+
+                                                                    <div class="modal-body" style="color: #444444;">
+                                                                        <!-- modal-body -->
+                                                                        <div id="div01"
+                                                                            class="form-group col-xl-12 col-12">
+                                                                            <div class="row" style="margin-left: 0px;">
+                                                                                <label class="col-form-label"
+                                                                                    style="padding-right: 30px;"><span>Recipient
+                                                                                    </span></label>
+                                                                                <input type="text"
+                                                                                    class="form-control input-lg"
+                                                                                    value="<%= model.Email %>"
+                                                                                    name="User[recipient3]"
+                                                                                    style="width: 600px; margin-left: 4px; font-size: 14px;">
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div id="div02"
+                                                                            class="form-group col-xl-12 col-12">
+                                                                            <div class="row" style="margin-left: 0px;">
+                                                                                <label class="col-form-label"
+                                                                                    style="padding-right: 43px;"><span>Subject
+                                                                                    </span></label>
+                                                                                <input type="text"
+                                                                                    class="form-control input-lg"
+                                                                                    value="HKBU Interview Invitation - <%= model.program3 %>"
+                                                                                    name="User[subject3]"
+                                                                                    style="width: 600px; margin-left: 4px; font-size: 14px;">
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div id="div03"
+                                                                            class="form-group col-xl-12 col-12">
+                                                                            <div class="row" style="margin-left: 0px;">
+                                                                                <label class="col-form-label"
+                                                                                    style="padding-right: 43px;"><span>Content</span></label>
+                                                                                <textarea rows="10" cols="50"
+                                                                                    id="content3"
+                                                                                    class="form-control input-lg"
+                                                                                    name="User[content3]"
+                                                                                    style="width: 600px; font-size: 14px;"
+                                                                                    required>Dear <%= model.Surname%> <%= model.GivenName%>,&#13;&#10;&#13;&#10;We would like to invite you to attend an interview for admission to the following undergraduate degree programme:&#13;&#10;&#13;&#10;Programme：<%= model.program3 %>&#13;&#10;Date： <%= model.thirdInterviewDate %>&#13;&#10;Time： <%= model.thirdInterviewTime %>&#13;&#10;Venue：<%= model.thirdInterviewLocation %>&#13;&#10;&#13;&#10;When attending the interview, please note the following:&#13;&#10;- Interview Format: Group Interview;&#13;&#10;- Interview Language(s): English;&#13;&#10;- Arrive at the interview venue 30 minutes before the interview time;&#13;&#10;- Request for change of interview date or time will not be entertained. Absence without an acceptable reason could lead to disqualification of your application;&#13;&#10;&#13;&#10;Please write to us at admission@hkbu.edu.hk or contact us at telephone no. 3411 2200 should you have any enquiries.&#13;&#10;&#13;&#10;Yours sincerely,&#13;&#10;Admissions Section&#13;&#10;Academic Registry</textarea>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div>
+                                                                            <button type="submit"
+                                                                                onclick="toLineBreak3()"
+                                                                                class="sendBtn modalBtn" id="sendBtn3">
+                                                                                <i class="fa fa-envelope-o"
+                                                                                    aria-hidden="true"></i>&nbsp
+                                                                                Send</button>
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+                                                        </form>
+                                                    </div>
+                                                    <!-- end -->
+                                                    <% } %>
+
+
+
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <% }); %>
+                </table>
+
+                <br>
+                <div>
+                    <!-- current page -->
+                    <% const current=parseInt(req.query.page) || 1; %>
+
+                        <% if (allNum !=0) { var start=10 * (current - 1) + 1 } else { var start=0 }%>
+
+                            <% var end=10 * (current - 1) + allNum % 10 %>
+
+                                <% if (qallNum !=0) { var qstart=10 * (current - 1) + 1 } else { var qstart=0 }%>
+
+                                    <% var qend=10 * (current - 1) + qallNum % 10 %>
+
+                                        <% if (req.query.sApplication=="" || !req.query.sApplication) { %>
+
+                                            <% if (allNum==0) { %>
+                                                <span style="color: #666666;">Showing 0 to <%=end %> of <%=allNum %>
+                                                            entries</span>
+                                                <% } else { %>
+                                                    <span style="color: #666666;">Showing <%=start %> to <%=end %> of
+                                                                <%=allNum %> entries</span>
+                                                    <%　}　%>
+
+                                                        <%　} else {　%>
+
+                                                            <% if (qallNum==0) { %>
+                                                                <span style="color: #666666;">Showing 0 to <%=qend %> of
+                                                                        <%=qallNum %> entries</span>
+                                                                <% } else { %>
+                                                                    <span style="color: #666666;">Showing <%=qstart %>
+                                                                            to <%=qend %> of <%=qallNum %>
+                                                                                    entries</span>
+                                                                    <%　}　%>
+
+                                                                        <%　}　%>
+
+                                                                            <div style="float: right;">
+                                                                                <div class="form-inline">
+                                                                                    <nav
+                                                                                        aria-label="Page navigation example">
+                                                                                        <ul
+                                                                                            class="pagination justify-content-end">
+                                                                                            <li class="page-item">
+                                                                                                <a class="page-link"
+                                                                                                    style="color:#8AA0AB;"
+                                                                                                    href="/user/admin/applications/all/search/?page=<%= Math.max(current-1, 1) %>&sApplication=<%= req.query.sApplication %>"><span
+                                                                                                        aria-hidden="true">&laquo;</span></a>
+                                                                                            </li>
+
+                                                                                            <% for (i=1; i <=count; i++)
+                                                                                                { %>
+                                                                                                <% if (i==current) {%>
+                                                                                                    <li
+                                                                                                        class="page-item">
+                                                                                                        <a class="page-link"
+                                                                                                            style="color:#fff; background-color:#8AA0AB; opacity: 0.7;"
+                                                                                                            href="/user/admin/applications/all/search/?page=<%= i %>&sApplication=<%= req.query.sApplication %>">
+                                                                                                            <%= i %>
+                                                                                                        </a>
+                                                                                                    </li>
+                                                                                                    <% } else {%>
+                                                                                                        <li
+                                                                                                            class="page-item">
+                                                                                                            <a class="page-link"
+                                                                                                                style="color:#8AA0AB;"
+                                                                                                                href="/user/admin/applications/all/serach/?page=<%= i %>&sApplication=<%= req.query.sApplication %>">
+                                                                                                                <%= i %>
+                                                                                                            </a>
+                                                                                                        </li>
+                                                                                                        <% } %>
+                                                                                                            <% } %>
+                                                                                                                <li
+                                                                                                                    class="page-item">
+                                                                                                                    <a class="page-link"
+                                                                                                                        style="color:#8AA0AB;"
+                                                                                                                        href="/user/admin/applications/all/search/?page=<%= Math.min(current+1, count) %>&sApplication=<%= req.query.sApplication %>"><span
+                                                                                                                            aria-hidden="true">&raquo;</span></a>
+                                                                                                                </li>
+                                                                                        </ul>
+                                                                                    </nav>
+                                                                                </div>
+                                                                            </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function compareApplication(tableID) {
+        var table = document.getElementById(tableID);
+        var rowCount = table.rows.length;
+        var selectedRows = "";
+        for (var i = 0; i < rowCount; i++) {
+            var row = table.rows[i];
+            var chkbox = row.cells[1];
+            if (chkbox != null && chkbox.checked == true) {
+                selectedRows = selectedRows + ":" + row.cells[2].innerText;
+            }
+        }
+        document.getElementById("demo").innerHTML = selectedRows;
+
+        document.getElementById("sApplication").value = selectedRows;
+
+        // toLineBreak();
+    }
+</script>
+
+<script>
+    function toLineBreak() {
+        document.getElementById("content").value = document.getElementById("content1").value.replace(/\n/g, "<br/>");
+    }
+
+    function toLineBreak1() {
+        document.getElementById("content1").value = document.getElementById("content1").value.replace(/\n/g, "<br/>");
+    }
+
+    function toLineBreak2() {
+        document.getElementById("content2").value = document.getElementById("content2").value.replace(/\n/g, "<br/>");
+    }
+
+    function toLineBreak3() {
+        document.getElementById("content3").value = document.getElementById("content3").value.replace(/\n/g, "<br/>");
+    }
+</script>
+
+<script>
+    var coll = document.getElementsByClassName("collapsible");
+    var i;
+
+    for (i = 0; i < coll.length; i++) {
+        coll[i].addEventListener("click", function () {
+            this.classList.toggle("active");
+            var content = this.nextElementSibling;
+            if (content.style.maxHeight) {
+                content.style.maxHeight = null;
+            } else {
+                content.style.maxHeight = content.scrollHeight + "px";
+            }
+        });
+    }
+</script>
+
+<script>
+    document.getElementById('select-all').onclick = function () {
+        var checkboxes = document.getElementsByName('select-applications');
+        for (var checkbox of checkboxes) {
+            checkbox.checked = this.checked;
+        }
+        showContent();
+    }
+</script>
+
+<script>
+    async function disapproveApplication(id) {
+
+        var response = await fetch("/applications/disapprove/" + id, {
+            method: "POST",
+            credentials: 'same-origin',
+        });
+
+        if (response.ok) {
+            var data = await response.json();
+            alert(data.message);
+            location.reload();
+        } else {
+            alert(response.status + ": " + response.statusText);
+        }
+    };
+</script>
+
+<script>
+    async function approveApplication(id) {
+
+        var response = await fetch("/applications/approve/" + id, {
+            method: "POST",
+            credentials: 'same-origin',
+        });
+        if (response.ok) {
+            var data = await response.json();
+            alert(data.message);
+            location.reload();
+        } else {
+            alert(response.status + ": " + response.statusText);
+        }
+    };
+</script>
+
+<script>
+    async function scheduleInterview1(id) {
+
+        var response = await fetch("/applications/firstPreference/scheduleInterview/" + id, {
+            method: "POST",
+            credentials: 'same-origin',
+        });
+        if (response.ok) {
+            var data = await response.json();
+            // alert(data.message);
+            location.reload();
+        } else {
+            alert(response.status + ": " + response.statusText);
+        }
+    };
+
+    async function scheduleInterview2(id) {
+
+        var response = await fetch("/applications/secondPreference/scheduleInterview/" + id, {
+            method: "POST",
+            credentials: 'same-origin',
+        });
+        if (response.ok) {
+            var data = await response.json();
+            // alert(data.message);
+            location.reload();
+        } else {
+            alert(response.status + ": " + response.statusText);
+        }
+    };
+
+    async function scheduleInterview3(id) {
+
+        var response = await fetch("/applications/thirdPreference/scheduleInterview/" + id, {
+            method: "POST",
+            credentials: 'same-origin',
+        });
+        if (response.ok) {
+            var data = await response.json();
+            // alert(data.message);
+            location.reload();
+        } else {
+            alert(response.status + ": " + response.statusText);
+        }
+    };
+</script>
+
+<script>
+    async function sendEmail1(id) {
+
+        var response = await fetch("/applications/firstPreference/interviewInvitation/sendEmail/" + id, {
+            method: "POST",
+            credentials: 'same-origin',
+        });
+        if (response.ok) {
+            var data = await response.json();
+            alert(data.message);
+            location.reload();
+        } else {
+            alert(response.status + ": " + response.statusText);
+        }
+    };
+
+    async function sendEmail2(id) {
+
+        var response = await fetch("/applications/secondPreference/interviewInvitation/sendEmail/" + id, {
+            method: "POST",
+            credentials: 'same-origin',
+        });
+        if (response.ok) {
+            var data = await response.json();
+            alert(data.message);
+            location.reload();
+        } else {
+            alert(response.status + ": " + response.statusText);
+        }
+    };
+
+    async function sendEmail3(id) {
+
+        var response = await fetch("/applications/thirdPreference/interviewInvitation/sendEmail/" + id, {
+            method: "POST",
+            credentials: 'same-origin',
+        });
+        if (response.ok) {
+            var data = await response.json();
+            alert(data.message);
+            location.reload();
+        } else {
+            alert(response.status + ": " + response.statusText);
+        }
+    };
+</script>
+
+<script>
+    function showContent() {
+
+        var checkboxs = document.getElementsByName("select-applications");
+        var visibility = "none";
+        for (var i = 0; i < checkboxs.length; i++) {
+            if (checkboxs[i].checked) {
+                visibility = "block";
+                break;
+            }
+        }
+        document.getElementById("sendEmail").style.display = visibility;
+        document.getElementById("scheduleInterview").style.display = visibility;
+    }
+</script>

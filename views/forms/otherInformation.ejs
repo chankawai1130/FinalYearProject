@@ -1,0 +1,500 @@
+<!--  meta tags -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<script src="https://kit.fontawesome.com/a076d05399.js"></script>
+
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<style type="text/css">
+    .main-nav-ul ul a:before {
+        content: '\203A';
+        margin-right: 20px;
+    }
+
+    .sub-arrow-selected:after {
+        content: '\203A';
+        float: right;
+        margin-right: 20px;
+        transform: rotate(90deg);
+    }
+
+    .sub-arrow:after {
+        content: '\203A';
+        float: right;
+        margin-right: 20px;
+    }
+
+    body {
+        background: #e0ded6;
+        font-family: "Helvetica Neue", Helvetica, Arial;
+        padding-top: 20px;
+    }
+
+    table,
+    th,
+    td {
+        border: 2px solid;
+        border-collapse: collapse;
+        border-color: #e4dfdf;
+    }
+
+    th {
+        padding-top: 8px;
+        background-color: #EFEFEF;
+        text-align: center;
+        width: 300px;
+        font-size: 14px;
+    }
+
+    .table-content {
+        padding: 4px 10px;
+        text-align: center;
+        width: 500px;
+    }
+
+    ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        width: 250px;
+        background-color: #f1f1f1;
+    }
+
+    li a {
+        display: block;
+        color: #000;
+        padding: 8px 16px;
+        text-decoration: none;
+    }
+
+    #lv1_selected {
+        background-color: #8AA0AB;
+        color: white;
+    }
+
+    #lv2_selected {
+        background-color: #FCFEFE;
+        color: #000;
+    }
+
+    a:hover:not(.active) {
+        background-color: rgb(218, 218, 218);
+        color: #000;
+    }
+
+    #submitBtn {
+        background: -moz-linear-gradient(top,
+                #b9c5dd 0%,
+                #ACB9CA);
+        background: -webkit-gradient(linear, left top, left bottom,
+                from(#b9c5dd),
+                to(#ACB9CA));
+        color: #000;
+        border: 2px solid #ACB9CA;
+    }
+
+    #submitBtn:hover {
+        background: -moz-linear-gradient(top,
+                #ACB9CA 0%,
+                #b9c5dd);
+        background: -webkit-gradient(linear, left top, left bottom,
+                from(#ACB9CA),
+                to(#b9c5dd));
+    }
+
+    #saveBtn {
+        background: -moz-linear-gradient(top,
+                #D8D8D8 0%,
+                #C9C9C9);
+        background: -webkit-gradient(linear, left top, left bottom,
+                from(#D8D8D8),
+                to(#C9C9C9));
+        /* background: #D8D8D8; */
+        color: #000;
+        border: 2px solid #D8D8D8;
+    }
+
+    #saveBtn:hover {
+        background: -moz-linear-gradient(top,
+                #C9C9C9 0%,
+                #D8D8D8);
+        background: -webkit-gradient(linear, left top, left bottom,
+                from(#C9C9C9),
+                to(#D8D8D8));
+    }
+
+    #addRecord_Btn {
+        background-color: #C5C4B0;
+        color: #000;
+        border-color: #aca979;
+    }
+
+    #addRecord_Btn:hover {
+        background-color: #acab9a;
+        color: #000;
+        border-color: #aca979;
+    }
+</style>
+
+<div class="container" style="width: 1140px; position: static; text-align:right;">
+    <% if (req.session.role !=undefined) {%>
+
+        <a href="/user/logout" class="item" style="color: black;">(Logout)</a>
+
+        <%}%>
+</div>
+
+<div class="container" style="width: 1140px;  justify-content: center; 
+    margin: 0 auto;  padding: 30px 15px 25px; background: #fff;
+    border-radius: 0px; position: static;">
+    <article class="page">
+        <div style="display: flex;">
+
+            <nav class="main-nav">
+                <ul class="main-nav-ul">
+                    <li class="menu-left_item lv1"><a href="/user/student/myInbox"><span class="nav-text lv1"> My
+                                Inbox</span><span class="sub-arrow"></span></a></li>
+
+                    <li class="menu-left_item lv1"><a class="active" id="lv1_selected"
+                            href="/user/student/myApplication">My
+                            Application<span class="sub-arrow-selected"></span></a>
+                        <ul>
+                            <li class="menu-left_item lv2"><a href="/forms/personalParticulars">Personal Particulars</a>
+                            </li>
+                            <li class="menu-left_item lv2"><a href="/forms/academicProfile">Academic Profile</a></li>
+                            <li class="menu-left_item lv2"><a href="/forms/academicQualification">Academic
+                                    Qualification</a></li>
+                            <li class="menu-left_item lv2"><a href="/forms/programmePreference">Programme Preference</a>
+                            </li>
+                            <li class="menu-left_item lv2"><a href="#">Prize and Awards</a></li>
+                            <li class="menu-left_item lv2"><a href="#">Extra-curricular Activities</a></li>
+                            <li class="menu-left_item lv2"><a href="/forms/academicReference">Academic Reference</a></li>
+                            <li class="menu-left_item lv2"><a class="active" id="lv2_selected"
+                                    href="/forms/OtherInformation">Other Information</a></li>
+                        </ul>
+                    </li>
+                    <li class="menu-left_item lv1"><a href="/user/student/applicationStatus"><span
+                                class="nav-text lv1">Application Status</span><span class="sub-arrow"></span></a>
+                    </li>
+                    <li class="menu-left_item lv1"><a href="/user/student/myProfile"><span class="nav-text lv1"> My
+                                Profile</span><span class="sub-arrow"></span></a>
+                    </li>
+                </ul>
+            </nav>
+
+            <form id="OtherInformation" action="/forms/OtherInformation" method="POST">
+
+                <div class="main-content" style="margin-left: 40px">
+                    <h3 style="color: #333333;
+                            font-size: 24px;
+                            font-weight: bold;
+                            margin-bottom: 5px;">Other Information</h3>
+
+                    <div class="container" style="background: #C8D8CC; margin-top: 15px; width: 800px; padding-top: 1px;
+                margin-left: 0px ">
+                        <p>Personal Statement</p>
+                    </div>
+
+                    <div style="margin: 10px 0;">
+                        <p style=" width: 800px; color: #444444;">Submission of personal statement is OPTIONAL, though
+                            some
+                            study programmes may make reference to
+                            the personal statement during the selection process.
+                            Please write no more than 600 words either in English or Chinese, such as reasons for
+                            application, career aspiration, personal strengths, hobbies and interests, voluntary
+                            services,
+                            etc. If space provided is not enough, please upload your personal statement via the
+                            "Supporting
+                            Documents" section.</p>
+
+                        <div class="row">
+                            <div id="div01" class="form-group col-xl-12 col-12">
+                                <textarea rows="5" cols="50" maxlength="600" class="form-control input-lg"
+                                    name="OtherInformation[personalStatement]"
+                                    style="width: 800px; display:inline-block; vertical-align:left;"><% if(req.session.otherInformationData !=null && req.session.otherInformationData.OtherInformation.personalStatement !=null) 
+                                    { %><%=req.session.otherInformationData.OtherInformation.personalStatement %><% } %></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="container" style="background: #C8D8CC; margin-top: 15px; width: 800px; padding-top: 1px;
+                      margin-left: 0px;">
+                        <p>Working Experience</p>
+                    </div>
+
+                    <div class="row" style="max-width: 810px;">
+                        <table style="color: #333333; margin-left: 20px; padding-top: 0px; max-width: 800px; ">
+                            <tr>
+                                <th>Name of Organization</th>
+                                <td class=" table-content">
+                                    <input type="text" class="form-control" name="OtherInformation[organization1]"
+                                        style="height: 21px; padding: 4px;" <% if(req.session.otherInformationData
+                                        !=null && req.session.otherInformationData.OtherInformation.organization1
+                                        !=null) { %>
+                                    value="<%=req.session.otherInformationData.OtherInformation.organization1 %>" <% }
+                                            %>
+                                            />
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <th>Position Held</th>
+                                <td class="table-content">
+                                    <input type="text" class="form-control" name="OtherInformation[position1]"
+                                        style="height: 21px; padding: 4px;" <% if(req.session.otherInformationData
+                                        !=null && req.session.otherInformationData.OtherInformation.position1 !=null) {
+                                        %>
+                                    value="<%=req.session.otherInformationData.OtherInformation.position1 %>" <% } %>
+                                            />
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <th>Nature of Work</th>
+                                <td class="table-content">
+                                    <select class="form-control" id="workNature1" name="OtherInformation[workNature1]"
+                                        style="height: 20px; padding: 0px; width: 325px;">
+                                    </select>
+                                </td>
+
+                            </tr>
+
+                            <tr>
+                                <th>Work Mode</th>
+                                <td class="table-content">
+                                    <div class="select_join">
+                                        <select class="form-control" name="OtherInformation[workMode1]"
+                                            style="height: 20px; padding: 0px; width: 200px;">
+                                            <option value="" selected="true" disabled="disabled">-Select-</option>
+                                            <option value="full-time" <% if(req.session.otherInformationData !=null &&
+                                                req.session.otherInformationData.OtherInformation.workMode1 !=null) { %>
+                                                <%=(req.session.otherInformationData.OtherInformation.workMode1=='full-time'
+                                                    )? 'selected' :'' %>
+                                                    <% } %>
+                                                        >Full-time
+                                            </option>
+                                            <option value="part-time" <% if(req.session.otherInformationData !=null &&
+                                                req.session.otherInformationData.OtherInformation.workMode1 !=null) { %>
+                                                <%=(req.session.otherInformationData.OtherInformation.workMode1=='part-time'
+                                                    )? 'selected' :'' %>
+                                                    <% } %>
+                                                        >Part-time
+                                            </option>
+                                            <option value="voluntary" <% if(req.session.otherInformationData !=null &&
+                                                req.session.otherInformationData.OtherInformation.workMode1 !=null) { %>
+                                                <%=(req.session.otherInformationData.OtherInformation.workMode1=='voluntary'
+                                                    )? 'selected' :'' %>
+                                                    <% } %>
+                                                        >Voluntary
+                                            </option>
+                                        </select>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <th>Period From</th>
+                                <td class="table-content">
+                                    <div class="row" style="margin-left: 0px ;">
+                                        <select class="form-control" id="periodFromMonth1"
+                                            name="OtherInformation[periodFromMonth1]"
+                                            style="height: 20px; padding: 0px; width: 105px;">
+                                        </select>
+
+                                        <label class="col-form-label"
+                                            style="padding: 0px; margin: 0px;"><span>&nbsp;/&nbsp;</span></label>
+
+                                        <select class="form-control" id="periodFromYear1"
+                                            name="OtherInformation[periodFromYear1]"
+                                            style="height: 20px; padding: 0px; width: 105px;">
+                                        </select>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <th>Period To</th>
+                                <td class="table-content">
+                                    <div class="row" style="margin-left: 0px ;">
+                                        <select class="form-control" id="periodToMonth1"
+                                            name="OtherInformation[periodToMonth1]"
+                                            style="height: 20px; padding: 0px; width: 105px;">
+                                        </select>
+
+                                        <label class="col-form-label"
+                                            style="padding: 0px; margin: 0px;"><span>&nbsp;/&nbsp;</span></label>
+
+                                        <select class="form-control" id="periodToYear1"
+                                            name="OtherInformation[periodToYear1]"
+                                            style="height: 20px; padding: 0px; width: 105px;">
+                                        </select>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <th>Duties</th>
+                                <td class="table-content">
+                                    <textarea rows="2" cols="50" maxlength="100" class="form-control input-lg"
+                                        name="OtherInformation[duties1]"><% if(req.session.otherInformationData !=null
+                                        && req.session.otherInformationData.OtherInformation.duties1 !=null) 
+                                        { %><%=req.session.otherInformationData.OtherInformation.duties1 %><% } %></textarea>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div>
+                        <br>
+                        <button type="button" id="addRecord_Btn" class="btn btn-primary" style="font-size: 15px;"
+                            onclick="addRow()">
+                            <b>Add Record</b></button>
+                    </div>
+
+                    <div>
+                        <br>
+                        <!-- Save -->
+                        <button type="submit" id="saveBtn" value="save" class="btn btn-primary">
+                            <b>Save</b></button>
+                        <!-- Submit -->
+                        <button type="submit" id="submitBtn" value="submit" formaction="/forms/submit"
+                            class="btn btn-primary"><b>Submit Application</b></button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </article>
+</div>
+
+<script>
+    (function () {
+        //set month options
+        var monthOptions1 = "<option selected value=''>" + "-Month-" + "</option>";
+        var monthOptions2 = "<option selected value=''>" + "-Month-" + "</option>";
+
+        var month = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+
+        for (i = 0; i < month.length; i = i + 1) {
+            monthOptions1 += "<option value='" + month[i] + "' id='" + month[i] + "1'>" + month[i] + "</option>";
+        }
+
+        for (i = 0; i < month.length; i = i + 1) {
+            monthOptions2 += "<option value='" + month[i] + "' id='" + month[i] + "2'>" + month[i] + "</option>";
+        }
+
+        document.getElementById("periodFromMonth1").innerHTML = monthOptions1;
+        document.getElementById("periodToMonth1").innerHTML = monthOptions2;
+
+        '<% if (req.session.otherInformationData != null && req.session.otherInformationData.OtherInformation.periodFromMonth1 != null) { %>'
+        var selectedPeriodFromMonth = '<%= req.session.otherInformationData.OtherInformation.periodFromMonth1 %>';
+        '<% } %>'
+
+        '<% if (req.session.otherInformationData != null && req.session.otherInformationData.OtherInformation.periodToMonth1 != null) { %>'
+        var selectedPeriodToMonth = '<%= req.session.otherInformationData.OtherInformation.periodToMonth1 %>';
+        '<% } %>'
+
+        for (i = 0; i < month.length; i = i + 1) {
+            if (selectedPeriodFromMonth == month[i]) {
+
+                document.getElementById(month[i] + '1').setAttribute('selected', 'selected');
+            }
+        }
+
+        for (i = 0; i < month.length; i = i + 1) {
+            if (selectedPeriodToMonth == month[i]) {
+
+                document.getElementById(month[i] + '2').setAttribute('selected', 'selected');
+            }
+        }
+    })();
+</script>
+
+<script>
+    (function () {
+        //set year options
+        var todayYear = new Date().getFullYear();
+        var start = todayYear;
+        var end = 1950;
+        var yearOptions1 = "<option selected value=''>" + "-Year-" + "</option>";
+        var yearOptions2 = "<option selected value=''>" + "-Year-" + "</option>";
+
+        for (var year = start; year >= end; year--) {
+            yearOptions1 += "<option id='" + year + "1'>" + year + "</option>";
+        }
+
+        for (var year = start; year >= end; year--) {
+            yearOptions2 += "<option id='" + year + "2'>" + year + "</option>";
+        }
+
+        document.getElementById("periodFromYear1").innerHTML = yearOptions1;
+        document.getElementById("periodToYear1").innerHTML = yearOptions2;
+
+        '<% if (req.session.otherInformationData != null && req.session.otherInformationData.OtherInformation.periodFromYear1 != null) { %>'
+        var selectedPeriodFromYear = '<%= req.session.otherInformationData.OtherInformation.periodFromYear1 %>';
+        '<% } %>'
+
+        '<% if (req.session.otherInformationData != null && req.session.otherInformationData.OtherInformation.periodToYear1 != null) { %>'
+        var selectedPeriodToYear = '<%= req.session.otherInformationData.OtherInformation.periodToYear1 %>';
+        '<% } %>'
+
+        for (var year = start; year >= end; year--) {
+            if (selectedPeriodFromYear == year) {
+
+                document.getElementById(year + '1').setAttribute('selected', 'selected');
+            }
+        }
+
+        for (var year = start; year >= end; year--) {
+            if (selectedPeriodToYear == year) {
+
+                document.getElementById(year + '2').setAttribute('selected', 'selected');
+            }
+        }
+    })();
+</script>
+
+<script>
+    (function () {
+        //set nature of work options
+        var workNatureOptions = "<option disabled selected>" + "-Select-" + "</option>";
+
+        var workNature = ['Accounting', 'Admin & HR', 'Banking / Finance', 'Beauty Care / Health', 'Building & Construction',
+            'Design', 'E-commerce', 'Education', 'Engineering', 'Hospitality / Food & Beverage', 'Information Technology (IT)', 'Insurance',
+            'Management', 'Manufacturing', 'Marketing / Public Relations', 'Medical Services', 'Mechanising & Purchasing', 'Profession Services',
+            'Property / Real Estate', 'Public / Civil', 'Sales, Customer Service & Business', 'Sciences, Lab, Research & Development',
+            'Transportation & Logistics', 'Others'];
+
+        for (i = 0; i < workNature.length; i = i + 1) {
+            workNatureOptions += "<option value='" + workNature[i] + "' id='" + workNature[i] + "'>" + workNature[i] + "</option>";
+        }
+
+        document.getElementById("workNature1").innerHTML = workNatureOptions;
+
+        '<% if (req.session.otherInformationData != null && req.session.otherInformationData.OtherInformation.workNature1 != null) { %>'
+        var selectedWorkNature = '<%= req.session.otherInformationData.OtherInformation.workNature1 %>';
+        '<% } %>'
+
+        for (i = 0; i < workNature.length; i = i + 1) {
+            if (selectedWorkNature == workNature[i]) {
+
+                document.getElementById(workNature[i]).setAttribute('selected', 'selected');
+            }
+        }
+    })();
+</script>
+
+<script>
+    (function () {
+        document.getElementById('submitBtn').addEventListener('click', function (event) {
+
+                '<% if (req.session.academicProfileData == null || req.session.personalParticularsData == null || req.session.program1 == "") {%>'
+                event.preventDefault();
+                alert("You have not completed all the compulsory sections of the application form.");
+                '<% } %>'
+
+        }, false);
+    })();
+</script>

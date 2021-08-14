@@ -1,0 +1,759 @@
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<style type="text/css">
+    .topnav {
+        overflow: hidden;
+        background-color: #f0f0f0;
+        width: 100%;
+        justify-content: center;
+        margin: 0 auto;
+        padding-left: 110px;
+        border-radius: 0px;
+        position: static;
+    }
+
+    .topnav a {
+        float: left;
+        color: #000;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+        font-size: 17px;
+    }
+
+    .topnav a:hover:not(.active) {
+        background-color: rgb(218, 218, 218);
+        color: #000;
+    }
+
+    .topnav a:hover,
+    .topnav a:focus {
+        text-decoration: underline;
+    }
+
+    .topnav a.active {
+        /* background-color:#697174; */
+        /* background-color:#717A7D; */
+        background-color: #8AA0AB;
+        color: white;
+    }
+
+    body {
+        background: #e0ded6;
+        font-family: "Helvetica Neue", Helvetica, Arial;
+    }
+
+    input::-webkit-input-placeholder {
+        color: #b5b5b5;
+    }
+
+    input:-moz-placeholder {
+        color: #b5b5b5;
+    }
+
+    .clearfix::after {
+        content: "";
+        clear: both;
+        display: table;
+    }
+
+    #backToDataTable:hover {
+        opacity: 1;
+    }
+
+    #backToDataTable {
+        background-color: #FEFAFF;
+        color: #666666;
+        border-radius: 2px;
+        width: 175px;
+        margin-bottom: 10px;
+        margin-right: 5px;
+        font-size: 14px;
+        padding: 4px 9px 4px;
+        opacity: 0.9;
+    }
+
+    .main-nav-ul ul {
+        display: none;
+    }
+
+    .main-nav-ul li:hover ul {
+        display: block;
+    }
+
+    .sub-arrow:after {
+        content: '\203A';
+        float: right;
+        margin-right: 20px;
+    }
+
+    ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        width: 250px;
+        background-color: #f8f8f8;
+    }
+
+    li a {
+        display: block;
+        color: #666666;
+        padding: 8px 16px;
+        text-decoration: none;
+    }
+
+    li a.active {
+        background-color: #908B85;
+        color: white;
+        opacity: 0.7;
+    }
+
+    li a:hover:not(.active) {
+        background-color: rgb(218, 218, 218);
+        color: #000;
+    }
+
+    #nextBtn {
+        background: -moz-linear-gradient(top,
+                #b9c5dd 0%,
+                #ACB9CA);
+        background: -webkit-gradient(linear, left top, left bottom,
+                from(#b9c5dd),
+                to(#ACB9CA));
+        color: #000;
+        border: 2px solid #ACB9CA;
+    }
+
+    #nextBtn:hover {
+        background: -moz-linear-gradient(top,
+                #ACB9CA 0%,
+                #b9c5dd);
+        background: -webkit-gradient(linear, left top, left bottom,
+                from(#ACB9CA),
+                to(#b9c5dd));
+    }
+</style>
+
+<div class="wrapper" style="width: 100%;">
+    <div class="container-fluid no-gutters"
+        style="position: static; text-align: right; margin: 8px 0px; font-size: 14px;">
+
+        <% if (req.session.role !=undefined) {%>
+
+            Logged in as <b>
+                <%= req.session.user.Surname%>
+                    <%= req.session.user.GivenName%>
+            </b>&nbsp; |&nbsp;
+
+            <a style="color: black; padding: 5px 50px 25px 0px; color: #71838C" href="/user/logout">Logout</a>
+
+            <%}%>
+    </div>
+</div>
+
+<div class="wrapper" style="width: 100%; margin: 0 auto;">
+    <div class="container-fluid" style="justify-content: center; 
+    padding: 27px 15px 12px 115px; background: #fff;
+    border-radius: 0px; position: static;">
+        <h2 style="font-size: 40px;
+            font-weight: bold; color:#6A635A">HKBU Student Admission System</h2>
+    </div>
+</div>
+
+<div class="topnav">
+    <a class="active" href="/user/admin/applications/all/search">Applications</a>
+    <a href="/user/admin/statistics">Statistics</a>
+    <a href="/user/admin/profile">Profile</a>
+</div>
+
+<div class="wrapper" style="width: 100%; margin: 0 auto;">
+    <div class="container-fluid"
+        style="justify-content: center; height: 35px; font-size: 17px;
+background: #fff; border-radius: 0px; position: static; color: #888888; padding-top: 6px; padding-bottom: 5px; padding-left: 125px;">
+        <i class="fa fa-home" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;<i class="fa fa-angle-right"
+            aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;<span>Applications</span>&nbsp;&nbsp;
+    </div>
+</div>
+<br>
+
+<div class="wrapper" style="width: 1310px; margin: 0 auto;">
+    <div class="container-fluid" style="justify-content: center; 
+    padding: 30px 15px 25px; background: #fff;
+    border-radius: 0px; position: static;">
+
+        <div style="display: flex;">
+
+            <div class="main-content" style="margin-left: 40px;">
+
+                <div class="row" style="margin-left: 0px; clear: both">
+                    <!-- send email button -->
+                    <a id="redirect-link" style="color: #333333;" href="/user/admin/applications/all/search">
+                        <button class="form-control btn-lg" id="backToDataTable">
+                            << See all applications </button>
+                    </a>
+                </div>
+
+                <br>
+                <article class="page">
+                    <div style="display: flex;">
+
+                        <nav class="main-nav">
+                            <ul class="main-nav-ul">
+                                <li class="menu-left_item lv1"><a class="active" href="/user/admin/applications/details/<%= application.id%>"><span class="sub-arrow">Personal
+                                            Particulars</span></a></li>
+
+                                <li class="menu-left_item lv1"><a href="/user/admin/applications/details/academicProfile/<%= application.id%>">Academic Profile<span
+                                            class="sub-arrow"></span></a>
+                                </li>
+                                <li class="menu-left_item lv1"><a href="/user/admin/applications/details/academicQualification/<%= application.id%>"><span class="sub-arrow">Academic
+                                            Qualification</span></a>
+                                </li>
+                                <li class="menu-left_item lv1"><a href="/user/admin/applications/details/programmePreference/<%= application.id%>"><span class="sub-arrow">Programme
+                                            Preference</span></a>
+                                </li>
+                                <li class="menu-left_item lv1"><a href="/user/admin/applications/details/academicReference/<%= application.id%>"><span class="sub-arrow">Academic Reference</span></a>
+                                </li>
+                                <li class="menu-left_item lv1"><a href="/user/admin/applications/details/otherInformation/<%= application.id%>"><span class="sub-arrow">Other
+                                            Information</span></a>
+                                </li>
+                            </ul>
+                        </nav>
+
+                        <div id="personalParticulars">
+
+                            <div class="main-content" style="margin-left: 40px">
+                                <h3 style="color: #666666;
+                                        font-size: 24px;
+                                        font-weight: bold;
+                                        margin-bottom: 5px;">Personal Particulars</h3>
+
+                                <div class="container" style="background: #C8D8CC; margin-top: 15px; width: 800px; padding-top: 1px;
+                            margin-left: 0px ">
+                                    <p>Personal Information</p>
+                                </div>
+
+                                <div class="row" style="width: 810px;">
+                                    <div id="div01" class="form-group col-xl-6 col-12">
+                                        <label>English Name: <span style="color: #F16C6D;">*</span></label>
+                                        <input type="text" class="form-control" name="engName"
+                                            onkeyup="value=value.replace(/[^\a-\z\A-\Z\ ]/g,'')"
+                                            <%
+                                            if(application.personalParticularsData !=null &&
+                                            application.personalParticularsData.PersonalParticulars.engName !=null) { %>
+                                        value="<%=application.personalParticularsData.PersonalParticulars.engName%>" <%
+                                                } %>
+                                            required>
+                                    </div>
+
+                                    <div id="div02" class="form-group col-xl-6 col-12">
+                                        <label>Chinese Name:</label>
+                                        <input type="text" class="form-control" name="chiName" <%
+                                            if(application.personalParticularsData !=null &&
+                                            application.personalParticularsData.PersonalParticulars.chiName !=null) { %>
+                                        value="<%=application.personalParticularsData.PersonalParticulars.chiName%>" <%
+                                                } %>
+                                                >
+                                    </div>
+
+                                    <div id="div03" class="form-group col-xl-6 col-12">
+                                        <label>Nationality: <span style="color: #F16C6D;">*</span></label>
+                                        <select id="nationality" name="nationality" class="form-control"
+                                            required></select>
+                                    </div>
+
+                                    <div id="div04" class="form-group col-xl-6 col-12">
+                                        <label>Date of Birth: <span style="color: #F16C6D;">*</span></label>
+                                        <input type="date" class="form-control" name="dateOfBirth"
+                                            value="<%=application.personalParticularsData.PersonalParticulars.dateOfBirth%>"
+                                            required>
+                                    </div>
+
+                                    <div id="div05" class="form-group col-xl-6 col-12">
+                                        <label>Place of Birth: <span style="color: #F16C6D;">*</span></label>
+                                        <select id="placeOfBirth" name="placeOfBirth" class="form-control"
+                                            required></select>
+                                    </div>
+
+                                    <div id="div06" class="form-group col-xl-6 col-12">
+                                        <label>Sex: <span style="color: #F16C6D;">*</span></label>
+                                        <select class="form-control" name="sex" required>
+                                            <option value="" selected="true" disabled="disabled">-Select-</option>
+                                            <option value="Female" <% if(application.personalParticularsData !=null &&
+                                                application.personalParticularsData.PersonalParticulars.sex !=null) { %>
+                                                <%=(application.personalParticularsData.PersonalParticulars.sex=='Female'
+                                                    )? 'selected' :'' %>
+                                                    <% } %>
+                                                        >Female
+                                            </option>
+                                            <option value="Male" <% if(application.personalParticularsData !=null &&
+                                                application.personalParticularsData.PersonalParticulars.sex !=null) { %>
+                                                <%=(application.personalParticularsData.PersonalParticulars.sex=='Male'
+                                                    )? 'selected' :'' %>
+                                                    <% } %>
+                                                        >Male
+                                            </option>
+                                        </select>
+                                    </div>
+
+                                    <div id="div07" class="form-group col-xl-6 col-12">
+                                        <label>Email:</label>
+                                        <input type="email" class="form-control" value="<%= application.Email %>"
+                                            name="email" disabled>
+                                    </div>
+                                </div>
+
+                                <div class="container" style="background: #C8D8CC; margin-top: 15px; width: 800px; padding-top: 1px;
+                                  margin-left: 0px ">
+                                    <p>Identity</p>
+                                </div>
+
+                                <div class="row" style="max-width: 810px;">
+                                    <div>
+                                        <p style="margin-left: 15px; color: #444444">Please provide one of the following
+                                            Identity
+                                            Document Number. For Non-local applicants, please specify the issuing
+                                            country/ region of
+                                            the identity document you hold.</p>
+                                    </div>
+
+                                    <div id="div08" class="form-group col-xl-6 col-12">
+                                        <label>HKID Card No.:</label>
+                                        <input type="text" class="form-control" id="hkID" name="hkID" <%
+                                            if(application.personalParticularsData !=null &&
+                                            application.personalParticularsData.PersonalParticulars.hkID !=null) { %>
+                                        value="<%=application.personalParticularsData.PersonalParticulars.hkID%>" <% }
+                                                %>
+                                                >
+                                    </div>
+
+                                    <div id="div09" class="form-group col-xl-6"></div>
+
+                                    <div id="div10" class="form-group col-xl-6 col-12">
+                                        <label>Other National ID No.:</label>
+                                        <input type="text" class="form-control" id="nationalID" name="nationalID"
+                                            onchange="setMandatory()" <% if(application.personalParticularsData !=null
+                                            && application.personalParticularsData.PersonalParticulars.nationalID
+                                            !=null) { %>
+                                        value="<%=application.personalParticularsData.PersonalParticulars.nationalID%>"
+                                            <% } %>
+                                                >
+                                    </div>
+
+                                    <div id="div11" class="form-group col-xl-6 col-12">
+                                        <label>Issuing Country/ Region:</label>
+                                        <select class="form-control" id="issueCountry1" name="issueCountry1"></select>
+                                    </div>
+
+                                    <div id="div12" class="form-group col-xl-6 col-12">
+                                        <label>Travel Document No.:</label>
+                                        <input type="text" class="form-control" id="travelDocNum"
+                                            onchange="setRequired()" <% if(application.personalParticularsData !=null &&
+                                            application.personalParticularsData.PersonalParticulars.travelDocNum !=null)
+                                            { %>
+                                        value="<%=application.personalParticularsData.PersonalParticulars.travelDocNum%>
+                                            " <% } %>
+                                                name="travelDocNum">
+                                    </div>
+
+                                    <div id="div13" class="form-group col-xl-6 col-12">
+                                        <label>Issuing Country/ Region:</label>
+                                        <select class="form-control" id="issueCountry2" onchange="setRequired()"
+                                            name="issueCountry2"></select>
+                                    </div>
+                                </div>
+
+                                <div class="container" style="background: #C8D8CC; margin-top: 15px; width: 800px; padding-top: 1px;
+                                margin-left: 0px ">
+                                    <p>Contact</p>
+                                </div>
+
+                                <div class="row" style="max-width: 810px;">
+                                    <div id="div14" class="form-group col-xl-6 col-12">
+                                        <label>Home Telephone Number:</label>
+                                        <input type="tel" class="form-control" name="telNum" pattern="^([0-9]){8,}$" <%
+                                            if(application.personalParticularsData !=null &&
+                                            application.personalParticularsData.PersonalParticulars.telNum !=null) { %>
+                                        value="<%=application.personalParticularsData.PersonalParticulars.telNum%>" <% }
+                                                %>
+                                                >
+                                    </div>
+
+                                    <div id="div15" class="form-group col-xl-6 col-12">
+                                        <label>Mobile Number: <span style="color: #F16C6D;">*</span></label>
+                                        <input type="tel" class="form-control" name="mobileNum" pattern="^([0-9]){8,}$"
+                                            <% if(application.personalParticularsData !=null &&
+                                            application.personalParticularsData.PersonalParticulars.mobileNum !=null) {
+                                            %>
+                                        value="<%=application.personalParticularsData.PersonalParticulars.mobileNum%>"
+                                            <% } %>
+                                                required>
+                                    </div>
+
+                                    <div id="div16" class="form-group col-xl-12 col-12">
+                                        <label>Postal Address: <span style="color: #F16C6D;">*</span></label>
+                                        <input type="text" class="form-control" name="address" <%
+                                            if(application.personalParticularsData !=null &&
+                                            application.personalParticularsData.PersonalParticulars.address !=null) { %>
+                                        value="<%=application.personalParticularsData.PersonalParticulars.address%>" <%
+                                                } %>
+                                                required>
+                                    </div>
+                                </div>
+                                <div>
+                                    <br>
+                                    <!-- Next -->
+                                    <a href="/user/admin/applications/details/academicProfile/<%= application.id%>">
+                                        <button id="nextBtn" class="btn btn-primary"><b>Next
+                                                Page >></b></button>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </article>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    (function () {
+        var nationalityOptions = "<option disabled selected>" + "-Select-" + "</option>";
+        var placeOfBirthOptions = "<option disabled selected>" + "-Select-" + "</option>";
+        var issueCountry1Options = "<option selected value=''>" + "-Select-" + "</option>";
+        var issueCountry2Options = "<option selected value=''>" + "-Select-" + "</option>";
+        var countries = [
+            "Afghanistan",
+            "Åland Islands",
+            "Albania",
+            "Algeria",
+            "American Samoa",
+            "Andorra",
+            "Angola",
+            "Anguilla",
+            "Antarctica",
+            "Antigua and Barbuda",
+            "Argentina",
+            "Armenia",
+            "Aruba",
+            "Australia",
+            "Austria",
+            "Azerbaijan",
+            "Bahamas (the)",
+            "Bahrain",
+            "Bangladesh",
+            "Barbados",
+            "Belarus",
+            "Belgium",
+            "Belize",
+            "Benin",
+            "Bermuda",
+            "Bhutan",
+            "Bolivia (Plurinational State of)",
+            "Bonaire, Sint Eustatius and Saba",
+            "Bosnia and Herzegovina",
+            "Botswana",
+            "Bouvet Island",
+            "Brazil",
+            "British Indian Ocean Territory (the)",
+            "Brunei Darussalam",
+            "Bulgaria",
+            "Burkina Faso",
+            "Burundi",
+            "Cabo Verde",
+            "Cambodia",
+            "Cameroon",
+            "Canada",
+            "Cayman Islands (the)",
+            "Central African Republic (the)",
+            "Chad",
+            "Chile",
+            "China",
+            "Christmas Island",
+            "Cocos (Keeling) Islands (the)",
+            "Colombia",
+            "Comoros (the)",
+            "Congo (the Democratic Republic of the)",
+            "Congo (the)",
+            "Cook Islands (the)",
+            "Costa Rica",
+            "Croatia",
+            "Cuba",
+            "Curaçao",
+            "Cyprus",
+            "Czechia",
+            "Côte d'Ivoire",
+            "Denmark",
+            "Djibouti",
+            "Dominica",
+            "Dominican Republic (the)",
+            "Ecuador",
+            "Egypt",
+            "El Salvador",
+            "Equatorial Guinea",
+            "Eritrea",
+            "Estonia",
+            "Eswatini",
+            "Ethiopia",
+            "Falkland Islands (the) [Malvinas]",
+            "Faroe Islands (the)",
+            "Fiji",
+            "Finland",
+            "France",
+            "French Guiana",
+            "French Polynesia",
+            "French Southern Territories (the)",
+            "Gabon",
+            "Gambia (the)",
+            "Georgia",
+            "Germany",
+            "Ghana",
+            "Gibraltar",
+            "Greece",
+            "Greenland",
+            "Grenada",
+            "Guadeloupe",
+            "Guam",
+            "Guatemala",
+            "Guernsey",
+            "Guinea",
+            "Guinea-Bissau",
+            "Guyana",
+            "Haiti",
+            "Heard Island and McDonald Islands",
+            "Holy See (the)",
+            "Honduras",
+            "Hong Kong",
+            "Hungary",
+            "Iceland",
+            "India",
+            "Indonesia",
+            "Iran (Islamic Republic of)",
+            "Iraq",
+            "Ireland",
+            "Isle of Man",
+            "Israel",
+            "Italy",
+            "Jamaica",
+            "Japan",
+            "Jersey",
+            "Jordan",
+            "Kazakhstan",
+            "Kenya",
+            "Kiribati",
+            "Korea (the Democratic People's Republic of)",
+            "Korea (the Republic of)",
+            "Kuwait",
+            "Kyrgyzstan",
+            "Lao People's Democratic Republic (the)",
+            "Latvia",
+            "Lebanon",
+            "Lesotho",
+            "Liberia",
+            "Libya",
+            "Liechtenstein",
+            "Lithuania",
+            "Luxembourg",
+            "Macao",
+            "Madagascar",
+            "Malawi",
+            "Malaysia",
+            "Maldives",
+            "Mali",
+            "Malta",
+            "Marshall Islands (the)",
+            "Martinique",
+            "Mauritania",
+            "Mauritius",
+            "Mayotte",
+            "Mexico",
+            "Micronesia (Federated States of)",
+            "Moldova (the Republic of)",
+            "Monaco",
+            "Mongolia",
+            "Montenegro",
+            "Montserrat",
+            "Morocco",
+            "Mozambique",
+            "Myanmar",
+            "Namibia",
+            "Nauru",
+            "Nepal",
+            "Netherlands (the)",
+            "New Caledonia",
+            "New Zealand",
+            "Nicaragua",
+            "Niger (the)",
+            "Nigeria",
+            "Niue",
+            "Norfolk Island",
+            "Northern Mariana Islands (the)",
+            "Norway",
+            "Oman",
+            "Pakistan",
+            "Palau",
+            "Palestine, State of",
+            "Panama",
+            "Papua New Guinea",
+            "Paraguay",
+            "Peru",
+            "Philippines (the)",
+            "Pitcairn",
+            "Poland",
+            "Portugal",
+            "Puerto Rico",
+            "Qatar",
+            "Republic of North Macedonia",
+            "Romania",
+            "Russian Federation (the)",
+            "Rwanda",
+            "Réunion",
+            "Saint Barthélemy",
+            "Saint Helena, Ascension and Tristan da Cunha",
+            "Saint Kitts and Nevis",
+            "Saint Lucia",
+            "Saint Martin (French part)",
+            "Saint Pierre and Miquelon",
+            "Saint Vincent and the Grenadines",
+            "Samoa",
+            "San Marino",
+            "Sao Tome and Principe",
+            "Saudi Arabia",
+            "Senegal",
+            "Serbia",
+            "Seychelles",
+            "Sierra Leone",
+            "Singapore",
+            "Sint Maarten (Dutch part)",
+            "Slovakia",
+            "Slovenia",
+            "Solomon Islands",
+            "Somalia",
+            "South Africa",
+            "South Georgia and the South Sandwich Islands",
+            "South Sudan",
+            "Spain",
+            "Sri Lanka",
+            "Sudan (the)",
+            "Suriname",
+            "Svalbard and Jan Mayen",
+            "Sweden",
+            "Switzerland",
+            "Syrian Arab Republic",
+            "Taiwan (Province of China)",
+            "Tajikistan",
+            "Tanzania, United Republic of",
+            "Thailand",
+            "Timor-Leste",
+            "Togo",
+            "Tokelau",
+            "Tonga",
+            "Trinidad and Tobago",
+            "Tunisia",
+            "Turkey",
+            "Turkmenistan",
+            "Turks and Caicos Islands (the)",
+            "Tuvalu",
+            "Uganda",
+            "Ukraine",
+            "United Arab Emirates (the)",
+            "United Kingdom of Great Britain and Northern Ireland (the)",
+            "United States Minor Outlying Islands (the)",
+            "United States of America (the)",
+            "Uruguay",
+            "Uzbekistan",
+            "Vanuatu",
+            "Venezuela (Bolivarian Republic of)",
+            "Viet Nam",
+            "Virgin Islands (British)",
+            "Virgin Islands (U.S.)",
+            "Wallis and Futuna",
+            "Western Sahara",
+            "Yemen",
+            "Zambia",
+            "Zimbabwe"
+        ];
+
+        for (i = 0; i < countries.length; i = i + 1) {
+            nationalityOptions += "<option value='" + countries[i] + "' id='" + countries[i] + "1'>" + countries[i] + "</option>";
+        }
+
+        for (i = 0; i < countries.length; i = i + 1) {
+            placeOfBirthOptions += "<option value='" + countries[i] + "' id='" + countries[i] + "2'>" + countries[i] + "</option>";
+        }
+
+        for (i = 0; i < countries.length; i = i + 1) {
+            issueCountry1Options += "<option value='" + countries[i] + "' id='" + countries[i] + "3'>" + countries[i] + "</option>";
+        }
+
+        for (i = 0; i < countries.length; i = i + 1) {
+            issueCountry2Options += "<option value='" + countries[i] + "' id='" + countries[i] + "4'>" + countries[i] + "</option>";
+        }
+
+        document.getElementById("nationality").innerHTML = nationalityOptions;
+        document.getElementById("placeOfBirth").innerHTML = placeOfBirthOptions;
+        document.getElementById("issueCountry1").innerHTML = issueCountry1Options;
+        document.getElementById("issueCountry2").innerHTML = issueCountry2Options;
+
+
+
+        '<% if (application.personalParticularsData != null && application.personalParticularsData.PersonalParticulars.nationality != null) { %>'
+        var selectedCountry = '<%= application.personalParticularsData.PersonalParticulars.nationality %>';
+        '<% } %>'
+
+        '<% if (application.personalParticularsData != null && application.personalParticularsData.PersonalParticulars.placeOfBirth != null) { %>'
+        var selectedPlaceOfBirth = '<%= application.personalParticularsData.PersonalParticulars.placeOfBirth %>';
+        '<% } %>'
+
+        '<% if (application.personalParticularsData != null && application.personalParticularsData.PersonalParticulars.issueCountry1 != null) { %>'
+        var selectedIssueCountry1 = '<%= application.personalParticularsData.PersonalParticulars.issueCountry1 %>';
+        '<% } %>'
+
+        '<% if (application.personalParticularsData != null && application.personalParticularsData.PersonalParticulars.issueCountry2 != null) { %>'
+        var selectedIssueCountry2 = '<%= application.personalParticularsData.PersonalParticulars.issueCountry2 %>';
+        '<% } %>'
+
+        for (i = 0; i < countries.length; i = i + 1) {
+
+            if (selectedCountry == countries[i]) {
+
+                document.getElementById(countries[i] + '1').setAttribute('selected', 'selected');
+            }
+        }
+
+        for (i = 0; i < countries.length; i = i + 1) {
+
+            if (selectedPlaceOfBirth == countries[i]) {
+
+                document.getElementById(countries[i] + '2').setAttribute('selected', 'selected');
+            }
+        }
+
+        for (i = 0; i < countries.length; i = i + 1) {
+
+            if (selectedIssueCountry1 == countries[i]) {
+
+                document.getElementById(countries[i] + '3').setAttribute('selected', 'selected');
+            }
+        }
+
+        for (i = 0; i < countries.length; i = i + 1) {
+
+            if (selectedIssueCountry2 == countries[i]) {
+
+                document.getElementById(countries[i] + '4').setAttribute('selected', 'selected');
+            }
+        }
+
+    })();
+</script>
