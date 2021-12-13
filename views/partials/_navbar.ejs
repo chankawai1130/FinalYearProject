@@ -1,0 +1,89 @@
+<style type="text/css">
+      .main-nav-ul ul a:before {
+        content: '\203A';
+        margin-right: 20px;
+    }
+
+    .sub-arrow-selected:after {
+        content: '\203A';
+        float: right;
+        margin-right: 20px;
+        transform: rotate(90deg);
+    }
+
+    .sub-arrow:after {
+        content: '\203A';
+        float: right;
+        margin-right: 20px;
+    }
+
+
+    ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        width: 250px;
+        background-color: #f1f1f1;
+    }
+
+    li a {
+        display: block;
+        color: #000;
+        padding: 8px 16px;
+        text-decoration: none;
+    }
+
+    .lv1_selected {
+        background-color: #8AA0AB;
+        color: white;
+    }
+
+    .lv2_active {
+        background-color: #FCFEFE;
+        color: #000;
+    }
+</style>
+
+<nav class="main-nav">
+    <ul class="main-nav-ul">
+        <li class="menu-left_item lv1"><a href="/user/student/myInbox"><span class="nav-text lv1"> My
+                    Inbox</span><span class="sub-arrow"></span></a></li>
+
+        <li class="menu-left_item lv1 lv1_selected"><a
+                href="/user/student/myApplication">My
+                Application<span class="sub-arrow-selected"></span></a>
+            <ul>
+                <li class="<%= (req.path == '/forms/personalParticulars') ? 'menu-left_item lv2 lv2_active' : 'menu-left_item lv2' %>">
+                    <a href="/forms/personalParticulars">Personal Particulars</a>
+                </li>
+                <li class="<%= (req.path == '/forms/academicProfile') ? 'menu-left_item lv2 lv2_active' : 'menu-left_item lv2' %>">
+                    <a href="/forms/academicProfile">Academic Profile</a>
+                </li>
+                <li class="<%= (req.path == '/forms/academicQualification') ? 'menu-left_item lv2 lv2_active' : 'menu-left_item lv2' %>">
+                    <a href="/forms/academicQualification">Academic Qualification</a>
+                </li>
+                <li class="<%= (req.path == '/forms/programmePreference') ? 'menu-left_item lv2 lv2_active' : 'menu-left_item lv2' %>">
+                    <a href="/forms/programmePreference">Programme Preference</a>
+                </li>
+                <li class="<%= (req.path == '/forms/prizeAndAwards') ? 'menu-left_item lv2 lv2_active' : 'menu-left_item lv2' %>">
+                    <a href="#">Prize and Awards</a>
+                </li>
+                <li class="<%= (req.path == '/forms/extra-curricular-activities') ? 'menu-left_item lv2 lv2_active' : 'menu-left_item lv2' %>">
+                    <a href="#">Extra-curricular Activities</a>
+                </li>
+                <li class="<%= (req.path == '/forms/academicReference') ? 'menu-left_item lv2 lv2_active' : 'menu-left_item lv2' %>">
+                    <a href="/forms/academicReference">Academic Reference</a>
+                </li>
+                <li class="<%= (req.path == '/forms/OtherInformation') ? 'menu-left_item lv2 lv2_active' : 'menu-left_item lv2' %>">
+                    <a href="/forms/OtherInformation">Other Information</a>
+                </li>
+            </ul>
+        </li>
+        <li class="menu-left_item lv1"><a href="/user/student/applicationStatus"><span
+                    class="nav-text lv1">Application Status</span><span class="sub-arrow"></span></a>
+        </li>
+        <li class="menu-left_item lv1"><a href="/user/student/myProfile"><span class="nav-text lv1"> My
+                    Profile</span><span class="sub-arrow"></span></a>
+        </li>
+    </ul>
+</nav>

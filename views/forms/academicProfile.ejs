@@ -186,29 +186,7 @@
     } */
 </style>
 
-<div class="container" style="width: 1140px; position: static; text-align:right;">
-    <% if (req.session.role !=undefined) {%>
-
-        <a href="/user/logout" class="item" style="color: black;">(Logout)</a>
-
-        <%}%>
-</div>
-
-
-<!-- <div class="container" style="width: 1140px; justify-content: center; margin-top: 0px !important; 
-margin: 0 auto; background: #383836; color: #fff; position: static; padding-top: 12px; padding-bottom: 20px; opacity: 0.7;">
-        <span style="font-size: 19px; padding-bottom: 5px; padding-left: 15px; font-weight: bold;">HKBU
-            Application System for Undergraduate Programmes</span>
-        <br><span style="font-size: 17px; padding-left: 15px;">Hong Kong Baptist University</span>
-</div> -->
-
-<!-- <div class="container" style="width: 1140px;  justify-content: center; 
-margin: 0 auto; background: #8C8B87; border-radius: 0px; position: static; color: #fff; padding-top: 2px; padding-bottom: 2px;">
-    <i class="fa fa-home" aria-hidden="true"></i>&nbsp;&nbsp;<i class="fa fa-angle-right"
-        aria-hidden="true"></i>&nbsp;&nbsp;<span style="font-size: 14px;"><a href="/user/student/myApplication"
-            class="header">My Application</a></span>&nbsp;&nbsp;<i class="fa fa-angle-right"
-        aria-hidden="true"></i>&nbsp;&nbsp;<span style="font-size: 14px;">Academic Profile</span>
-</div> -->
+<%- partial('../partials/_logout.ejs') %>
 
 <div class="container" style="width: 1140px;  justify-content: center; 
     margin: 0 auto; padding: 30px 15px 25px; background: #fff;
@@ -216,38 +194,7 @@ margin: 0 auto; background: #8C8B87; border-radius: 0px; position: static; color
     <article class="page">
         <div style="display: flex;">
 
-            <nav class="main-nav">
-                <ul class="main-nav-ul">
-                    <li class="menu-left_item lv1"><a href="/user/student/myInbox"><span class="nav-text lv1"> My
-                                Inbox</span><span class="sub-arrow"></span></a></li>
-
-                    <li class="menu-left_item lv1"><a class="active" id="lv1_selected"
-                            href="/user/student/myApplication">My
-                            Application<span class="sub-arrow-selected"></span></a>
-                        <ul>
-                            <li class="menu-left_item lv2"><a href="/forms/personalParticulars">Personal Particulars</a>
-                            </li>
-                            <li class="menu-left_item lv2"><a class="active" id="lv2_selected"
-                                    href="/forms/academicProfile">Academic Profile</a></li>
-                            <li class="menu-left_item lv2"><a href="/forms/academicQualification">Academic
-                                    Qualification</a></li>
-                            <li class="menu-left_item lv2"><a href="/forms/programmePreference">Programme Preference</a>
-                            </li>
-                            <li class="menu-left_item lv2"><a href="#">Prize and Awards</a></li>
-                            <li class="menu-left_item lv2"><a href="#">Extra-curricular Activities</a></li>
-                            <li class="menu-left_item lv2"><a href="/forms/academicReference">Academic Reference</a>
-                            </li>
-                            <li class="menu-left_item lv2"><a href="/forms/OtherInformation">Other Information</a></li>
-                        </ul>
-                    </li>
-                    <li class="menu-left_item lv1"><a href="/user/student/applicationStatus"><span
-                                class="nav-text lv1">Application Status</span><span class="sub-arrow"></span></a>
-                    </li>
-                    <li class="menu-left_item lv1"><a href="/user/student/myProfile"><span class="nav-text lv1"> My
-                                Profile</span><span class="sub-arrow"></span></a>
-                    </li>
-                </ul>
-            </nav>
+            <%- partial('../partials/_navbar.ejs') %>
 
             <form id="academicProfile" action="/forms/academicProfile" method="POST">
 

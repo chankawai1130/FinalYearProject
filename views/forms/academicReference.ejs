@@ -149,38 +149,7 @@
     <article class="page">
         <div style="display: flex;">
 
-            <nav class="main-nav">
-                <ul class="main-nav-ul">
-                    <li class="menu-left_item lv1"><a href="/user/student/myInbox"><span class="nav-text lv1"> My
-                                Inbox</span><span class="sub-arrow"></span></a></li>
-
-                    <li class="menu-left_item lv1"><a class="active" id="lv1_selected"
-                            href="/user/student/myApplication">My
-                            Application<span class="sub-arrow-selected"></span></a>
-                        <ul>
-                            <li class="menu-left_item lv2"><a href="/forms/personalParticulars">Personal Particulars</a>
-                            </li>
-                            <li class="menu-left_item lv2"><a href="/forms/academicProfile">Academic Profile</a></li>
-                            <li class="menu-left_item lv2"><a href="/forms/academicQualification">Academic
-                                    Qualification</a></li>
-                            <li class="menu-left_item lv2"><a href="/forms/programmePreference">Programme Preference</a>
-                            </li>
-                            <li class="menu-left_item lv2"><a href="#">Prize and Awards</a></li>
-                            <li class="menu-left_item lv2"><a href="#">Extra-curricular Activities</a></li>
-                            <li class="menu-left_item lv2"><a class="active" id="lv2_selected"
-                                    href="/forms/academicReference">Academic
-                                    Reference</a></li>
-                            <li class="menu-left_item lv2"><a href="/forms/OtherInformation">Other Information</a></li>
-                        </ul>
-                    </li>
-                    <li class="menu-left_item lv1"><a href="/user/student/applicationStatus"><span
-                                class="nav-text lv1">Application Status</span><span class="sub-arrow"></span></a>
-                    </li>
-                    <li class="menu-left_item lv1"><a href="/user/student/myProfile"><span class="nav-text lv1"> My
-                                Profile</span><span class="sub-arrow"></span></a>
-                    </li>
-                </ul>
-            </nav>
+            <%- partial('../partials/_navbar.ejs') %>
 
             <form id="academicReference" action="/forms/academicReference" method="POST">
 
